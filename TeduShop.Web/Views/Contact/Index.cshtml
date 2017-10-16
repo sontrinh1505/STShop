@@ -1,0 +1,73 @@
+﻿@model TeduShop.Web.Models.FeedbackViewModel
+@using BotDetect.Web.Mvc;
+
+@{
+    ViewBag.Title = "Contact";
+    ViewBag.MetaKeyword = "Contact";
+    ViewBag.MetaDescription = "Contact of TeduShop";
+    Layout = "~/Views/Shared/Layouts.cshtml";
+}
+
+@section footerJS{
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvUK9KIxoz-oh_ypqMnOPuaEbubX9nGDw"></script>
+    <script src="~/Assets/client/js/controllers/Contact.js"></script>
+}
+
+<style>
+    #map {
+        height: 400px;
+    }
+</style>
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
+
+<input type="hidden" id="hidContactDetail" value="@Model.ContactDetail.Name <br/> Phone: @Model.ContactDetail.Phone <br/> @Model.ContactDetail.Address" />
+<input type="hidden" id="hidLat" value="@Model.ContactDetail.Lat" />
+<input type="hidden" id="hidLng" value="@Model.ContactDetail.Lng" />
+<input type="hidden" id="hidName" value="@Model.ContactDetail.Name" />
+<div class="main">
+    <div class="reservation_top">
+        <div class="contact_right">
+            <h3>Detail Information</h3>
+            <address class="address">
+                <p>@Model.ContactDetail.Address</p>
+                <dl>
+                    <dt> </dt>
+                    <dd>Phone:<span> @Model.ContactDetail.Phone</span></dd>
+                    <dd>E-mail:&nbsp; <a href="mailto:@(Model.Email)">@Model.Email</a></dd>
+                </dl>
+            </address>
+
+            <div class="clearfix"></div>
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <div class="reservation_top">
+        <div class="contact_right">
+            <h3>Contact Form</h3>
+            <div class="contact-form">
+                @using (Html.BeginForm("SendFeedback", "Contact", FormMethod.Post))
+                {
+                    if (ViewData["successMsg"] != null)
+                    {
+                        <div class="alert alert-success" role="alert">
+                            <strong>Congratulation!!!</strong> you was Sent Contact form successfully.
+                        </div>
+                    }
+                    @Html.ValidationSummary(false, "", new { @class = "error" })
+                    @Html.TextBoxFor(model => model.Name, new { @class = "textbox" });
+                    @Html.TextBoxFor(model => model.Email, new { @class = "textbox" });
+                    @Html.TextAreaFor(model => model.Message);
+
+
+                    MvcCaptcha contactCaptcha = new MvcCaptcha("contactCaptcha");
+                    @Html.Captcha(contactCaptcha)
+                    @Html.TextBox("CaptchaCode")
+
+                    <input type="submit" value="Send">
+                    <div class="clearfix"> </div>
+                 }
+            </div>
+        </div>
+    </div>
+</div>

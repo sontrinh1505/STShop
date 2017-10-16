@@ -1,0 +1,11 @@
+﻿.has-error{
+    color: red;
+}
+
+.roles{
+    display:block;
+}
+
+.permissions{
+    display:block;
+}

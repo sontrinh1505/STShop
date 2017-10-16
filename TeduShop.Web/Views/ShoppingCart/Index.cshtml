@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layouts.cshtml";
+}
+
+<div class="single_top">
+    <div class="single_grid">
+        <div id="cartContent">
+            <h3>Your Cart</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>
+                            Index
+                        </td>
+                        <td>
+                            Name
+                        </td>
+                        <td>
+                            Image
+                        </td>
+                        <td>
+                            Price
+                        </td>
+                        <td>
+                            Quantity
+                        </td>
+                        <td>
+                            Total
+                        </td>
+                        <td>
+                            #
+                        </td>
+                    </tr>
+                </thead>
+                <tbody id="cartBody"></tbody>
+            </table>
+
+            <button class="btn btn-success" id="btnContinue">Continue shopping</button>
+            <button class="btn btn-danger" id="btnDeleteAll">Delete your cart</button>
+            <button class="btn btn" id="btnCheckout">Checkout</button>
+            <div class="pull-right">
+                Final Total: <span id="lbtTotalOrder"></span>
+            </div>
+        </div>
+    </div>
+    <div id="divCheckout" style="display: none;">
+        <div class="reservation_top">
+            <div class="contact_right">
+                <h3>Checkout</h3>
+                <div class="contact-form">
+                    <form method="post" id="frmPayment">
+                        @if (Request.IsAuthenticated)
+                        {
+                            <label>
+                                <input type="checkbox" id="chkUserLoginInfo">
+                                use your information for checkout
+                            </label>
+                        }
+
+                        <input type="text" class="textbox" id="txtName" name="name" placeholder="Full name">
+                        <input type="text" class="textbox" id="txtAddress" name="address" placeholder="Address">
+                        <input type="text" class="textbox" id="txtEmail"  name="email" placeholder="Email">
+                        <input type="text" class="textbox" id="txtPhoneNumber" name="phone" placeholder="Phone number">
+                        <textarea value="" id="txtMessage" name="message" >Message</textarea>
+                        <input type="button" id="btnCreateOrder" value="Checkout">
+                        <div class="clearfix"> </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"> </div>
+</div>
+
+
+<script id="tmplCart" type="x-tmpl-mustache">
+    <tr>
+        <td>{{ProductId}}</td>
+        <td>{{ProductName}}</td>
+        <td><img src="{{Image}}" height="50" /> </td>
+        <td>{{ProductPriceF}}</td>
+        <td><input type="number" data-id="{{ProductId}}" data-price="{{ProductPrice}}" value="{{Quantity}}" class="input txtQuantity" /></td>
+        <td id="amount_{{ProductId}}">{{Amount}}</td>
+        <td><button class="btn btn-danger btnDeleteItem" data-id="{{ProductId}}"><i class="fa fa-close"></i></button></td>
+    </tr>
+</script>
+
+

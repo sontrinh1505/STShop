@@ -1,0 +1,177 @@
+﻿ <!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Update product
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">product</a></li>
+        <li><a ui-sref="products">Product List</a></li>
+        <li class="active">Update</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Horizontal Form -->
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">{{product.Name}}</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" novalidate name="frmUpDateProduct" role="form" ng-submit="UpdateProduct()">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-maxlength="256" required class="form-control" name="name" ng-change="GetSeoTitle()" ng-model="product.Name">
+                        <span ng-show="frmUpDateProduct.name.$invalid" class="has-error"> must be enter name</span>
+                        <span ng-show="frmUpDateProduct.name.$error.maxlength" class="has-error"> Field should be 256 characters.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">SEO</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-maxlength="256" required class="form-control" name="alias" ng-model="product.Alias">
+                        <span ng-show="frmUpDateProduct.alias.$invalid" class="has-error"> must be enter SEO name</span>
+                        <span ng-show="frmUpDateProduct.alias.$error.maxlength" class="has-error"> Field should be 256 characters.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-maxlength="500" class="form-control" name="description" ng-model="product.Description">
+                        <span ng-show="frmUpDateProduct.description.$error.maxlength" class="has-error"> Field should be 500 characters.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Category</label>
+                    <div class="col-sm-10">
+                        <!--<select name="categoryID" required class="form-control" ng-model="product.CategoryID"
+                                ng-options="option.ID as option.Name for option in productCategories">
+                            <option value="">Choose category</option>
+                        </select>-->
+
+                        <ui-select ng-model="product.CategoryID" name="categoryID" theme="bootstrap" style="width: 300px;" title="Choose a Category">
+                            <ui-select-match placeholder="choose a Category">{{$select.selected.Name}}</ui-select-match>
+                            <ui-select-choices repeat="item.ID as item in productCategories | filter: $select.search">
+                                <span ng-bind-html="item.Name | highlight: $select.search"></span>
+                                <small ng-bind-html="item.Name | highlight: $select.search"></small>
+                            </ui-select-choices>
+                        </ui-select>
+
+                        <span ng-show="frmUpDateProduct.categoryID.$invalid" class="has-error"> must be choose Category</span>
+                        <input type="hidden" name="categoryID" ng-model="product.CategoryID" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Original Price</label>
+                    <div class="col-sm-10">
+                        <input type="number" required class="form-control" name="originalPrice" ng-model="product.OriginalPrice">
+                        <span ng-show="frmUpDateProduct.originalPrice.$invalid" class="has-error">must be enter original price</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Price</label>
+                    <div class="col-sm-10">
+                        <input type="number" required class="form-control" name="price" ng-model="product.Price">
+                        <span ng-show="frmUpDateProduct.price.$invalid" class="has-error">must be enter price</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Promotion Price</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" name="promotionPrice" ng-model="product.PromotionPrice">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Quantity</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" name="quantity" ng-model="product.Quantity">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Warranty</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" name="warranty" ng-model="product.Warranty">(Month)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Image</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-maxlength="256" class="form-control" name="image" ng-model="product.Image">
+                        <span ng-show="frmUpDateProduct.image.$error.maxlength" class="has-error"> Field should be 256 characters.</span>
+                        <button class="btn btn-default" type="button" ng-click="chooseImage()">Choose image</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Image Group</label>
+                    <div class="col-sm-10">
+                        <ul class="list-inline">
+                            <li ng-repeat="img in moreImages track by $index"> <img ng-src="{{img}}" width="100px" height="100px"> </li>
+                        </ul>
+                        <button class="btn btn-default" type="button" ng-click="chooseMoreImage()">Choose image</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Product Description</label>
+                    <div class="col-sm-10">
+                        <textarea ng-maxlength="256" class="form-control" ckeditor="ckeditorOptions" name="content" ng-model="product.Content"></textarea>
+                        <span ng-show="frmUpDateProduct.content.$error.maxlength" class="has-error"> Field should be 256 characters.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Tags</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-maxlength="256" class="form-control" name="tags" ng-model="product.Tags">
+                        <span ng-show="frmUpDateProduct.metaKeyword.$error.maxlength" class="has-error"> Field should be 256 characters.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Meta Keyword</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-maxlength="256" class="form-control" name="metaKeyword" ng-model="product.MetaKeyword">
+                        <span ng-show="frmUpDateProduct.metaKeyword.$error.maxlength" class="has-error"> Field should be 256 characters.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Meta Description</label>
+                    <div class="col-sm-10">
+                        <textarea ng-maxlength="256" class="form-control" name="metaDescription" ng-model="product.MetaDescription"></textarea>
+                        <span ng-show="frmUpDateProduct.metaDescription.$error.maxlength" class="has-error"> Field should be 256 characters.</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="status" ng-model="product.Status" ng-checked="product.Status"> Active
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="homeFlag" ng-model="product.HomeFlag" ng-checked="product.HomeFlag"> Show Home Page
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="hotFlag" ng-model="product.HotFlag" ng-checked="product.HotFlag"> Hot Product
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <button ui-sref="products" class="btn btn-default">Cancel</button>
+                <button type="submit" ng-disabled="frmUpDateProduct.$invalid" class="btn btn-success pull-right">Save</button>
+            </div>
+            <!-- /.box-footer -->
+        </form>
+    </div>
+    <!-- /.box -->
+</section>
+<!-- /.content -->
