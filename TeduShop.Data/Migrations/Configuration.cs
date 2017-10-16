@@ -223,32 +223,38 @@
                     new ApplicationPermission
                     {
                         Name = "User",
-                        Description = "User"
+                        Description = "User",
+                        ControllerName="ApplicationUser",
                     },
                     new ApplicationPermission
                     {
                         Name = "Group",
-                        Description = "Group"
+                        Description = "Group",
+                        ControllerName="ApplicationGroup",
                     },
                     new ApplicationPermission
                     {
                         Name = "Role",
-                        Description = "Role"
+                        Description = "Role",
+                        ControllerName="ApplicationRole",
                     },
                     new ApplicationPermission
                     {
                         Name = "Product",
-                        Description = "Product"
+                        Description = "Product",
+                        ControllerName="Product",
                     },
                     new ApplicationPermission
                     {
                         Name = "Catagory",
-                        Description = "Catagory"
+                        Description = "Catagory",
+                        ControllerName="ProductCategory",
                     },
                     new ApplicationPermission
                     {
                         Name = "Post",
-                        Description = "Post"
+                        Description = "Post",
+                        ControllerName="PostCategory",
                     }
                 };
 

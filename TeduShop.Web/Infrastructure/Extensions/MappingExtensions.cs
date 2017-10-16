@@ -234,5 +234,8 @@ namespace TeduShop.Web.Infrastructure.Extensions
         {
             return Mapper.Map<IEnumerable<ApplicationPermission>, IEnumerable<ApplicationPermissionViewModel>>(model);
         }
+
+       
+
     }
 }

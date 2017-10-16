@@ -9,14 +9,16 @@ using System.Web.Script.Serialization;
 using TeduShop.Common.Exceptions;
 using TeduShop.Model.Models;
 using TeduShop.Service;
+using TeduShop.Web.Customs;
 using TeduShop.Web.Infrastructure.Core;
 using TeduShop.Web.Infrastructure.Extensions;
 using TeduShop.Web.Models;
 
 namespace TeduShop.Web.Api
 {
+   
     [RoutePrefix("api/applicationRole")]
-    [Authorize]
+    [CustomAuthorize]
     public class ApplicationRoleController : ApiControllerBase
     {
         private IApplicationRoleService _appRoleService;
@@ -27,9 +29,10 @@ namespace TeduShop.Web.Api
             _appRoleService = appRoleService;
         }
 
+       
         [Route("getlistpaging")]
-        [Authorize(Roles = "Read")]
         [HttpGet]
+        [CustomAuthorize(Roles = "Read")]
         public HttpResponseMessage GetListPaging(HttpRequestMessage request, int page, int pageSize, string filter = null)
         {
             return CreateHttpResponse(request, () =>
@@ -54,7 +57,7 @@ namespace TeduShop.Web.Api
             });
         }
         [Route("getlistall")]
-        [Authorize(Roles = "Read")]
+        [CustomAuthorize(Roles = "Read")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
         {
@@ -71,7 +74,7 @@ namespace TeduShop.Web.Api
             });
         }
         [Route("detail/{id}")]
-        [Authorize(Roles = "Read")]
+        [CustomAuthorize(Roles = "Read")]
         [HttpGet]
         public HttpResponseMessage Details(HttpRequestMessage request, string id)
         {
@@ -89,7 +92,7 @@ namespace TeduShop.Web.Api
 
         [HttpPost]
         [Route("add")]
-        [Authorize(Roles = "Create")]
+        [CustomAuthorize(Roles = "Create")]
         public HttpResponseMessage Create(HttpRequestMessage request, ApplicationRoleViewModel applicationRoleViewModel)
         {
             if (ModelState.IsValid)
@@ -118,7 +121,7 @@ namespace TeduShop.Web.Api
 
         [HttpPut]
         [Route("update")]
-        [Authorize(Roles = "Update")]
+        [CustomAuthorize(Roles = "Update")]
         public HttpResponseMessage Update(HttpRequestMessage request, ApplicationRoleViewModel applicationRoleViewModel)
         {
             if (ModelState.IsValid)
@@ -145,7 +148,7 @@ namespace TeduShop.Web.Api
 
         [HttpDelete]
         [Route("delete")]
-        [Authorize(Roles = "Delete")]
+        [CustomAuthorize(Roles = "Delete")]
         public HttpResponseMessage Delete(HttpRequestMessage request, string id)
         {
             _appRoleService.Delete(id);
@@ -154,7 +157,7 @@ namespace TeduShop.Web.Api
         }
 
         [Route("deletemulti")]
-        [Authorize(Roles = "Delete")]
+        [CustomAuthorize(Roles = "Delete")]
         [HttpDelete]
         public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedList)
         {

@@ -42,5 +42,7 @@ namespace TeduShop.Web.Models
 
         [Required(ErrorMessage = "should be enter status")]
         public bool Status { set; get; }
+
+        public virtual IEnumerable<ProductCategoryViewModel> Products { set; get; }
     }
 }

@@ -20,5 +20,7 @@ namespace TeduShop.Model.Models
 
         [StringLength(250)]
         public string Description { set; get; }
+
+        public virtual IEnumerable<ApplicationPermission> Permissions { set; get; }
     }
 }

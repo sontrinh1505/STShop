@@ -20,5 +20,8 @@ namespace TeduShop.Model.Models
 
         [StringLength(250)]
         public string Description { set; get; }
+
+        [StringLength(250)]
+        public string ControllerName { set; get; }
     }
 }

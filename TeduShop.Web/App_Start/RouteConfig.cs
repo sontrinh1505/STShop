@@ -11,6 +11,7 @@ namespace TeduShop.Web
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             // BotDetect requests must not be routed

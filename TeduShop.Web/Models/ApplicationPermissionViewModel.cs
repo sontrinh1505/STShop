@@ -12,6 +12,6 @@ namespace TeduShop.Web.Models
 
         public string Name { get; set; }
 
-        public IEnumerable<ApplicationGroupViewModel> Roles { set; get; }
+        public IEnumerable<ApplicationGroupViewModel> Groups { set; get; }
     }
 }
