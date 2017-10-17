@@ -11,12 +11,12 @@ using TeduShop.Web.Infrastructure.Core;
 using TeduShop.Web.Models;
 using TeduShop.Web.Infrastructure.Extensions;
 using System.Web.Script.Serialization;
-
+using TeduShop.Web.Customs;
 
 namespace TeduShop.Web.Api
 {
     [RoutePrefix("api/productcategory")]
-    [Authorize]
+    [CustomAuthorize]
     public class ProductCategoryController : ApiControllerBase
     {
         #region Initialize
@@ -30,7 +30,7 @@ namespace TeduShop.Web.Api
         #endregion
 
         [Route("getall")]
-        [Authorize(Roles = "Read")]
+        [CustomAuthorize(Roles = "Read")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request, string keyWord, int page, int pageSize = 20)
         {
@@ -68,7 +68,7 @@ namespace TeduShop.Web.Api
         }
 
         [Route("getbyid/{id:int}")]
-        [Authorize(Roles = "Read")]
+        [CustomAuthorize(Roles = "Read")]
         [HttpGet]
         public HttpResponseMessage GetbyId(HttpRequestMessage request, int id)
         {
@@ -82,7 +82,7 @@ namespace TeduShop.Web.Api
         }
 
         [Route("create")]
-        [Authorize(Roles = "Create")]
+        [CustomAuthorize(Roles = "Create")]
         [HttpPost]
         public HttpResponseMessage Create(HttpRequestMessage request, ProductCategoryViewModel productCategoryVm)
         {
@@ -113,7 +113,7 @@ namespace TeduShop.Web.Api
         }
 
         [Route("update")]
-        [Authorize(Roles = "Update")]
+        [CustomAuthorize(Roles = "Update")]
         [HttpPut]
         public HttpResponseMessage Update(HttpRequestMessage request, ProductCategoryViewModel productCategoryVm)
         {
@@ -145,7 +145,7 @@ namespace TeduShop.Web.Api
         }
 
         [Route("delete")]
-        [Authorize(Roles = "Delete")]
+        [CustomAuthorize(Roles = "Delete")]
         [HttpDelete]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
@@ -170,7 +170,7 @@ namespace TeduShop.Web.Api
         }
 
         [Route("deletemulti")]
-        [Authorize(Roles = "Delete")]
+        [CustomAuthorize(Roles = "Delete")]
         [HttpDelete]
         public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedProductCategories)
         {

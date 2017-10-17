@@ -84,7 +84,9 @@
             {
                 var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new TeduShopDbContext()));
 
-                var rolemanager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new TeduShopDbContext()));
+                //var rolemanager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new TeduShopDbContext()));
+
+                var rolemanager = new RoleManager<ApplicationRole>(new RoleStore<ApplicationRole>(new TeduShopDbContext()));
 
                 var user = new ApplicationUser()
                 {
@@ -101,10 +103,10 @@
 
                     if (!rolemanager.Roles.Any())
                     {
-                        rolemanager.Create(new IdentityRole { Name = "Read" });
-                        rolemanager.Create(new IdentityRole { Name = "Create" });
-                        rolemanager.Create(new IdentityRole { Name = "Update" });
-                        rolemanager.Create(new IdentityRole { Name = "Delete" });
+                        rolemanager.Create(new ApplicationRole { Name = "Read", Description= "Read" });
+                        rolemanager.Create(new ApplicationRole { Name = "Create", Description = "Create" });
+                        rolemanager.Create(new ApplicationRole { Name = "Update", Description = "Update" });
+                        rolemanager.Create(new ApplicationRole { Name = "Delete", Description = "Delete" });
                     }
 
                     var adminuser = manager.FindByEmail("Administrator@gmail.com");
@@ -262,8 +264,14 @@
                 context.SaveChanges();
 
                 var group = context.ApplicationGroups.FirstOrDefault(x => x.Name == "Super Admin");
+
                 var permissionListAdd = context.ApplicationPermissions.ToList();
+
+                var roles = context.ApplicationRoles.ToList();
+
                 var listPermisionGroup = new List<ApplicationPermissionGroup>();
+
+                var listRolePermission = new List<ApplicationRolePermission>();
 
                 foreach (var permision in permissionListAdd)
                 {
@@ -272,9 +280,18 @@
                         GroupId = group.ID,
                         PermissionId = permision.ID
                     });
+                    foreach(var role in roles)
+                    {
+                        listRolePermission.Add(new ApplicationRolePermission() {
+
+                            RoleId = role.Id,
+                            PermissonId = permision.ID
+                        });
+                    }
                 }
 
                 context.ApplicationPermissionGroups.AddRange(listPermisionGroup);
+                context.ApplicationRolePermissions.AddRange(listRolePermission);
                 context.SaveChanges();
             }
 
@@ -283,6 +300,7 @@
 
         private void CreateGroup(TeduShop.Data.TeduShopDbContext context)
         {
+            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new TeduShopDbContext()));
             if (context.ApplicationGroups.Count() == 0)
             {
                 var groupList = new List<ApplicationGroup>()
@@ -304,8 +322,21 @@
                     }
 
                 };
+              
+                
 
                 context.ApplicationGroups.AddRange(groupList);
+                context.SaveChanges();
+
+                var group = context.ApplicationGroups.FirstOrDefault(x => x.Name == "Super Admin");
+                var adminuser = manager.FindByEmail("Administrator@gmail.com");
+                var userGroup = new ApplicationUserGroup()
+                {
+                    UserId = adminuser.Id,
+                    GroupId = group.ID,
+                };
+
+                context.ApplicationUserGroups.Add(userGroup);
                 context.SaveChanges();
             }
         }

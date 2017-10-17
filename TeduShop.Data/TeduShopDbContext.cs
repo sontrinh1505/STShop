@@ -41,7 +41,7 @@ namespace TeduShop.Data
 
         public DbSet<ApplicationGroup> ApplicationGroups { get; set; }
         public DbSet<ApplicationRole> ApplicationRoles { get; set; }
-        public DbSet<ApplicationRoleGroup> ApplicationRoleGroups { get; set; }
+        public DbSet<ApplicationRolePermission> ApplicationRolePermissions { get; set; }
         public DbSet<ApplicationUserGroup> ApplicationUserGroups { get; set; }
 
         public DbSet<ApplicationPermission> ApplicationPermissions { get; set; }

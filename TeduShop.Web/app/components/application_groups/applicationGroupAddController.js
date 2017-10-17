@@ -8,8 +8,10 @@
     function applicationGroupAddController($scope, apiService, notificationService, $location, commonService) {
         $scope.group = {
             ID: 0,
-            Roles: [],
-            Permissions:[]
+            // Roles: [],
+            Permissions: {
+                Roles: {}
+            }
         }
 
         $scope.addAppGroup = addApplicationGroup;
@@ -29,29 +31,55 @@
             notificationService.displayErrorValidation(response);
         }
 
-        function loadRoles() {
+        function loadRoles(calback) {
             apiService.get('/api/applicationRole/getlistall',
                 null,
                 function (response) {
-                    $scope.roles = response.data;
-                }, function (response) {
-                    notificationService.displayError('not loaded roles.');
-                });
+                    //$scope.roles = response.data;
+                    var roles = response.data;
 
+                    calback(roles);
+
+                }, function (response) {
+                    notificationService.displayError('can not load roles.');
+                    return null;
+                });
         }
+
+        var permissonRole = [];
         
         function loadPermissions() {
             apiService.get('/api/applicationGroup/getlistpermission',
                 null,
                 function (response) {
-                    $scope.permissions = response.data;
+                    var permissions = response.data;
+                    var _pers = [];
+                    loadRoles(function (_roles) {
+                        permissions.forEach(function (permission, index) {
+                            var item = new Array();
+                            _roles.forEach(function (role, index) {
+
+                                var itemob = { index: "0", ID: "0", Name: "", Description: "" };
+                                itemob.index = permission.ID;
+                                itemob.ID = role.ID;
+                                itemob.Name = role.Name;
+                                itemob.Description = role.Description;
+
+                                item.push(itemob);
+                            });
+                            permission.Roles = item;
+                            permissonRole.push(permission);
+                        });
+                        $scope.permissions = permissonRole;
+                    });
+
+
                 }, function (response) {
-                    notificationService.displayError('not loaded permissions.');
+                    notificationService.displayError('can not load permissions.');
                 });
 
         }
-
-        loadRoles();
+        //loadRoles();
         loadPermissions();
 
     }

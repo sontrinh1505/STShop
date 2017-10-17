@@ -61,7 +61,7 @@
     <Compile Include="Abstract\IAuditable.cs" />
     <Compile Include="Models\ApplicationPermission.cs" />
     <Compile Include="Models\ApplicationPermissionGroup.cs" />
-    <Compile Include="Models\ApplicationRoleGroup.cs" />
+    <Compile Include="Models\ApplicationRolePermission.cs" />
     <Compile Include="Models\ApplicationUserGroup.cs" />
     <Compile Include="Models\ApplicationGroup.cs" />
     <Compile Include="Models\ApplicationRole.cs" />

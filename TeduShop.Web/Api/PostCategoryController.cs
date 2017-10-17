@@ -8,11 +8,12 @@ using TeduShop.Service;
 using TeduShop.Web.Infrastructure.Core;
 using TeduShop.Web.Models;
 using TeduShop.Web.Infrastructure.Extensions;
+using TeduShop.Web.Customs;
 
 namespace TeduShop.Web.Api
 {
     [RoutePrefix("api/postcategory")]
-    [Authorize]
+    [CustomAuthorize]
     public class PostCategoryController : ApiControllerBase
     {
         IPostCategoryService _postCategoryService;
@@ -24,7 +25,7 @@ namespace TeduShop.Web.Api
         }
 
         [Route("getall")]
-        [Authorize(Roles = "Read")]
+        [CustomAuthorize(Roles = "Read")]
         public HttpResponseMessage Get(HttpRequestMessage request)
         {
             return CreateHttpResponse(request, () =>
@@ -40,7 +41,7 @@ namespace TeduShop.Web.Api
         }
 
         [Route("add")]
-        [Authorize(Roles = "Read")]
+        [CustomAuthorize(Roles = "Read")]
         public HttpResponseMessage Post(HttpRequestMessage request, PostCategoryViewModel postCategoryVm)
         {
             return CreateHttpResponse(request, () =>
@@ -67,7 +68,7 @@ namespace TeduShop.Web.Api
         }
 
         [Route("update")]
-        [Authorize(Roles = "Update")]
+        [CustomAuthorize(Roles = "Update")]
         public HttpResponseMessage Put(HttpRequestMessage request, PostCategoryViewModel postCategoryVm)
         {
             return CreateHttpResponse(request, () =>
@@ -93,7 +94,7 @@ namespace TeduShop.Web.Api
         }
 
         [Route("delete")]
-        [Authorize(Roles = "Delete")]
+        [CustomAuthorize(Roles = "Delete")]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
             return CreateHttpResponse(request, () =>

@@ -25,10 +25,10 @@ namespace TeduShop.Service
         void Delete(string id);
 
         //Add roles to a sepcify group
-        bool AddRolesToGroup(IEnumerable<ApplicationRoleGroup> roleGroups, int groupId);
+        //bool AddRolesToGroup(IEnumerable<ApplicationRolePermission> roleGroups, int groupId);
 
         //Get list role by group id
-        IEnumerable<ApplicationRole> GetListRoleByGroupId(int groupId);
+      //  IEnumerable<ApplicationRole> GetListRoleByGroupId(int groupId);
 
         void Save();
     }
@@ -54,15 +54,15 @@ namespace TeduShop.Service
             return _appRoleRepository.Add(appRole);
         }
 
-        public bool AddRolesToGroup(IEnumerable<ApplicationRoleGroup> roleGroups, int groupId)
-        {
-            _appRoleGroupRepository.DeleteMulti(x => x.GroupId == groupId);
-            foreach (var roleGroup in roleGroups)
-            {
-                _appRoleGroupRepository.Add(roleGroup);
-            }
-            return true;
-        }
+        //public bool AddRolesToGroup(IEnumerable<ApplicationRolePermission> roleGroups, int groupId)
+        //{
+        //    _appRoleGroupRepository.DeleteMulti(x => x.GroupId == groupId);
+        //    foreach (var roleGroup in roleGroups)
+        //    {
+        //        _appRoleGroupRepository.Add(roleGroup);
+        //    }
+        //    return true;
+        //}
 
         public void Delete(string id)
         {
@@ -101,9 +101,9 @@ namespace TeduShop.Service
             _appRoleRepository.Update(AppRole);
         }
 
-        public IEnumerable<ApplicationRole> GetListRoleByGroupId(int groupId)
-        {
-            return _appRoleRepository.GetListRoleByGroupId(groupId);
-        }
+        //public IEnumerable<ApplicationRole> GetListRoleByGroupId(int groupId)
+        //{
+        //    return _appRoleRepository.GetListRoleByGroupId(groupId);
+        //}
     }
 }

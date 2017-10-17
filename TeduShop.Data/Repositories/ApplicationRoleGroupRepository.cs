@@ -8,11 +8,11 @@ using TeduShop.Model.Models;
 
 namespace TeduShop.Data.Repositories
 {
-    public interface IApplicationRoleGroupRepository : IRepository<ApplicationRoleGroup>
+    public interface IApplicationRoleGroupRepository : IRepository<ApplicationRolePermission>
     {
 
     }
-    public class ApplicationRoleGroupRepository : RepositoryBase<ApplicationRoleGroup>, IApplicationRoleGroupRepository
+    public class ApplicationRoleGroupRepository : RepositoryBase<ApplicationRolePermission>, IApplicationRoleGroupRepository
     {
         public ApplicationRoleGroupRepository(IDbFactory dbFactory) : base(dbFactory)
         {

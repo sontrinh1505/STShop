@@ -10,13 +10,14 @@ using TeduShop.Common.Exceptions;
 using TeduShop.Model.Models;
 using TeduShop.Service;
 using TeduShop.Web.App_Start;
+using TeduShop.Web.Customs;
 using TeduShop.Web.Infrastructure.Core;
 using TeduShop.Web.Infrastructure.Extensions;
 using TeduShop.Web.Models;
 
 namespace TeduShop.Web.Api
 {
-    [Authorize]
+    [CustomAuthorize]
     [RoutePrefix("api/applicationUser")]
     public class ApplicationUserController : ApiControllerBase
     {
@@ -36,7 +37,7 @@ namespace TeduShop.Web.Api
         }
         [Route("getlistpaging")]
         [HttpGet]
-        [Authorize(Roles = "Read")]
+        [CustomAuthorize(Roles = "Read")]
         public HttpResponseMessage GetListPaging(HttpRequestMessage request, int page, int pageSize, string filter = null)
         {
             return CreateHttpResponse(request, () =>
@@ -62,7 +63,7 @@ namespace TeduShop.Web.Api
 
         [Route("detail/{id}")]
         [HttpGet]
-        [Authorize(Roles = "Read")]
+        [CustomAuthorize(Roles = "Read")]
         public HttpResponseMessage Details(HttpRequestMessage request, string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -89,7 +90,7 @@ namespace TeduShop.Web.Api
 
         [HttpPost]
         [Route("add")]
-        [Authorize(Roles = "Create")]
+        [CustomAuthorize(Roles = "Create")]
         public async Task<HttpResponseMessage> Create(HttpRequestMessage request, ApplicationUserViewModel applicationUserViewModel)
         {
             if (ModelState.IsValid)
@@ -112,12 +113,12 @@ namespace TeduShop.Web.Api
                                 UserId = newAppUser.Id
                             });
                             //add role to user
-                            var listRole = _appRoleService.GetListRoleByGroupId(group.ID);
-                            foreach (var role in listRole)
-                            {
-                                await _userManager.RemoveFromRoleAsync(newAppUser.Id, role.Name);
-                                await _userManager.AddToRoleAsync(newAppUser.Id, role.Name);
-                            }
+                            //var listRole = _appRoleService.GetListRoleByGroupId(group.ID);
+                            //foreach (var role in listRole)
+                            //{
+                            //    await _userManager.RemoveFromRoleAsync(newAppUser.Id, role.Name);
+                            //    await _userManager.AddToRoleAsync(newAppUser.Id, role.Name);
+                            //}
                         }
                         _appGroupService.AddUserToGroups(listAppUserGroup, newAppUser.Id);
                         _appGroupService.Save();
@@ -146,7 +147,7 @@ namespace TeduShop.Web.Api
 
         [HttpPut]
         [Route("update")]
-        [Authorize(Roles = "Update")]
+        [CustomAuthorize(Roles = "Update")]
         public async Task<HttpResponseMessage> Update(HttpRequestMessage request, ApplicationUserViewModel applicationUserViewModel)
         {
             if (ModelState.IsValid)
@@ -169,12 +170,12 @@ namespace TeduShop.Web.Api
                                 UserId = applicationUserViewModel.Id
                             });
                             //add role to user
-                            var listRole = _appRoleService.GetListRoleByGroupId(group.ID);
-                            foreach (var role in listRole)
-                            {
-                                await _userManager.RemoveFromRoleAsync(appUser.Id, role.Name);
-                                await _userManager.AddToRoleAsync(appUser.Id, role.Name);
-                            }
+                            //var listRole = _appRoleService.GetListRoleByGroupId(group.ID);
+                            //foreach (var role in listRole)
+                            //{
+                            //    await _userManager.RemoveFromRoleAsync(appUser.Id, role.Name);
+                            //    await _userManager.AddToRoleAsync(appUser.Id, role.Name);
+                            //}
                         }
                         _appGroupService.AddUserToGroups(listAppUserGroup, applicationUserViewModel.Id);
                         _appGroupService.Save();
@@ -197,7 +198,7 @@ namespace TeduShop.Web.Api
 
         [HttpDelete]
         [Route("delete")]
-        [Authorize(Roles = "Delete")]
+        [CustomAuthorize(Roles = "Delete")]
         public async Task<HttpResponseMessage> Delete(HttpRequestMessage request, string id)
         {
             var appUser = await _userManager.FindByIdAsync(id);
