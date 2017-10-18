@@ -33,11 +33,15 @@ namespace TeduShop.Service
 
         bool AddPermissionsToGroup(IEnumerable<ApplicationPermissionGroup> permisions, int groupId);
 
+        bool AddRolesToPermission(IEnumerable<ApplicationRolePermission> rolePermissions);
+
         IEnumerable<ApplicationGroup> GetListGroupByUserId(string userId);
 
         IEnumerable<ApplicationUser> GetListUserByGroupId(int groupId);
 
         IEnumerable<ApplicationPermission> GetListPermissionByGroupId(int groupId);
+
+        IEnumerable<ApplicationRole> GetListRoleByPermissionId(int permissionId, int groupId);
 
         void Save();
     }
@@ -48,12 +52,14 @@ namespace TeduShop.Service
         private IUnitOfWork _unitOfWork;
         private IApplicationUserGroupRepository _appUserGroupRepository;
         private IApplicationPermissionGroupRepository _applicationPermissionGroupRepository;
+        private IApplicationRolePermissionRepository _applicationRolePermissionRepository;
 
         public ApplicationGroupService(IUnitOfWork unitOfWork,
             IApplicationUserGroupRepository appUserGroupRepository,
             IApplicationGroupRepository appGroupRepository,
             IApplicationPermissionGroupRepository applicationPermissionGroupRepository,
-            IApplicationPermissionRepository applicationPermissionRepository
+            IApplicationPermissionRepository applicationPermissionRepository,
+            IApplicationRolePermissionRepository applicationRolePermissionRepository
             )
         {
             this._appGroupRepository = appGroupRepository;
@@ -61,12 +67,13 @@ namespace TeduShop.Service
             this._unitOfWork = unitOfWork;
             this._applicationPermissionGroupRepository = applicationPermissionGroupRepository;
             this._applicationPermissionRepository = applicationPermissionRepository;
+            this._applicationRolePermissionRepository = applicationRolePermissionRepository;
         }
 
         public ApplicationGroup Add(ApplicationGroup appGroup)
         {
             if (_appGroupRepository.CheckContains(x => x.Name == appGroup.Name))
-                throw new NameDuplicatedException("Tên không được trùng");
+                throw new NameDuplicatedException("The Name already exist");
             return _appGroupRepository.Add(appGroup);
         }
 
@@ -132,6 +139,16 @@ namespace TeduShop.Service
             }
             return true;
         }
+
+        public bool AddRolesToPermission(IEnumerable<ApplicationRolePermission> rolePermissions)
+        {
+           // _applicationRolePermissionRepository.DeleteMulti(x => x.PermissonId == permissionId);
+            foreach (var rolePermission in rolePermissions)
+            {
+                _applicationRolePermissionRepository.Add(rolePermission);
+            }
+            return true;
+        }
         
 
         public IEnumerable<ApplicationGroup> GetListGroupByUserId(string userId)
@@ -151,8 +168,19 @@ namespace TeduShop.Service
 
         public IEnumerable<ApplicationPermission> GetListPermissionByGroupId(int groupId)
         {
-            return _appGroupRepository.GetListPermissionByGroupId(groupId);
+            var listPermission = _appGroupRepository.GetListPermissionByGroupId(groupId).ToList();
+            foreach(var permission in listPermission)
+            {
+                permission.Roles = GetListRoleByPermissionId(permission.ID, groupId);
+            }
+            return listPermission;
         }
 
+        public IEnumerable<ApplicationRole> GetListRoleByPermissionId(int permissionId, int groupId)
+        {
+            return _appGroupRepository.GetListRoleByPermissionId(permissionId, groupId).ToList();
+            
+
+        }
     }
 }

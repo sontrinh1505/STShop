@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TeduShop.Data.Infrastructure;
 using TeduShop.Model.Models;
+using System.Data.Entity;
 
 namespace TeduShop.Data.Repositories
 {
@@ -13,6 +14,7 @@ namespace TeduShop.Data.Repositories
         IEnumerable<ApplicationGroup> GetListGroupByUserId(string userId);
         IEnumerable<ApplicationUser> GetListUserByGroupId(int groupId);
         IEnumerable<ApplicationPermission> GetListPermissionByGroupId(int groupId);
+        IEnumerable<ApplicationRole> GetListRoleByPermissionId(int permissionId, int groupId);
 
     }
     public class ApplicationGroupRepository : RepositoryBase<ApplicationGroup>, IApplicationGroupRepository
@@ -53,6 +55,19 @@ namespace TeduShop.Data.Repositories
                         on pg.PermissionId equals u.ID
                         where pg.GroupId == groupId
                         select u;
+            //var query = DbContext.Set<ApplicationPermission>().Include("Roles").ToList();
+            return query;
+        }
+
+        public IEnumerable<ApplicationRole> GetListRoleByPermissionId(int permissionId, int groupId)
+        {
+            var query = from p in DbContext.ApplicationPermissions
+                        join rp in DbContext.ApplicationRolePermissions
+                        on p.ID equals rp.PermissonId
+                        join r in DbContext.ApplicationRoles
+                        on rp.RoleId equals r.Id
+                        where rp.PermissonId == permissionId && rp.GroupId == groupId
+                        select r;
             return query;
         }
     }

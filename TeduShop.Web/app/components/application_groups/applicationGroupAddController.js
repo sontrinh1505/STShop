@@ -9,9 +9,7 @@
         $scope.group = {
             ID: 0,
             // Roles: [],
-            Permissions: {
-                Roles: {}
-            }
+            RolePermissions: []
         }
 
         $scope.addAppGroup = addApplicationGroup;
@@ -59,9 +57,10 @@
                             var item = new Array();
                             _roles.forEach(function (role, index) {
 
-                                var itemob = { index: "0", ID: "0", Name: "", Description: "" };
-                                itemob.index = permission.ID;
-                                itemob.ID = role.ID;
+                                var itemob = { PermissionId: 0, RoleId: "0", Name: "", Description: "" };
+
+                                itemob.PermissionId = permission.ID;
+                                itemob.RoleId = role.Id;
                                 itemob.Name = role.Name;
                                 itemob.Description = role.Description;
 

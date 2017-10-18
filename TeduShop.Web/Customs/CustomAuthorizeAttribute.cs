@@ -18,9 +18,12 @@ namespace TeduShop.Web.Customs
 {
     public class CustomAuthorizeAttribute : AuthorizeAttribute
     {
+        
+
         TeduShopDbContext context = new TeduShopDbContext();
         protected override bool IsAuthorized(HttpActionContext httpContext)
         {
+            return true;
             //var context = new TeduShopDbContext();
             bool authorize = false;
             if (!httpContext.RequestContext.Principal.Identity.IsAuthenticated)
@@ -57,7 +60,7 @@ namespace TeduShop.Web.Customs
                 return false;
             }
 
-            return true; 
+           // return true; 
         }
 
 

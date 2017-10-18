@@ -23,5 +23,7 @@ namespace TeduShop.Model.Models
 
         [StringLength(250)]
         public string ControllerName { set; get; }
+
+        public virtual IEnumerable<ApplicationRole> Roles { set; get; }
     }
 }

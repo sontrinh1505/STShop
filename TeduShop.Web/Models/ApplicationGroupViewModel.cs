@@ -11,8 +11,10 @@ namespace TeduShop.Web.Models
 
         public string Name { get; set; }
 
-        public IEnumerable<ApplicationRoleViewModel> Roles { set; get; }
+       // public IEnumerable<ApplicationRoleViewModel> Roles { set; get; }
 
         public IEnumerable<ApplicationPermissionViewModel> Permissions { set; get; }
+
+        public IEnumerable<ApplicationRolePermissionViewModel> RolePermissions { set; get; }
     }
 }

@@ -88,9 +88,18 @@
     <Compile Include="Migrations\201710170544370_ChangeStruture.Designer.cs">
       <DependentUpon>201710170544370_ChangeStruture.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710180454378_AddGroupIdFieldInRolePermissonTable.cs" />
+    <Compile Include="Migrations\201710180454378_AddGroupIdFieldInRolePermissonTable.Designer.cs">
+      <DependentUpon>201710180454378_AddGroupIdFieldInRolePermissonTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710180501409_ChangeRolePermissionTable.cs" />
+    <Compile Include="Migrations\201710180501409_ChangeRolePermissionTable.Designer.cs">
+      <DependentUpon>201710180501409_ChangeRolePermissionTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationGroupRepository.cs" />
+    <Compile Include="Repositories\ApplicationRolePermissionRepository.cs" />
     <Compile Include="Repositories\ApplicationRoleGroupRepository.cs" />
     <Compile Include="Repositories\ApplicationPermissionRepository.cs" />
     <Compile Include="Repositories\ApplicationRoleRepository.cs" />
@@ -152,6 +161,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710170544370_ChangeStruture.resx">
       <DependentUpon>201710170544370_ChangeStruture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710180454378_AddGroupIdFieldInRolePermissonTable.resx">
+      <DependentUpon>201710180454378_AddGroupIdFieldInRolePermissonTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710180501409_ChangeRolePermissionTable.resx">
+      <DependentUpon>201710180501409_ChangeRolePermissionTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

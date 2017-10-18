@@ -11,14 +11,18 @@ namespace TeduShop.Model.Models
     [Table("ApplicationRolePermissions")]
     public class ApplicationRolePermission
     {
-        [Key]
+        public int Id { set; get; }
+
+        //[Key]
         [Column(Order = 1)]
         public int PermissonId { set; get; }
 
         [StringLength(128)]
-        [Key]
+      //  [Key]
         [Column(Order = 2)]
         public string RoleId { set; get; }
+
+        public int GroupId{ set; get; }
 
         [ForeignKey("PermissonId")]
         public virtual ApplicationPermission ApplicationPermission { set; get; }

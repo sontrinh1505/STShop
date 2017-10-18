@@ -12,7 +12,7 @@ namespace TeduShop.Data.Infrastructure
     {
         #region Properties
         private TeduShopDbContext dataContext;
-        private readonly IDbSet<T> dbSet;
+        public readonly IDbSet<T> dbSet;
 
         protected IDbFactory DbFactory
         {

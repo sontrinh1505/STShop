@@ -12,7 +12,8 @@ namespace TeduShop.Web.Mappings
     {
         public static void configure()
         {
-            Mapper.Initialize(cfg => {
+            Mapper.Initialize(cfg =>
+            {
                 cfg.CreateMap<Post, PostViewModel>().ReverseMap().MaxDepth(4);
                 cfg.CreateMap<PostCategory, PostCategoryViewModel>().ReverseMap().MaxDepth(4);
                 cfg.CreateMap<Tag, TagViewModel>().ReverseMap().MaxDepth(4);
@@ -24,9 +25,13 @@ namespace TeduShop.Web.Mappings
                 cfg.CreateMap<Page, PageViewModel>().ReverseMap().MaxDepth(4);
                 cfg.CreateMap<ContactDetail, ContactDetailViewModel>().ReverseMap().MaxDepth(4);
                 cfg.CreateMap<ApplicationGroup, ApplicationGroupViewModel>().ReverseMap().MaxDepth(4);
+              
                 cfg.CreateMap<ApplicationRole, ApplicationRoleViewModel>().ReverseMap().MaxDepth(4);
+
                 cfg.CreateMap<ApplicationUser, ApplicationUserViewModel>().ReverseMap().MaxDepth(4);
+
                 cfg.CreateMap<ApplicationPermission, ApplicationPermissionViewModel>().ReverseMap().MaxDepth(4);
+
             });
         }
     }

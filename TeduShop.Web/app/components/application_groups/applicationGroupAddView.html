@@ -32,13 +32,14 @@
                                 <label class="col-sm-2 control-label">Permisions</label>
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <div class="permissions" ng-repeat="permission in permissions">
-                                        <input type="checkbox" checklist-model="group.Permissions" checklist-value="permission.Name"> {{permission.Name}}
+                                        <label class="col-sm-2 control-label">{{permission.Name}}</label>
+                                        <!--<input type="checkbox" checklist-model="group.Permissions" checklist-value="permission"> {{permission.Name}}-->
 
                                         <div class="form-group ">
                                             <!--<label class="col-sm-2 control-label">Roles</label>-->
                                             <div class="col-sm-offset-2 col-sm-10">
                                                 <label class="roles" ng-repeat="role in permission.Roles">
-                                                    <input type="checkbox" checklist-model="group.Permissions.Roles" checklist-value="role"> {{role.Name}}
+                                                    <input type="checkbox" checklist-model="group.RolePermissions" checklist-value="role"> {{role.Name}}
                                                 </label>
                                             </div>
                                         </div>

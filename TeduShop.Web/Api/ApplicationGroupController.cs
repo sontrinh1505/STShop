@@ -99,8 +99,13 @@ namespace TeduShop.Web.Api
             //appGroupViewModel.Roles = Mapper.Map<IEnumerable<ApplicationRole>,IEnumerable<ApplicationRoleViewModel>>(listRole);
            // appGroupViewModel.Roles = listRole.ToListViewModel();
 
-            var listPermission = _appGroupService.GetListPermissionByGroupId(appGroupViewModel.ID);
+            var listPermission = _appGroupService.GetListPermissionByGroupId(appGroupViewModel.ID).ToList();
+           // appGroupViewModel.Permissions = Mapper.Map<IEnumerable<ApplicationPermission>, IEnumerable<ApplicationPermissionViewModel>>(listPermission);
             appGroupViewModel.Permissions = listPermission.ToListViewModel();
+
+           // var appGroupViewModel = appGroup.ToViewModel();
+
+
             return request.CreateResponse(HttpStatusCode.OK, appGroupViewModel);
         }
 
@@ -134,18 +139,39 @@ namespace TeduShop.Web.Api
 
                     //save Permission
                     var listPermisionGroup = new List<ApplicationPermissionGroup>();
-                    foreach (var permission in appGroupViewModel.Permissions)
+                    foreach (var permission in appGroupViewModel.RolePermissions)
                     {
-                        listPermisionGroup.Add(new ApplicationPermissionGroup()
+                        if(!listPermisionGroup.Any(x => x.PermissionId == permission.PermissionId))
                         {
-                            GroupId = appGroup.ID,
-                            PermissionId = permission.ID
-                        });
+                            listPermisionGroup.Add(new ApplicationPermissionGroup()
+                            {
+                                GroupId = appGroup.ID,
+                                PermissionId = permission.PermissionId
+                            });
+                        }                     
                     }
-                    
                    
-                    _appGroupService.AddPermissionsToGroup(listPermisionGroup, appGroup.ID);
 
+
+                    var listRolePermision = new List<ApplicationRolePermission>();
+                    foreach (var rolePermission in appGroupViewModel.RolePermissions)
+                    {
+                        if(!listRolePermision.Any(x => x.RoleId == rolePermission.RoleId && x.PermissonId == rolePermission.PermissionId))
+                        {
+                            listRolePermision.Add(new ApplicationRolePermission()
+                            {
+                                PermissonId = rolePermission.PermissionId,
+                                RoleId = rolePermission.RoleId,
+                                GroupId = appGroup.ID
+                            });
+                        }
+                        
+                    }
+
+                    
+
+                    _appGroupService.AddRolesToPermission(listRolePermision);
+                    _appGroupService.AddPermissionsToGroup(listPermisionGroup, appGroup.ID);
                     _appRoleService.Save();
 
 

@@ -22,5 +22,6 @@ namespace TeduShop.Model.Models
         public string Description { set; get; }
 
         public virtual IEnumerable<ApplicationPermission> Permissions { set; get; }
+        //public virtual IEnumerable<ApplicationGroup> Groups { set; get; }
     }
 }

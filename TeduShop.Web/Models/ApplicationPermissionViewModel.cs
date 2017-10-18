@@ -11,7 +11,12 @@ namespace TeduShop.Web.Models
         public int ID { get; set; }
 
         public string Name { get; set; }
+        public string Description { set; get; }
 
-        public IEnumerable<ApplicationGroupViewModel> Groups { set; get; }
+        public string ControllerName { set; get; }
+
+        // public IEnumerable<ApplicationGroupViewModel> Groups { set; get; }
+
+        public virtual IEnumerable<ApplicationRoleViewModel> Roles { set; get; }
     }
 }

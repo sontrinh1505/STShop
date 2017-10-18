@@ -285,7 +285,8 @@
                         listRolePermission.Add(new ApplicationRolePermission() {
 
                             RoleId = role.Id,
-                            PermissonId = permision.ID
+                            PermissonId = permision.ID,
+                            GroupId = group.ID
                         });
                     }
                 }

@@ -233,6 +233,7 @@ namespace TeduShop.Web.Infrastructure.Extensions
         public static IEnumerable<ApplicationPermissionViewModel> ToListViewModel(this IEnumerable<ApplicationPermission> model)
         {
             return Mapper.Map<IEnumerable<ApplicationPermission>, IEnumerable<ApplicationPermissionViewModel>>(model);
+
         }
 
        
