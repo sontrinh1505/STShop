@@ -23,44 +23,42 @@ namespace TeduShop.Web.Customs
         TeduShopDbContext context = new TeduShopDbContext();
         protected override bool IsAuthorized(HttpActionContext httpContext)
         {
-            return true;
+            //return true;
             //var context = new TeduShopDbContext();
             bool authorize = false;
             if (!httpContext.RequestContext.Principal.Identity.IsAuthenticated)
                 return false;
-          
+
+            var controllerName = httpContext.ControllerContext.ControllerDescriptor.ControllerName;
 
             var userId = httpContext.RequestContext.Principal.Identity.GetUserId();
 
             if (string.IsNullOrEmpty(userId))
                 return false;
 
-            var listGroupId = context.ApplicationUserGroups.Where(x => x.UserId == userId).Select(x => x.GroupId);
+            if (string.IsNullOrEmpty(Roles))
+                return true;
 
-            var listPermission = context.ApplicationPermissionGroups.Where(x => listGroupId.Contains(x.GroupId)).Select(x => x.ApplicationPermission).ToList();
+            var listGroupId = context.ApplicationUserGroups.Where(x => x.UserId == userId).Select(x => x.GroupId).ToList();
 
-            var permissionIds = listPermission.Select(x => x.ID).ToList();
+            var permission = context.ApplicationPermissionGroups.Where(x => listGroupId.Contains(x.GroupId))
+                .Select(x => x.ApplicationPermission)
+                .FirstOrDefault(x => x.ControllerName == controllerName);
 
-            var listRole = context.ApplicationRolePermissions.Where(x => permissionIds.Contains(x.PermissonId)).Select(x => x.ApplicationRole);
+            //authorize = listPermission.Any(x => x.ControllerName.Contains(controllerName));
 
-            var controllerName = httpContext.ControllerContext.ControllerDescriptor.ControllerName;
+            //var permissionIds = listPermission.Select(x => x.ID).ToList();
 
-            authorize = listPermission.Any(x => x.ControllerName.Contains(controllerName));
+            authorize = context.ApplicationRolePermissions.Where(x => permission.ID == x.PermissonId && listGroupId.Contains(x.GroupId)).Select(x => x.ApplicationRole).Distinct().Any(x => x.Name == Roles);
+
 
             if (!authorize)
             {
                 return false;
             }
 
-            if (string.IsNullOrEmpty(Roles))
-                return true;
 
-            if (!listRole.Any(x => x.Name == Roles))
-            {
-                return false;
-            }
-
-           // return true; 
+            return true; 
         }
 
 

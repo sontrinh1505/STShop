@@ -33,7 +33,7 @@ namespace TeduShop.Service
 
         bool AddPermissionsToGroup(IEnumerable<ApplicationPermissionGroup> permisions, int groupId);
 
-        bool AddRolesToPermission(IEnumerable<ApplicationRolePermission> rolePermissions);
+        bool AddRolesToPermission(IEnumerable<ApplicationRolePermission> rolePermissions, int groupId);
 
         IEnumerable<ApplicationGroup> GetListGroupByUserId(string userId);
 
@@ -140,9 +140,9 @@ namespace TeduShop.Service
             return true;
         }
 
-        public bool AddRolesToPermission(IEnumerable<ApplicationRolePermission> rolePermissions)
+        public bool AddRolesToPermission(IEnumerable<ApplicationRolePermission> rolePermissions, int groupId)
         {
-           // _applicationRolePermissionRepository.DeleteMulti(x => x.PermissonId == permissionId);
+            _applicationRolePermissionRepository.DeleteMulti(x => x.GroupId == groupId);
             foreach (var rolePermission in rolePermissions)
             {
                 _applicationRolePermissionRepository.Add(rolePermission);

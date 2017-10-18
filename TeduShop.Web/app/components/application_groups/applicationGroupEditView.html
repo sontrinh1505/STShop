@@ -26,39 +26,21 @@
                                            required reqired-message="Tên nhóm bắt buộc." ng-model="group.Name">
                                 </div>
                             </div>
-                            <!--<div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <label ng-repeat="role in roles">
-                                        <input type="checkbox" checklist-model="group.Roles" checklist-value="role"> {{role.Description}}
-                                    </label>
-                                </div>
-                            </div>-->
-
-
-                         
-
+                           
                             <div class="form-group ">
                                 <label class="col-sm-2 control-label">Permisions</label>
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <div class="permissions" ng-repeat="permission in permissions">
+                                    <div class="permissions" ng-repeat="permission in group.Permissions">
                                         <!--<input type="checkbox" checklist-model="group.Permissions" checklist-value="permission"> {{permission.Name}}-->
                                         <label class="col-sm-2  control-label">{{permission.Name}}</label>
-
                                         <div class="form-group ">
-                                           <!-- <label class="col-sm-2 control-label">Roles</label>-->
+                                            <!-- <label class="col-sm-2 control-label">Roles</label>-->
                                             <div class="col-sm-offset-2 col-sm-10">
-                                                <div class="roles" ng-repeat="role in roles">
-                                                    <div  ng-repeat="permissionin in group.Permissions">
-                                                        <div ng-if="permissionin.ID == permission.ID">
-                                                            <input type="checkbox" checklist-model="permissionin.Roles" checklist-value="role"> {{role.Name}}
-                                                        </div>
-                                                        
-                                                    </div>
-</div>
+                                                <div class="roles" ng-repeat="role in permission.allRole">
+                                                    <input type="checkbox" checklist-model="permission.Roles" checklist-value="role"> {{role.Name}}
+                                                </div>
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>

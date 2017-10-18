@@ -170,7 +170,7 @@ namespace TeduShop.Web.Api
 
                     
 
-                    _appGroupService.AddRolesToPermission(listRolePermision);
+                    _appGroupService.AddRolesToPermission(listRolePermision, appGroup.ID);
                     _appGroupService.AddPermissionsToGroup(listPermisionGroup, appGroup.ID);
                     _appRoleService.Save();
 
@@ -194,7 +194,7 @@ namespace TeduShop.Web.Api
         [HttpPut]
         [Route("update")]
         [CustomAuthorize(Roles = "Update")]
-        public async Task<HttpResponseMessage> Update(HttpRequestMessage request, ApplicationGroupViewModel appGroupViewModel)
+        public HttpResponseMessage Update(HttpRequestMessage request, ApplicationGroupViewModel appGroupViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -231,6 +231,22 @@ namespace TeduShop.Web.Api
                         });
                     }
 
+
+                    var listRolePermision = new List<ApplicationRolePermission>();
+                    foreach (var permission in appGroupViewModel.Permissions)
+                    {
+                        foreach(var role in permission.Roles)
+                        {
+                            listRolePermision.Add(new ApplicationRolePermission()
+                            {
+                                PermissonId = permission.ID,
+                                RoleId = role.Id,
+                                GroupId = appGroup.ID
+                            });
+                        }
+                    }
+
+                    _appGroupService.AddRolesToPermission(listRolePermision, appGroup.ID);
                     _appGroupService.AddPermissionsToGroup(listPermisionGroup, appGroup.ID);                 
                     _appRoleService.Save();
 

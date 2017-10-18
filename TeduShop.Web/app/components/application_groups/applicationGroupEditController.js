@@ -16,10 +16,13 @@
             apiService.put('/api/applicationGroup/update', $scope.group, addSuccessed, addFailed);
         }
 
-        function loadDetail() {
+        function loadDetail(callbackDetail) {
             apiService.get('/api/applicationGroup/detail/' + $stateParams.id, null,
             function (result) {
                 $scope.group = result.data;
+                
+                var rolePermissions = result.data.Permissions;
+                callbackDetail(rolePermissions);
             },
             function (result) {
                 notificationService.displayError(result.data);
@@ -37,30 +40,60 @@
             notificationService.displayErrorValidation(response);
         }
 
-        function loadRoles() {
+       
+        function loadRoles(callback) {
             apiService.get('/api/applicationRole/getlistall',
                 null,
                 function (response) {
-                    $scope.roles = response.data;
-                }, function (response) {
-                    notificationService.displayError('not loaded roles.');
-                });
+                    //$scope.roles = response.data;
+                    var roles = response.data;
 
+                    callback(roles);
+
+                }, function (response) {
+                    notificationService.displayError('can not load roles.');
+                    return null;
+                });
         }
+
+        var permissonRole = [];
 
         function loadPermissions() {
             apiService.get('/api/applicationGroup/getlistpermission',
                 null,
                 function (response) {
-                    $scope.permissions = response.data;
+                    var permissions = response.data;
+
+                    loadRoles(function (_roles) {
+                        permissions.forEach(function (permission, index) {
+                            permission.allRole = _roles;
+                        });
+                        $scope.group.Permissions = permissions;
+                    });
+
+                    loadDetail(function (_rolePermissions) {
+                        permissions.forEach(function (permission, index) {
+                            _rolePermissions.forEach(function (rolePermission, index) {
+                                if (rolePermission.ID == permission.ID)
+                                {
+                                    permission.Roles = rolePermission.Roles;
+                                }
+                            });
+                                                  
+                        });
+                        $scope.group.Permissions = permissions;
+                   });
+                    $scope.group.Permissions = permissions;
+
                 }, function (response) {
-                    notificationService.displayError('not loaded permissions.');
+                    notificationService.displayError('can not load permissions.');
                 });
 
         }
+        
 
         loadPermissions()
-        loadRoles();
-        loadDetail();
+        //loadRoles();
+        //loadDetail();
     }
 })(angular.module('tedushop.application_groups'));
