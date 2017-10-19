@@ -30,6 +30,6 @@ namespace TeduShop.Model.Models
         //public virtual IEnumerable<Order> Orders { set; get; }
 
         //public virtual IEnumerable<ApplicationGroup> Groups { set; get; }
-        //public virtual IEnumerable<ApplicationUserGroup> UserGroups { set; get; }
+        public virtual IEnumerable<ApplicationUserGroup> UserGroups { set; get; }
     }
 }

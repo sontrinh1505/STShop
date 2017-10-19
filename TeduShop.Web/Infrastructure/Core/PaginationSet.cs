@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TeduShop.Model.Models;
 
 namespace TeduShop.Web.Infrastructure.Core
 {
@@ -19,5 +20,7 @@ namespace TeduShop.Web.Infrastructure.Core
         public int TotalCount { get; set; }
         public int MaxPage { get; set; }
         public IEnumerable<T> Items { get; set; }
+
+        public IEnumerable<ApplicationPermission> Permission { get; set; }
     }
 }

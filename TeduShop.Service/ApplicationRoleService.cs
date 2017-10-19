@@ -27,8 +27,8 @@ namespace TeduShop.Service
         //Add roles to a sepcify group
         //bool AddRolesToGroup(IEnumerable<ApplicationRolePermission> roleGroups, int groupId);
 
-        //Get list role by group id
-      //  IEnumerable<ApplicationRole> GetListRoleByGroupId(int groupId);
+        //Get list roles by userId and permissonName
+        IEnumerable<ApplicationRole> GetListRoleByUserId(string userId, string permissionName);
 
         void Save();
     }
@@ -38,13 +38,18 @@ namespace TeduShop.Service
         private IApplicationRoleRepository _appRoleRepository;
         private IApplicationRoleGroupRepository _appRoleGroupRepository;
         private IUnitOfWork _unitOfWork;
+        private IApplicationGroupService _applicationGroupService;
 
         public ApplicationRoleService(IUnitOfWork unitOfWork,
-            IApplicationRoleRepository appRoleRepository, IApplicationRoleGroupRepository appRoleGroupRepository)
+            IApplicationRoleRepository appRoleRepository, 
+            IApplicationRoleGroupRepository appRoleGroupRepository,
+            IApplicationGroupService applicationGroupService
+            )
         {
             this._appRoleRepository = appRoleRepository;
             this._appRoleGroupRepository = appRoleGroupRepository;
             this._unitOfWork = unitOfWork;
+            this._applicationGroupService = applicationGroupService;
         }
 
         public ApplicationRole Add(ApplicationRole appRole)
@@ -101,9 +106,11 @@ namespace TeduShop.Service
             _appRoleRepository.Update(AppRole);
         }
 
-        //public IEnumerable<ApplicationRole> GetListRoleByGroupId(int groupId)
-        //{
-        //    return _appRoleRepository.GetListRoleByGroupId(groupId);
-        //}
+        public  IEnumerable<ApplicationRole> GetListRoleByUserId(string userId, string permissionName)
+        {
+            var roles = _appRoleRepository.GetListRoleByUserId(userId, permissionName).ToList();
+            return roles;
+        }
+
     }
 }

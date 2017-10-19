@@ -28,10 +28,10 @@
                 }
             }
             apiService.del('api/applicationGroup/deletemulti', config, function (result) {
-                notificationService.displaySuccess('Xóa thành công ' + result.data + ' bản ghi.');
+                notificationService.displaySuccess('Delete ' + result.data + ' items.');
                 search();
             }, function (error) {
-                notificationService.displayError('Xóa không thành công');
+                notificationService.displayError('Unsuccessful');
             });
         }
 
@@ -61,7 +61,7 @@
         }, true);
 
         function deleteItem(id) {
-            $ngBootbox.confirm('Bạn có chắc muốn xóa?')
+            $ngBootbox.confirm('Do you want to delete this item?')
                 .then(function () {
                     var config = {
                         params: {
@@ -69,11 +69,11 @@
                         }
                     }
                     apiService.del('/api/applicationGroup/delete', config, function () {
-                        notificationService.displaySuccess('Đã xóa thành công.');
+                        notificationService.displaySuccess('Successful');
                         search();
                     },
                     function () {
-                        notificationService.displayError('Xóa không thành công.');
+                        notificationService.displayError('Unsuccessful');
                     });
                 });
         }
@@ -112,6 +112,31 @@
             search();
         }
 
+
+
+
+        function loadRoles() {
+
+            var config = {
+                params: {
+                    permissionName: "Group"
+                }
+            }
+
+            apiService.get('/api/applicationRole/getlisrolebypermissionname',
+                config,
+                function (response) {
+                    //$scope.roles = response.data;
+                    var roles = response.data;
+
+                }, function (response) {
+                    notificationService.displayError('can not load roles.');
+                    return null;
+                });
+        }
+
+
+        loadRoles();
         $scope.search();
     }
 })(angular.module('tedushop.application_groups'));

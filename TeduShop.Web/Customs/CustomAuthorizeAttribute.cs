@@ -41,13 +41,13 @@ namespace TeduShop.Web.Customs
 
             var listGroupId = context.ApplicationUserGroups.Where(x => x.UserId == userId).Select(x => x.GroupId).ToList();
 
+            if (listGroupId == null)
+                return false;
+
+
             var permission = context.ApplicationPermissionGroups.Where(x => listGroupId.Contains(x.GroupId))
                 .Select(x => x.ApplicationPermission)
                 .FirstOrDefault(x => x.ControllerName == controllerName);
-
-            //authorize = listPermission.Any(x => x.ControllerName.Contains(controllerName));
-
-            //var permissionIds = listPermission.Select(x => x.ID).ToList();
 
             authorize = context.ApplicationRolePermissions.Where(x => permission.ID == x.PermissonId && listGroupId.Contains(x.GroupId)).Select(x => x.ApplicationRole).Distinct().Any(x => x.Name == Roles);
 

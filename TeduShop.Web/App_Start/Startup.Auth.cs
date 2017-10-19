@@ -111,26 +111,27 @@ namespace TeduShop.Web.App_Start
                     var applicationGroupService = ServiceFactory.Get<IApplicationGroupService>();
                     var listGroup = applicationGroupService.GetListGroupByUserId(user.Id);
 
-                    ClaimsIdentity identity = await userManager.CreateIdentityAsync(
-                                                           user,
-                                                           DefaultAuthenticationTypes.ExternalBearer);
-                    context.Validated(identity);
-                    //if (listGroup.Any(x => x.Name == ComomConstants.Administrator))
-                    //{
-                    //    ClaimsIdentity identity = await userManager.CreateIdentityAsync(
+                    //ClaimsIdentity identity = await userManager.CreateIdentityAsync(
                     //                                       user,
                     //                                       DefaultAuthenticationTypes.ExternalBearer);
-                    //    context.Validated(identity);
-                    //}
-                    //else
-                    //{
-                    //    context.Rejected();
-                    //    context.SetError("invalid_group","you are not administrator.");
-                    //}                   
+                    //context.Validated(identity);
+
+                    if (listGroup.Any(x => x.Name == ComomConstants.Administrator || x.Name == ComomConstants.Admin))
+                    {
+                        ClaimsIdentity identity = await userManager.CreateIdentityAsync(
+                                                           user,
+                                                           DefaultAuthenticationTypes.ExternalBearer);
+                        context.Validated(identity);
+                    }
+                    else
+                    {
+                        context.Rejected();
+                        context.SetError("invalid_group", "You are not administrator.");
+                    }
                 }
                 else
                 {
-                    context.SetError("invalid_grant", "Tài khoản hoặc mật khẩu không đúng.'");
+                    context.SetError("invalid_grant", "User or Password are incorrect");
                     context.Rejected();
                 }
             }

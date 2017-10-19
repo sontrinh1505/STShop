@@ -17,6 +17,7 @@ namespace TeduShop.Common
         public const string HomeTitle = "HomeTitle";
         public const string HomeMetaKeyword = "HomeMetaKeyword";
         public const string HomeMataDescription = "HomeMataDescription";
-        public const string Administrator = "Administrator";
+        public const string Administrator = "Super Admin";
+        public const string Admin = "Admin";
     }
 }

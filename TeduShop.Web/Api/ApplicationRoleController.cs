@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Controllers;
 using System.Web.Script.Serialization;
+using TeduShop.Common;
 using TeduShop.Common.Exceptions;
 using TeduShop.Model.Models;
 using TeduShop.Service;
@@ -22,11 +25,13 @@ namespace TeduShop.Web.Api
     public class ApplicationRoleController : ApiControllerBase
     {
         private IApplicationRoleService _appRoleService;
+        private IApplicationGroupService _appGroupService;
 
         public ApplicationRoleController(IErrorService errorService,
-            IApplicationRoleService appRoleService) : base(errorService)
+            IApplicationRoleService appRoleService, IApplicationGroupService appGroupService) : base(errorService)
         {
             _appRoleService = appRoleService;
+            _appGroupService = appGroupService;
         }
 
        
@@ -56,6 +61,8 @@ namespace TeduShop.Web.Api
                 return response;
             });
         }
+
+
         [Route("getlistall")]
         [CustomAuthorize(Roles = "Read")]
         [HttpGet]
@@ -73,6 +80,35 @@ namespace TeduShop.Web.Api
                 return response;
             });
         }
+
+
+        [Route("getlisrolebypermissionname")]
+        [CustomAuthorize(Roles = "Read")]
+        [HttpGet]
+        public HttpResponseMessage GetListRole(HttpRequestMessage request, string permissionName)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+               // var auth = Request.Headers.Authorization;
+              //  var claim = JWTHandle.GetPrincipal(auth.Parameter);
+
+                var userId = User.Identity.GetUserId();
+
+                HttpResponseMessage response = null;
+
+                //HttpActionContext httpContext = new HttpActionContext();
+
+                //var userId = httpContext.RequestContext.Principal.Identity.GetUserId();
+
+                var result =  _appRoleService.GetListRoleByUserId(userId, permissionName).ToListViewModel();
+
+                response = request.CreateResponse(HttpStatusCode.OK, result);
+
+                return response;
+            });
+        }
+
+
         [Route("detail/{id}")]
         [CustomAuthorize(Roles = "Read")]
         [HttpGet]

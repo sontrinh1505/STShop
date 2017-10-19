@@ -28,7 +28,7 @@
                 success(result);
             }, function (error) {
                 if (error.status === 401) {
-                    notificationService.displayError('Authentication is required.');
+                    notificationService.displayError('You do not have permisson.');
                 } else if (failure != null) {
                     failure(error);
                 }
@@ -41,7 +41,7 @@
                 success(result);
             }, function (error) {
                 if (error.status === 401) {
-                    notificationService.displayError('Authentication is required.');
+                    notificationService.displayError('You do not have permisson.');
                 } else if (failure != null) {
                     failure(error);
                 }
@@ -54,7 +54,7 @@
                 success(result);
             }, function (error) {
                 if (error.status === 401) {
-                    notificationService.displayError('Authentication is required.');
+                    notificationService.displayError('You do not have permisson.');
                 } else if (failure != null) {
                     failure(error);
                 }
