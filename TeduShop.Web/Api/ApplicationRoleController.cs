@@ -73,7 +73,6 @@ namespace TeduShop.Web.Api
                 HttpResponseMessage response = null;
                 var model = _appRoleService.GetAll();
                 var modelVm = model.ToListViewModel();
-                //IEnumerable<ApplicationRoleViewModel> modelVm = Mapper.Map<IEnumerable<ApplicationRole>, IEnumerable<ApplicationRoleViewModel>>(model);
 
                 response = request.CreateResponse(HttpStatusCode.OK, modelVm);
 
@@ -89,16 +88,9 @@ namespace TeduShop.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
-               // var auth = Request.Headers.Authorization;
-              //  var claim = JWTHandle.GetPrincipal(auth.Parameter);
-
                 var userId = User.Identity.GetUserId();
 
                 HttpResponseMessage response = null;
-
-                //HttpActionContext httpContext = new HttpActionContext();
-
-                //var userId = httpContext.RequestContext.Principal.Identity.GetUserId();
 
                 var result =  _appRoleService.GetListRoleByUserId(userId, permissionName).ToListViewModel();
 

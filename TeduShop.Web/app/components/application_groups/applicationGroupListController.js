@@ -114,6 +114,8 @@
 
 
 
+        var editPermisson = false;
+        var deletePermission = false;
 
         function loadRoles() {
 
@@ -128,6 +130,26 @@
                 function (response) {
                     //$scope.roles = response.data;
                     var roles = response.data;
+                    roles.forEach(function (role, index) {
+                        if (role.Name == "Update") {
+
+                            editPermisson = true;
+
+                        } else if (role.Name == "Delete") {
+
+                            deletePermission = true;
+                        }
+
+                    });
+                    if (!editPermisson) {
+                        $('#delete').addClass('disabled');
+                    }
+
+                    if (!deletePermission){
+                        $('#edit').addClass('disabled');
+                    }
+                        
+                       
 
                 }, function (response) {
                     notificationService.displayError('can not load roles.');
