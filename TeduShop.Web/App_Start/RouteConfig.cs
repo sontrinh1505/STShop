@@ -82,6 +82,22 @@ namespace TeduShop.Web
                 namespaces: new string[] { "TeduShop.Web.Controllers" }
             );
 
+
+            routes.MapRoute(
+                name: "Hot Product",
+                url: "hot/product.html",
+                defaults: new { controller = "Product", action = "HotProduct", id = UrlParameter.Optional },
+                namespaces: new string[] { "TeduShop.Web.Controllers" }
+            );
+
+            routes.MapRoute(
+               name: "Latest Product",
+               url: "latest/product.html",
+               defaults: new { controller = "Product", action = "LatestProduct", id = UrlParameter.Optional },
+               namespaces: new string[] { "TeduShop.Web.Controllers" }
+           );
+
+
             routes.MapRoute(
                 name: "TagList",
                 url: "tag/{tagId}.html",

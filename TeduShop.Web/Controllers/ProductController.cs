@@ -117,6 +117,20 @@ namespace TeduShop.Web.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult HotProduct()
+        {
+            var products = _productService.GetHotProduct(20).ToListViewModel();
+
+            return View(products);
+        }
+
+        public ActionResult LatestProduct()
+        {
+            var products = _productService.GetLastest(20).ToListViewModel();
+
+            return View(products);
+        }
+
 
     }
 }

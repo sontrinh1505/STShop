@@ -116,6 +116,7 @@
 
         var editPermisson = false;
         var deletePermission = false;
+        var createPermission = false;
 
         function loadRoles() {
 
@@ -138,17 +139,32 @@
                         } else if (role.Name == "Delete") {
 
                             deletePermission = true;
+                        } else if (role.Name == "Create") {
+
+                            createPermission = true;
                         }
 
                     });
                     if (!editPermisson) {
-                        $('#delete').addClass('disabled');
+                        //$('.deleteItem').addClass('disabled');
+                        $('.deleteItem').attr('disabled', 'disabled');
                     }
 
                     if (!deletePermission){
-                        $('#edit').addClass('disabled');
-                    }
+                        //$('.editItem').addClass('disabled');
+                        //$('.checkboxItem').addClass('disabled');
+
+                        $('.editItem').attr('disabled', 'disabled');
+                        $('.checkboxItem').attr('disabled', 'disabled');
                         
+                    }
+
+                    if (!createPermission) {
+                        //$('.createItem').addClass('disabled');
+                        $('.createItem').attr('disabled', 'disabled');
+                    }
+                    $scope.editItem = editPermisson;
+
                        
 
                 }, function (response) {

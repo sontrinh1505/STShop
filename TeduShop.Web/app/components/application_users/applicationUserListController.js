@@ -66,6 +66,70 @@
             search();
         }
 
+
+
+        var editPermisson = false;
+        var deletePermission = false;
+        var createPermission = false;
+
+        function loadRoles() {
+
+            var config = {
+                params: {
+                    permissionName: "Role"
+                }
+            }
+
+            apiService.get('/api/applicationRole/getlisrolebypermissionname',
+                config,
+                function (response) {
+                    //$scope.roles = response.data;
+                    var roles = response.data;
+                    roles.forEach(function (role, index) {
+                        if (role.Name == "Update") {
+
+                            editPermisson = true;
+
+                        } else if (role.Name == "Delete") {
+
+                            deletePermission = true;
+                        } else if (role.Name == "Create") {
+
+                            createPermission = true;
+                        }
+
+                    });
+                    if (!editPermisson) {
+                        //$('.deleteItem').addClass('disabled');
+                        $('.deleteItem').attr('disabled', 'disabled');
+                    }
+
+                    if (!deletePermission) {
+                        //$('.editItem').addClass('disabled');
+                        //$('.checkboxItem').addClass('disabled');
+
+                        $('.editItem').attr('disabled', 'disabled');
+                        $('.checkboxItem').attr('disabled', 'disabled');
+
+                    }
+
+                    if (!createPermission) {
+                        //$('.createItem').addClass('disabled');
+                        $('.createItem').attr('disabled', 'disabled');
+                    }
+
+                    $scope.editItem = editPermisson;
+
+
+                }, function (response) {
+                    notificationService.displayError('can not load roles.');
+                    return null;
+                });
+        }
+
+
+        loadRoles();
+
         $scope.search();
     }
 })(angular.module('tedushop.application_users'));

@@ -1,10 +1,10 @@
 ﻿<section class="content-header">
   <h1>
-    DANH SÁCH NGƯỜI DÙNG
+   Users
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-    <li class="active"><a ui-sref="accounts">Danh sách người dùng</a></li>
+    <li><a href="/admin"><i class="fa fa-dashboard"></i>Home</a></li>
+    <li class="active"><a ui-sref="accounts">Users</a></li>
   </ol>
 </section>
 <!-- Main content -->
@@ -15,11 +15,11 @@
         <div class="box-header">
           <div class="col-md-12">
             <div class="col-md-6">
-              <input type="text" id="txtSearch" ng-model="filterExpression" class="form-control" placeholder="Nhập từ khóa..." />
+              <input type="text" id="txtSearch" ng-model="filterExpression" class="form-control" placeholder="Enter User Name" />
             </div>
             <div class="col-md-6">
 
-              <button class="btn btn-success pull-right" ui-sref="add_application_user"><i class="fa fa-plus"></i> Thêm mới</button>
+              <button class="btn btn-success pull-right createItem" ui-sref="add_application_user"><i class="fa fa-plus"></i> Create</button>
             </div>
           </div>
         </div><!-- /.box-header -->
@@ -27,20 +27,24 @@
           <table class="table table-bordered">
             <thead>
               <tr>
-                <th>Tên người dùng</th>
-                <th>Tài khoản</th>
+                <th>User</th>
+                <th>Account</th>
                 <th>Email</th>
                 <th style="width:10%"></th>
               </tr>
             </thead>
             <tbody>
               <tr ng-repeat="item in data | filter:filterExpression">
-                <td><a ui-sref="edit_application_user({id:item.Id})">{{item.FullName}}</a></td>
-                <td><a ui-sref="edit_application_user({id:item.Id})">{{item.UserName}}</a></td>
+                <td ng-if="editItem == false">{{item.FullName}}</td>
+                <td ng-if="editItem == true"><a ui-sref="edit_application_user({id:item.Id})">{{item.FullName}}</a></td>
+
+                <td ng-if="editItem == false">{{item.UserName}}</td>
+                <td ng-if="editItem == true"><a ui-sref="edit_application_user({id:item.Id})">{{item.UserName}}</a></td>
+
                 <td>{{item.Email}}</td>
                 <td>
-                  <a ui-sref="edit_application_user({id:item.Id})" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
-                  <button class="btn btn-sm btn-danger" ng-click="deleteItem(item.Id)"><i class="fa fa-trash-o"></i></button>
+                  <button ui-sref="edit_application_user({id:item.Id})" class="btn btn-sm btn-primary editItem"><i class="fa fa-pencil"></i></button>
+                  <button class="btn btn-sm btn-danger deleteItem" ng-click="deleteItem(item.Id)"><i class="fa fa-trash-o"></i></button>
                 </td>
               </tr>
             </tbody>
@@ -48,7 +52,7 @@
           <div ng-if="loading">
             <div class="col-xs-4"></div>
             <div class="col-xs-4">
-              <i class="fa fa-refresh fa-4x fa-spin"></i> <label class="label label-primary">Đang tải...</label>
+              <i class="fa fa-refresh fa-4x fa-spin"></i> <label class="label label-primary">Loading...</label>
             </div>
             <div class="col-xs-4"></div>
           </div>

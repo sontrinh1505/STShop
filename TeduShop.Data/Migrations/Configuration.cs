@@ -66,10 +66,8 @@
             {
                 List<ProductCategory> listProductCategory = new List<ProductCategory>()
             {
-                new ProductCategory() { Name="Điện lạnh",Alias="dien-lanh",Status=true },
-                new ProductCategory() { Name="Viễn thông",Alias="vien-thong",Status=true },
-                new ProductCategory() { Name="Đồ gia dụng",Alias="do-gia-dung",Status=true },
-                new ProductCategory() { Name="Mỹ phẩm",Alias="my-pham",Status=true }
+                new ProductCategory() { Name = "Laptop",Alias = "Laptop", Status = true },
+                new ProductCategory() { Name = "Phone",Alias = "Phone", Status = true },
             };
 
                 context.ProductCategories.AddRange(listProductCategory);

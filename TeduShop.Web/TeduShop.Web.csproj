@@ -5829,6 +5829,8 @@
     <None Include="Properties\PublishProfiles\publish.pubxml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Product\HotProduct.cshtml" />
+    <Content Include="Views\Product\LatestProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TeduShop.Common\TeduShop.Common.csproj">

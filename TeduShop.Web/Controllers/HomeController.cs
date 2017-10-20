@@ -29,8 +29,8 @@ namespace TeduShop.Web.Controllers
         public ActionResult Index()
         {
             var slideModel = _commonService.GetSlides();           
-            var lastestProductModel = _productService.GetLastest(3);
-            var topSaleProductModel = _productService.GetHotProduct(3);
+            var lastestProductModel = _productService.GetLastest(10);
+            var topSaleProductModel = _productService.GetHotProduct(10);
 
             var slideModelViewModel = Mapper.Map<IEnumerable<Slide>, IEnumerable<SlideViewModel>>(slideModel);
             var lastestProductModelViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(lastestProductModel);

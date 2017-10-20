@@ -43,7 +43,7 @@
             </ul>
         </div>
     </div>
-    <div class="shoes-grid-left">
+    @*<div class="shoes-grid-left">
         <a href="single.html">
             <div class="col-md-6 con-sed-grid">
 
@@ -73,10 +73,10 @@
                 <div class="clearfix"> </div>
             </div>
         </a>
-    </div>
+    </div>*@
     <div class="products">
         <h5 class="latest-product">LATEST PRODUCTS</h5>
-        <a class="view-all" href="product.html">VIEW ALL<span> </span></a>
+        <a class="view-all" href="/latest/product.html">VIEW ALL<span> </span></a>
     </div>
     <div class="product-left">
         @foreach (var product in Model.LastestProducts)
@@ -116,9 +116,10 @@
 
         <div class="clearfix"> </div>
     </div>
+
     <div class="products">
         <h5 class="latest-product">HOT PRODUCTS</h5>
-        <a class="view-all" href="product.html">VIEW ALL<span> </span></a>
+        <a class="view-all" href="/hot/product.html">VIEW ALL<span> </span></a>
     </div>
     <div class="product-left">
         @foreach (var product in Model.TopSaleProducts)
