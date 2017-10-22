@@ -4,10 +4,11 @@
     ViewBag.Title = Model.Title;
     ViewBag.MetaKeyword = Model.MetaKeyword;
     ViewBag.MetaDescription = Model.MetaDescription;
-    Layout = "~/Views/Shared/Layouts.cshtml";
+    //Layout = "~/Views/Shared/Layouts.cshtml";
+    Layout = "~/Views/Shared/Layouts_NewTemplate.cshtml";
 }
 
-@section footerJS{
+@*@section footerJS{
     <script src="/Assets/client/js/jquery.wmuSlider.js"></script>
     <script>
         $('.example1').wmuSlider();
@@ -74,7 +75,8 @@
             </div>
         </a>
     </div>*@
-    <div class="products">
+
+    @*<div class="products">
         <h5 class="latest-product">LATEST PRODUCTS</h5>
         <a class="view-all" href="/latest/product.html">VIEW ALL<span> </span></a>
     </div>
@@ -159,7 +161,7 @@
         <div class="clearfix"> </div>
     </div>
     <div class="clearfix"> </div>
-</div>
+</div>*@
 
 
 
