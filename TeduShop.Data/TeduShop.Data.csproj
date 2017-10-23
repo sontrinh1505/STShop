@@ -64,41 +64,9 @@
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\RepositoryBase.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\201710040910265_init.cs" />
-    <Compile Include="Migrations\201710040910265_init.Designer.cs">
-      <DependentUpon>201710040910265_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710130718022_AddFunctionality.cs" />
-    <Compile Include="Migrations\201710130718022_AddFunctionality.Designer.cs">
-      <DependentUpon>201710130718022_AddFunctionality.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710130804483_AddPermission.cs" />
-    <Compile Include="Migrations\201710130804483_AddPermission.Designer.cs">
-      <DependentUpon>201710130804483_AddPermission.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710160856449_AddControllerName.cs" />
-    <Compile Include="Migrations\201710160856449_AddControllerName.Designer.cs">
-      <DependentUpon>201710160856449_AddControllerName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710160946465_Update.cs" />
-    <Compile Include="Migrations\201710160946465_Update.Designer.cs">
-      <DependentUpon>201710160946465_Update.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710170544370_ChangeStruture.cs" />
-    <Compile Include="Migrations\201710170544370_ChangeStruture.Designer.cs">
-      <DependentUpon>201710170544370_ChangeStruture.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710180454378_AddGroupIdFieldInRolePermissonTable.cs" />
-    <Compile Include="Migrations\201710180454378_AddGroupIdFieldInRolePermissonTable.Designer.cs">
-      <DependentUpon>201710180454378_AddGroupIdFieldInRolePermissonTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710180501409_ChangeRolePermissionTable.cs" />
-    <Compile Include="Migrations\201710180501409_ChangeRolePermissionTable.Designer.cs">
-      <DependentUpon>201710180501409_ChangeRolePermissionTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710231049038_updateModel.cs" />
-    <Compile Include="Migrations\201710231049038_updateModel.Designer.cs">
-      <DependentUpon>201710231049038_updateModel.cs</DependentUpon>
+    <Compile Include="Migrations\201710231819597_aaa.cs" />
+    <Compile Include="Migrations\201710231819597_aaa.Designer.cs">
+      <DependentUpon>201710231819597_aaa.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -148,32 +116,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710040910265_init.resx">
-      <DependentUpon>201710040910265_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710130718022_AddFunctionality.resx">
-      <DependentUpon>201710130718022_AddFunctionality.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710130804483_AddPermission.resx">
-      <DependentUpon>201710130804483_AddPermission.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710160856449_AddControllerName.resx">
-      <DependentUpon>201710160856449_AddControllerName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710160946465_Update.resx">
-      <DependentUpon>201710160946465_Update.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710170544370_ChangeStruture.resx">
-      <DependentUpon>201710170544370_ChangeStruture.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710180454378_AddGroupIdFieldInRolePermissonTable.resx">
-      <DependentUpon>201710180454378_AddGroupIdFieldInRolePermissonTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710180501409_ChangeRolePermissionTable.resx">
-      <DependentUpon>201710180501409_ChangeRolePermissionTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710231049038_updateModel.resx">
-      <DependentUpon>201710231049038_updateModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710231819597_aaa.resx">
+      <DependentUpon>201710231819597_aaa.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

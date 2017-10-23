@@ -7,13 +7,13 @@ namespace TeduShop.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddPermission : IMigrationMetadata
+    public sealed partial class aaa : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddPermission));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(aaa));
         
         string IMigrationMetadata.Id
         {
-            get { return "201710130804483_AddPermission"; }
+            get { return "201710231819597_aaa"; }
         }
         
         string IMigrationMetadata.Source

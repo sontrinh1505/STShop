@@ -16,6 +16,11 @@ namespace TeduShop.Model.Models
         [MaxLength(50)]
         public string Name { set; get; }
 
+        public int? ParentId { get; set; }
+
+        [ForeignKey("ParentId")]
+        public virtual MenuGroup ParentGroupMenu { get; set; }  
+
         public virtual ICollection<Menu> Menus { set; get; }
     }
 }
