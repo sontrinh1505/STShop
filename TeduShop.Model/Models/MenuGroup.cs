@@ -16,6 +16,6 @@ namespace TeduShop.Model.Models
         [MaxLength(50)]
         public string Name { set; get; }
 
-        public virtual IEnumerable<Menu> Menus { set; get; }
+        public virtual ICollection<Menu> Menus { set; get; }
     }
 }

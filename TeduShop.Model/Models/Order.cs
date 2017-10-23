@@ -50,6 +50,6 @@ namespace TeduShop.Model.Models
         [ForeignKey("CustomerId")]
         public virtual ApplicationUser user { set; get; }
 
-        public virtual IEnumerable<OrderDetail> OrderDetails { set; get; }
+        public virtual ICollection<OrderDetail> OrderDetails { set; get; }
     }
 }

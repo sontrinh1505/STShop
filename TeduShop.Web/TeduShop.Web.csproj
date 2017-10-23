@@ -279,6 +279,7 @@
     <Compile Include="Models\PostViewModel.cs" />
     <Compile Include="Models\ProductCategoryViewModel.cs" />
     <Compile Include="Models\ProductTagViewModel.cs" />
+    <Compile Include="Models\MenuGroupViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\ShoppingCartViewModel.cs" />
@@ -6080,6 +6081,15 @@
     <Content Include="Views\Product\HotProduct.cshtml" />
     <Content Include="Views\Product\LatestProduct.cshtml" />
     <Content Include="Views\Shared\Layouts_NewTemplate.cshtml" />
+    <Content Include="Views\Shared\Header_NewTemplate.cshtml" />
+    <Content Include="Views\Shared\Footer_NewTemplate.cshtml" />
+    <Content Include="Views\Home\Index_NewTemplate.cshtml" />
+    <Content Include="Views\Shared\TopNavigation_NewTemplate.cshtml" />
+    <Content Include="Views\Shared\Banner_NewTemplate.cshtml" />
+    <Content Include="Views\Shared\ProductTab_NewTemplate.cshtml" />
+    <Content Include="Views\Shared\BestSeller_NewTemplate.cshtml" />
+    <Content Include="Views\Shared\RecentView_NewTemplate.cshtml" />
+    <Content Include="Views\Shared\TopBrand_NewTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TeduShop.Common\TeduShop.Common.csproj">

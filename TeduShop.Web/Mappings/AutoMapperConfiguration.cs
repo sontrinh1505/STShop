@@ -24,6 +24,7 @@ namespace TeduShop.Web.Mappings
                 cfg.CreateMap<Slide, SlideViewModel>().ReverseMap().MaxDepth(4);
                 cfg.CreateMap<Page, PageViewModel>().ReverseMap().MaxDepth(4);
                 cfg.CreateMap<ContactDetail, ContactDetailViewModel>().ReverseMap().MaxDepth(4);
+                cfg.CreateMap<MenuGroup, MenuGroupViewModel>().ReverseMap().MaxDepth(4);
                 cfg.CreateMap<ApplicationGroup, ApplicationGroupViewModel>().ReverseMap().MaxDepth(4);
               
                 cfg.CreateMap<ApplicationRole, ApplicationRoleViewModel>().ReverseMap().MaxDepth(4);

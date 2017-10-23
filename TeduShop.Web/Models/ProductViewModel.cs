@@ -59,5 +59,7 @@ namespace TeduShop.Web.Models
         public decimal OriginalPrice { set; get; }
 
         public virtual ProductCategoryViewModel ProductCategory { set; get; }
+
+        public virtual ICollection<ProductTagViewModel> ProductTags { set; get; }
     }
 }

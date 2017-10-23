@@ -86,7 +86,7 @@ namespace TeduShop.Data.Infrastructure
                 var query = dataContext.Set<T>().Include(includes.First());
                 foreach (var include in includes.Skip(1))
                     query = query.Include(include);
-                return query.AsQueryable();
+                return query.AsQueryable().ToList();
             }
 
             return dataContext.Set<T>().AsQueryable();

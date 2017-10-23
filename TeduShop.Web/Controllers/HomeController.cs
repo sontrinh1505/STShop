@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using TeduShop.Common;
 using TeduShop.Model.Models;
 using TeduShop.Service;
+using TeduShop.Web.Infrastructure.Extensions;
 using TeduShop.Web.Models;
 
 namespace TeduShop.Web.Controllers
@@ -17,12 +18,19 @@ namespace TeduShop.Web.Controllers
         IProductCategoryService _productCategoryService;
         ICommonService _commonService;
         IProductService _productService;
+        IMenuService _menuService;
+        IMenuGroupService _menuGroupService;
 
-        public HomeController(IProductCategoryService productCategoryService, ICommonService commonService, IProductService productService)
+        public HomeController(IProductCategoryService productCategoryService, 
+            ICommonService commonService, IProductService productService,
+            IMenuService menuService, IMenuGroupService menuGroupService
+            )
         {
             this._productCategoryService = productCategoryService;
             this._commonService = commonService;
             this._productService = productService;
+            this._menuService = menuService;
+            this._menuGroupService = menuGroupService;
         }
 
         [OutputCache(Duration = 3600, Location = System.Web.UI.OutputCacheLocation.Client)]
@@ -51,23 +59,66 @@ namespace TeduShop.Web.Controllers
 
             }
            
-            return View(homeViewModel);
+            return View("~/Views/Home/Index_NewTemplate.cshtml", homeViewModel);
         }
 
         [ChildActionOnly]
         [OutputCache(Duration = 3600)]
         public ActionResult Footer()
         {
-            var footerModel = _commonService.GetFooter();
-            var footerViewModel = Mapper.Map<Footer, FooterViewModel>(footerModel);
-            return PartialView(footerViewModel);
+            //var footerModel = _commonService.GetFooter();
+            //var footerViewModel = Mapper.Map<Footer, FooterViewModel>(footerModel);
+            return PartialView("~/Views/Shared/Footer_NewTemplate.cshtml");
         }
 
         [ChildActionOnly]
         public ActionResult Header()
         {
-            return PartialView();
+            var homeViewModel = new HomeViewModel();
+            string[] include = { "Menus" };
+            var menus = _menuGroupService.GetAll(include).ToList();
+            homeViewModel.Menus = menus.ToListViewModel();
+
+            return PartialView("~/Views/Shared/Header_NewTemplate.cshtml", homeViewModel);
         }
+
+        [ChildActionOnly]
+        public ActionResult TopNavigation()
+        {
+            return PartialView("~/Views/Shared/TopNavigation_NewTemplate.cshtml");
+        }
+
+        [ChildActionOnly]
+        public ActionResult Banner()
+        {
+            return PartialView("~/Views/Shared/Banner_NewTemplate.cshtml");
+        }
+
+        [ChildActionOnly]
+        public ActionResult ProductTab()
+        {
+            return PartialView("~/Views/Shared/ProductTab_NewTemplate.cshtml");
+        }
+
+        [ChildActionOnly]
+        public ActionResult BestSeller()
+        {
+            return PartialView("~/Views/Shared/BestSeller_NewTemplate.cshtml");
+        }
+
+        [ChildActionOnly]
+        public ActionResult RecentView()
+        {
+            return PartialView("~/Views/Shared/RecentView_NewTemplate.cshtml");
+        }
+
+        [ChildActionOnly]
+        public ActionResult Topbrand()
+        {
+            return PartialView("~/Views/Shared/TopBrand_NewTemplate.cshtml");
+        }
+
+
 
         [ChildActionOnly]
         [OutputCache(Duration = 3600)]

@@ -28,6 +28,7 @@
             CreateUser(context);
             CreateGroup(context);
             CreatePermission(context);
+            CreateMenu(context);
         }
 
         private void CreateConfigTitle(TeduShop.Data.TeduShopDbContext context)
@@ -101,7 +102,7 @@
 
                     if (!rolemanager.Roles.Any())
                     {
-                        rolemanager.Create(new ApplicationRole { Name = "Read", Description= "Read" });
+                        rolemanager.Create(new ApplicationRole { Name = "Read", Description = "Read" });
                         rolemanager.Create(new ApplicationRole { Name = "Create", Description = "Create" });
                         rolemanager.Create(new ApplicationRole { Name = "Update", Description = "Update" });
                         rolemanager.Create(new ApplicationRole { Name = "Delete", Description = "Delete" });
@@ -278,9 +279,10 @@
                         GroupId = group.ID,
                         PermissionId = permision.ID
                     });
-                    foreach(var role in roles)
+                    foreach (var role in roles)
                     {
-                        listRolePermission.Add(new ApplicationRolePermission() {
+                        listRolePermission.Add(new ApplicationRolePermission()
+                        {
 
                             RoleId = role.Id,
                             PermissonId = permision.ID,
@@ -321,8 +323,8 @@
                     }
 
                 };
-              
-                
+
+
 
                 context.ApplicationGroups.AddRange(groupList);
                 context.SaveChanges();
@@ -336,6 +338,140 @@
                 };
 
                 context.ApplicationUserGroups.Add(userGroup);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreateMenu(TeduShop.Data.TeduShopDbContext context)
+        {
+            if (context.MenuGroups.Count() == 0)
+            {
+                var groupList = new List<MenuGroup>()
+                {
+                    new MenuGroup
+                    {
+                        Name = "Laptops"
+                    },
+                    new MenuGroup
+                    {
+                        Name = "Phones"
+                    },
+                    new MenuGroup
+                    {
+                        Name = "Tablets"
+                    },
+                    new MenuGroup
+                    {
+                        Name = "TV & Audio"
+                    }
+
+                };
+
+                context.MenuGroups.AddRange(groupList);
+                context.SaveChanges();
+
+                var laptopGroup = context.MenuGroups.Where(x => x.Name == "Laptops").SingleOrDefault();
+                var phoneGroup = context.MenuGroups.Where(x => x.Name == "Phones").SingleOrDefault();
+                var tabletGroup = context.MenuGroups.Where(x => x.Name == "Tablets").SingleOrDefault();
+                var tvAudioGroup = context.MenuGroups.Where(x => x.Name == "TV & Audio").SingleOrDefault();
+
+                var MenuList = new List<Menu>()
+                {
+                    new Menu
+                    {
+                        URL="#",
+                        Name = "Dell",
+                        GroupID =laptopGroup.ID
+                    },
+                    new Menu
+                    {
+                        URL="#",
+                        Name = "Asus",
+                        GroupID =laptopGroup.ID
+                    },
+                    new Menu
+                    {
+                        URL="#",
+                        Name = "MSI",
+                        GroupID =laptopGroup.ID
+                    },
+                    new Menu
+                    {
+                        URL="#",
+                        Name = "Aser",
+                        GroupID =laptopGroup.ID
+                    },
+                     new Menu
+                    {
+                         URL="#",
+                        Name = "Apple",
+                        GroupID =phoneGroup.ID
+                    },
+                    new Menu
+                    {
+                        URL="#",
+                        Name = "Samsung",
+                        GroupID =phoneGroup.ID
+                    },
+                    new Menu
+                    {
+                        URL="#",
+                        Name = "One Plus",
+                        GroupID =phoneGroup.ID
+                    },
+                    new Menu
+                    {
+                        URL="#",
+                        Name = "Xiaomi",
+                        GroupID =phoneGroup.ID
+                    },
+                     new Menu
+                    {
+                        URL="#",
+                        Name = "Apple",
+                        GroupID = tabletGroup.ID
+                    },
+                    new Menu
+                    {
+                        URL="#",
+                        Name = "Samsung",
+                        GroupID = tabletGroup.ID
+                    },
+                    new Menu
+                    {
+                        URL="#",
+                        Name = "Apple",
+                        GroupID = tvAudioGroup.ID
+                    },
+                    new Menu
+                    {
+                        URL="#",
+                        Name = "Samsung",
+                        GroupID = tvAudioGroup.ID
+                    },
+                    new Menu
+                    {
+                        URL="#",
+                        Name = "Sony",
+                        GroupID = tvAudioGroup.ID
+                    },
+                    new Menu
+                    {
+                        URL="#",
+                        Name = "LG",
+                        GroupID = tvAudioGroup.ID
+                    },
+                    new Menu
+                    {
+                        URL="#",
+                        Name = "Asanzo",
+                        GroupID = tvAudioGroup.ID
+                    }
+
+
+                };
+
+                context.Menus.AddRange(MenuList);
                 context.SaveChanges();
             }
         }

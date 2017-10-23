@@ -236,7 +236,30 @@ namespace TeduShop.Web.Infrastructure.Extensions
 
         }
 
-       
+
+        //MenuGroup <-> MenuGroupViewModel
+        public static MenuGroup ToModel(this MenuGroupViewModel viewmodel)
+        {
+            return Mapper.Map<MenuGroupViewModel, MenuGroup>(viewmodel);
+        }
+
+        public static MenuGroupViewModel ToViewModel(this MenuGroup model)
+        {
+            return Mapper.Map<MenuGroup, MenuGroupViewModel>(model);
+        }
+
+        public static IEnumerable<MenuGroup> ToListModel(this IEnumerable<MenuGroupViewModel> viewmodel)
+        {
+            return Mapper.Map<IEnumerable<MenuGroupViewModel>, IEnumerable<MenuGroup>>(viewmodel);
+        }
+
+        public static IEnumerable<MenuGroupViewModel> ToListViewModel(this IEnumerable<MenuGroup> model)
+        {
+            return Mapper.Map<IEnumerable<MenuGroup>, IEnumerable<MenuGroupViewModel>>(model);
+
+        }
+
+
 
     }
 }
