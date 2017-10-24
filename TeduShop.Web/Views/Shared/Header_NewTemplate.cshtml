@@ -192,33 +192,59 @@
                 </div><!-- /.navbar-header -->
                 <div class="collapse navbar-collapse" id="mc-horizontal-menu-collapse">
                     <ul class="nav navbar-nav">
-                    @{
-                        foreach (var menuGroup in Model.Menus.ToList())
-                        {
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">@menuGroup.Name</a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <div class="yamm-content">
-                                            <div class="row">
-                                                <div class="col-xs-12 col-sm-4">
-                                                   @* <h2>@menuGroup.Name</h2>*@
-                                                    <ul>
-                                                        @foreach (var menu in menuGroup.Menus)
+                        @{
+                            foreach (var menuGroup in Model.Menus)
+                            {
+                                if (menuGroup.ParentId == null)
+                                {
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">@menuGroup.Name</a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <div class="yamm-content">
+                                                    @if (menuGroup.ChildrenGroupMenus.Count() == 0)
+                                                    {
+                                                        <div class="row">
+
+                                                            <div class="col-xs-12 col-sm-4">
+                                                                <ul>
+                                                                    @foreach (var menu in menuGroup.Menus)
+                                                                    {
+                                                                        <li><a href="@menu.URL">@menu.Name</a></li>
+
+                                                                    }
+
+                                                                </ul>
+                                                            </div>
+
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        foreach (var menu in menuGroup.ChildrenGroupMenus)
                                                         {
-                                                            <li><a href="#">@menu.Name</a></li>
+                                                            var col = 12 / menuGroup.ChildrenGroupMenus.Count();
+                                                            <div class="col-xs-12 col-sm-@col">
+                                                                <h2>@menu.Name</h2>
+                                                                <ul>
+                                                                    @foreach (var childMenu in menu.Menus)
+                                                                    {
+                                                                        <li><a href="@childMenu.URL">@childMenu.Name</a></li>
+                                                                    }
+                                                                </ul>
+                                                            </div><!-- /.col -->
                                                         }
-                                                        
-                                                        
-                                                    </ul>
-                                                </div><!-- /.col -->
-                                        </div><!-- /.yamm-content -->
+                                                    }
+
+                                                </div><!-- /.yamm-content -->
+                                            </li>
+                                        </ul>
                                     </li>
-                                </ul>
-                            </li>
+                                }
+
+                            }
                         }
-                    }
-                        
+
                     </ul><!-- /.navbar-nav -->
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.navbar -->

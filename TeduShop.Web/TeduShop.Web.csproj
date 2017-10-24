@@ -230,7 +230,7 @@
     <Compile Include="Api\ApplicationGroupController.cs" />
     <Compile Include="Api\ApplicationRoleController.cs" />
     <Compile Include="Api\ApplicationUserController.cs" />
-    <Compile Include="Api\HomeController.cs" />
+    <Compile Include="Api\MenuGroupController.cs" />
     <Compile Include="Api\PostCategoryController.cs" />
     <Compile Include="Api\ProductCategoryController.cs" />
     <Compile Include="Api\ProductController.cs" />
@@ -316,6 +316,13 @@
     <Content Include="app\components\home\rootController.js" />
     <Content Include="app\components\login\loginController.js" />
     <Content Include="app\components\login\loginView.html" />
+    <Content Include="app\components\menu_groups\menuGroupAddController.js" />
+    <Content Include="app\components\menu_groups\menuGroupAddView.html" />
+    <Content Include="app\components\menu_groups\menuGroupEditController.js" />
+    <Content Include="app\components\menu_groups\menuGroupEditView.html" />
+    <Content Include="app\components\menu_groups\menuGroupListController.js" />
+    <Content Include="app\components\menu_groups\menuGroupListView.html" />
+    <Content Include="app\components\menu_groups\menuGroups.module.js" />
     <Content Include="app\components\products\productAddController.js" />
     <Content Include="app\components\products\productEditController.js" />
     <Content Include="app\components\products\products.module.js" />

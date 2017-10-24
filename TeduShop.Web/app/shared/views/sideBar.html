@@ -28,6 +28,7 @@
                 <i class="fa fa-dashboard"></i> <span>Home</span> <i class="fa fa-angle-left pull-right"></i>
             </a>
         </li>
+
         <li class="treeview">
             <a href="javascript:void(0);">
                 <i class="fa fa-files-o"></i>
@@ -38,18 +39,32 @@
                 <li><a ui-sref="application_groups"><i class="fa fa-circle-o"></i> User Groups</a></li>
                 <li><a ui-sref="application_roles"><i class="fa fa-circle-o"></i> Roles</a></li>
                 <li><a ui-sref="application_users"><i class="fa fa-circle-o"></i> Users</a></li>
+                <li><a ui-sref="menus"><i class="fa fa-circle-o"></i> Menus</a></li>
+                <li><a ui-sref="menu_groups"><i class="fa fa-circle-o"></i> Menu Groups</a></li>           
             </ul>
         </li>
 
         <li class="treeview">
             <a href="javascript:void(0);">
                 <i class="fa fa-files-o"></i>
-                <span>Items</span>
+                <span>Configs</span>
+                <span class="label label-primary pull-right">3</span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a ui-sref="application_groups"><i class="fa fa-circle-o"></i> Color</a></li>
+            </ul>
+        </li>
+
+        <li class="treeview">
+            <a href="javascript:void(0);">
+                <i class="fa fa-files-o"></i>
+                <span>Contents</span>
                 <span class="label label-primary pull-right">4</span>
             </a>
             <ul class="treeview-menu">
                 <li><a ui-sref="product_categories"><i class="fa fa-circle-o"></i> Categories</a></li>
                 <li><a ui-sref="products"><i class="fa fa-circle-o"></i> Products</a></li>
+                <li><a ui-sref="application_users"><i class="fa fa-circle-o"></i> Slides</a></li>
             </ul>
         </li>
 

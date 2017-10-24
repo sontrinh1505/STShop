@@ -14,6 +14,11 @@ namespace TeduShop.Web.Models
 
         public string Name { set; get; }
 
+        public int? ParentId { get; set; }
+
         public virtual IEnumerable<Menu> Menus { set; get; }
+        public virtual IEnumerable<MenuGroup> ChildrenGroupMenus { set; get; }
+
+        public virtual MenuGroup MenuGroups { get; set; }
     }
 }

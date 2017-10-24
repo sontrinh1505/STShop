@@ -60,7 +60,10 @@ namespace TeduShop.Service
 
         public IEnumerable<MenuGroup> GetAll(string[] includes = null)
         {
-            return _menuGroupRepository.GetAll(includes);
+            string[] include = { "MenuGroups", "Menus", "ChildrenGroupMenus" };
+            var results = _menuGroupRepository.GetAll(include);
+            //return _menuGroupRepository.GetAll(includes);
+            return results;
         }
 
         //public IEnumerable<MenuGroup> GetAll(string keyWord)

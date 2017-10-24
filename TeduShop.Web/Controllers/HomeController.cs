@@ -75,9 +75,10 @@ namespace TeduShop.Web.Controllers
         public ActionResult Header()
         {
             var homeViewModel = new HomeViewModel();
-            string[] includes = { "Menus" };
-            var menus = _menuGroupService.GetAll(includes).ToList();
-            homeViewModel.Menus = menus.ToListViewModel();
+            string[] include = { "Menus"};
+            var menus = _menuGroupService.GetAll().ToList();
+            
+                homeViewModel.Menus = menus.ToListViewModel();
 
             return PartialView("~/Views/Shared/Header_NewTemplate.cshtml", homeViewModel);
         }

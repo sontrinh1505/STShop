@@ -68,6 +68,14 @@
     <Compile Include="Migrations\201710231819597_aaa.Designer.cs">
       <DependentUpon>201710231819597_aaa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710240317539_UpdateGroupMenu.cs" />
+    <Compile Include="Migrations\201710240317539_UpdateGroupMenu.Designer.cs">
+      <DependentUpon>201710240317539_UpdateGroupMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710240321247_UpdateGroupMenuf.cs" />
+    <Compile Include="Migrations\201710240321247_UpdateGroupMenuf.Designer.cs">
+      <DependentUpon>201710240321247_UpdateGroupMenuf.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationGroupRepository.cs" />
@@ -118,6 +126,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710231819597_aaa.resx">
       <DependentUpon>201710231819597_aaa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710240317539_UpdateGroupMenu.resx">
+      <DependentUpon>201710240317539_UpdateGroupMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710240321247_UpdateGroupMenuf.resx">
+      <DependentUpon>201710240321247_UpdateGroupMenuf.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

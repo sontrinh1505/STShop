@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TeduShop.Model.Abstract;
 
 namespace TeduShop.Model.Models
 {
@@ -19,8 +20,10 @@ namespace TeduShop.Model.Models
         public int? ParentId { get; set; }
 
         [ForeignKey("ParentId")]
-        public virtual MenuGroup ParentGroupMenu { get; set; }  
+        public virtual MenuGroup MenuGroups { get; set; }  
 
         public virtual ICollection<Menu> Menus { set; get; }
+
+        public virtual ICollection<MenuGroup> ChildrenGroupMenus { set; get; }
     }
 }
