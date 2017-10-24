@@ -53,6 +53,20 @@ namespace TeduShop.Web.Api
             });
         }
 
+
+        [Route("getallparents")]
+        // [CustomAuthorize(Roles = "Read")]
+        [HttpGet]
+        public HttpResponseMessage GetParent(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                var model = _menuGroupService.GetAll().ToListViewModel();
+                var response = request.CreateResponse(HttpStatusCode.OK, model);
+                return response;
+            });
+        }
+
         //[Route("getall")]
         ////[CustomAuthorize(Roles = "Read")]
         //[HttpGet]

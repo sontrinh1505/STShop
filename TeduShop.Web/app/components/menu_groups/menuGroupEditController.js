@@ -39,13 +39,13 @@
             });
         }
 
-        //function loadProductCategory() {
-        //    apiService.get('api/productcategory/getallparents', null, function (result) {
-        //        $scope.productCategories = result.data;
-        //    }, function () {
-        //        console.log('can not get list parent.');
-        //    });
-        //}
+        function loadProductCategory() {
+            apiService.get('api/menugroup/getallparents', null, function (result) {
+                $scope.productCategories = result.data;
+            }, function () {
+                console.log('can not get list parent.');
+            });
+        }
         $scope.chooseImage = function () {
             var finder = new CKFinder();
             finder.selectActionFunction = function (fileUrl) {
@@ -66,7 +66,7 @@
             finder.popup();
         }
 
-        //loadProductCategory();
+        loadProductCategory();
         loadProductDetail();
     }
 
