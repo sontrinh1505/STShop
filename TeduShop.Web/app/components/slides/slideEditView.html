@@ -1,0 +1,75 @@
+﻿ <!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Update Menu
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">System</a></li>
+        <li><a ui-sref="menus">Menu List</a></li>
+        <li class="active">Update</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Horizontal Form -->
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">{{slide.Name}}</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" novalidate name="frmUpdateSlide" role="form" ng-submit="UpdateSlide()">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" style="width: 300px;" ng-maxlength="256" required class="form-control" name="name" ng-model="slide.Name">
+                        <span ng-show="frmUpdateSlide.name.$invalid" class="has-error"> must be enter name</span>
+                        <span ng-show="frmUpdateSlide.name.$error.maxlength" class="has-error"> Field should be 256 characters.</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Content</label>
+                    <div class="col-sm-10">
+                        <textarea ng-maxlength="1024" class="form-control" ckeditor="ckeditorOptions" name="content" ng-model="slide.Content"></textarea>
+                        <span ng-show="frmUpdateSlide.content.$error.maxlength" class="has-error"> Field should be 1024 characters.</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Image</label>
+                    <div class="col-sm-10">
+                        <!--<input type="text" ng-maxlength="256" class="form-control" name="image" ng-model="slide.Image">-->
+                        <img ng-src="{{slide.Image}}" width="150px" height="150px" ng-model="slide.Image">
+                        <span ng-show="frmUpdateSlide.image.$error.maxlength" class="has-error"> Field should be 256 characters.</span>
+                        <button class="btn btn-default"  style="display:block;" type="button" ng-click="chooseImage()">Choose image</button>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Url</label>
+                    <div class="col-sm-10">
+                        <input type="text" style="width: 300px;" ng-maxlength="256" required class="form-control" name="url" ng-model="slide.Url">
+                        <span ng-show="frmUpdateMenu.url.$invalid" class="has-error"> must be enter name</span>
+                        <span ng-show="frmUpdateMenu.url.$error.maxlength" class="has-error"> Field should be 256 characters.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label" style="padding-top:0px; margin-left:15px;">Active</label>
+                    <input type="checkbox" name="status" ng-model="slide.Status" ng-checked="slide.Status">
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <button ui-sref="menus" class="btn btn-default">Cancel</button>
+                <button type="submit" ng-disabled="frmUpdateMenu.$invalid" class="btn btn-success pull-right">Save</button>
+            </div>
+            <!-- /.box-footer -->
+        </form>
+    </div>
+    <!-- /.box -->
+</section>
+<!-- /.content -->

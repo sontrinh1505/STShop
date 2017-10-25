@@ -20,10 +20,12 @@ namespace TeduShop.Web.Controllers
         IProductService _productService;
         IMenuService _menuService;
         IMenuGroupService _menuGroupService;
+        ISlideService _slideService;
 
         public HomeController(IProductCategoryService productCategoryService, 
             ICommonService commonService, IProductService productService,
-            IMenuService menuService, IMenuGroupService menuGroupService
+            IMenuService menuService, IMenuGroupService menuGroupService,
+            ISlideService slideService
             )
         {
             this._productCategoryService = productCategoryService;
@@ -31,23 +33,27 @@ namespace TeduShop.Web.Controllers
             this._productService = productService;
             this._menuService = menuService;
             this._menuGroupService = menuGroupService;
+            this._slideService = slideService;
         }
 
         [OutputCache(Duration = 3600, Location = System.Web.UI.OutputCacheLocation.Client)]
         public ActionResult Index()
         {
-            var slideModel = _commonService.GetSlides();           
-            var lastestProductModel = _productService.GetLastest(10);
-            var topSaleProductModel = _productService.GetHotProduct(10);
+            //var slideModel = _commonService.GetSlides();           
+            var lastestProductModel = _productService.GetLastest(10).ToListViewModel();
+            var topSaleProductModel = _productService.GetHotProduct(10).ToListViewModel(); ;
+            var slides = _slideService.GetAll().ToListViewModel();
 
-            var slideModelViewModel = Mapper.Map<IEnumerable<Slide>, IEnumerable<SlideViewModel>>(slideModel);
-            var lastestProductModelViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(lastestProductModel);
-            var topSaleProductModelViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(topSaleProductModel);
+            //var slideModelViewModel = Mapper.Map<IEnumerable<Slide>, IEnumerable<SlideViewModel>>(slideModel);
+            //var lastestProductModelViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(lastestProductModel);
+            //var topSaleProductModelViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(topSaleProductModel);
 
             var homeViewModel = new HomeViewModel();
-            homeViewModel.Slides = slideModelViewModel;
-            homeViewModel.LastestProducts = lastestProductModelViewModel;
-            homeViewModel.TopSaleProducts = topSaleProductModelViewModel;
+            homeViewModel.Slides = slides;
+            homeViewModel.LastestProducts = lastestProductModel;
+            homeViewModel.TopSaleProducts = topSaleProductModel;
+            //homeViewModel.Slides = slides.ToListViewModel();
+
             try
             {
                 homeViewModel.Title = _commonService.GetSystemConfig(ComomConstants.HomeTitle).ValueString;
@@ -90,9 +96,9 @@ namespace TeduShop.Web.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult Banner()
+        public ActionResult Banner(IEnumerable<SlideViewModel> slides)
         {
-            return PartialView("~/Views/Shared/Banner_NewTemplate.cshtml");
+            return PartialView("~/Views/Shared/Banner_NewTemplate.cshtml", slides);
         }
 
         [ChildActionOnly]

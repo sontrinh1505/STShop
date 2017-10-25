@@ -1,12 +1,12 @@
 ﻿ <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Menu Groups
+        Slides
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
         <li><a href="#">Systems</a></li>
-        <li class="active">Menu Groups</li>
+        <li class="active">Slides</li>
     </ol>
 </section>
 <!-- Main content -->
@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-md-6">
 
-                    <button class="btn btn-success createItem" ui-sref="menu_groups_add"><i class="fa fa-plus"></i> Create</button>
+                    <button class="btn btn-success createItem" ui-sref="slide_add"><i class="fa fa-plus"></i> Create</button>
                     <!--<a class="btn btn-warning" ui-sref="product_add">Create</a>-->
                     <button class="btn btn-danger" ng-click="deleteMultiple()" id="btnDelete" disabled>Delete</button>
                 </div>
@@ -47,18 +47,27 @@
                         <tr>
                             <td><input name="all" type="checkbox" ng-click="selectAll()" /></td>
                             
-                            <th style="width: 45%">Name</th>
-                            <th style="width: 45%">Parent</th>
+                            <th style="width: 20%">Name</th>
+                            <th style="width: 25%">Image</th>
+                            <th style="width: 20%">Content</th>
+                            <th style="width: 20%">Url</th>
+                            <th style="width: 5%">Active</th>
                             <th style="width: 10%">Action</th>
                         </tr>
-                        <tr ng-repeat="item in menugroups">
+                        <tr ng-repeat="item in slides">
                             <td><input type="checkbox" name="all" ng-model="item.checked" /></td>
                           
                             <td>{{item.Name}}</td>
-                            <td>{{item.MenuGroups.Name}}</td>
                             <td>
-                                <button class="btn btn-sm btn-primary" ui-sref="menu_groups_edit({id:item.ID})"><i class="fa fa-pencil"></i></button>
-                                <button class="btn btn-sm btn-danger" ng-click="deleteMenuGroup(item.ID)"><i class="fa fa-trash"></i></button>
+                                <img ng-src="{{item.Image}}" width="100px" height="100px">
+                                
+                            </td>
+                            <td>{{item.Content}}</td>
+                            <td>{{item.Url}}</td>
+                            <td>{{item.Status}}</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary" ui-sref="slide_edit({id:item.ID})"><i class="fa fa-pencil"></i></button>
+                                <button class="btn btn-sm btn-danger" ng-click="deleteMenu(item.ID)"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
                         <tfoot>
@@ -72,7 +81,7 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-            <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="getmenugroups(page)"></pager-directive>
+            <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="getslides(page)"></pager-directive>
         </div>
         <!-- /.box-footer-->
     </div>

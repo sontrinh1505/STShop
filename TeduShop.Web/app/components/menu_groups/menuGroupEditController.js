@@ -5,69 +5,40 @@
 
     function menuGroupEditController(apiService, $scope, notificationService, $state, commonService, $stateParams) {
 
-        $scope.product = {};
+        $scope.menuGroup = {};
 
-        $scope.ckeditorOptions = {
-            language: 'en',
-            height: '200px'
-        }
-        $scope.moreImages = [];
-        $scope.GetSeoTitle = GetSeoTitle;
+       
 
-        function GetSeoTitle() {
-            $scope.product.Alias = commonService.getSeoTitle($scope.product.Name);
-        }
+        $scope.UpdateMenuGroup = UpdateMenuGroup;
 
-        $scope.UpdateProduct = UpdateProduct;
-
-        function loadProductDetail() {
+        function loadMenuGroupDetail() {
             apiService.get('api/menugroup/getbyid/' + $stateParams.id, null, function (result) {
-                $scope.product = result.data;
-                $scope.moreImages = JSON.parse($scope.product.MoreImages);
+                $scope.menuGroup = result.data;
             }, function (error) {
                 notificationService.displayError(error.data);
             });
         }
 
-        function UpdateProduct() {
-            $scope.product.MoreImages = JSON.stringify($scope.moreImages);
-            apiService.put('api/menugroup/update', $scope.product, function (result) {
+        function UpdateMenuGroup() {
+            apiService.put('api/menugroup/update', $scope.menuGroup, function (result) {
                 notificationService.displaySuccess(result.data.Name + ' had been updated');
-                $state.go('products');
+                $state.go('menu_groups');
             }, function (error) {
-                notificationService.displayError('product can not update');
+                notificationService.displayError('menuGroup can not update');
             });
         }
 
-        function loadProductCategory() {
+        function loadMenuGroupParents() {
             apiService.get('api/menugroup/getallparents', null, function (result) {
-                $scope.productCategories = result.data;
+                $scope.menuGroupParents = result.data;
             }, function () {
                 console.log('can not get list parent.');
             });
         }
-        $scope.chooseImage = function () {
-            var finder = new CKFinder();
-            finder.selectActionFunction = function (fileUrl) {
-                $scope.$apply(function () {
-                    $scope.product.Image = fileUrl;
-                })  
-            }
-            finder.popup();
-        }
 
-        $scope.chooseMoreImage = function () {
-            var finder = new CKFinder();
-            finder.selectActionFunction = function (fileUrl) {
-                $scope.$apply(function () {
-                    $scope.moreImages.push(fileUrl);
-                })
-            }
-            finder.popup();
-        }
-
-        loadProductCategory();
-        loadProductDetail();
+        
+        loadMenuGroupParents();
+        loadMenuGroupDetail();
     }
 
 })(angular.module('tedushop.menu_groups'));

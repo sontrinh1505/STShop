@@ -62,10 +62,11 @@ namespace TeduShop.Service
 
         public IEnumerable<Menu> GetAll(string keyWord)
         {
+            string[] includes = { "MenuGroup" };
             if (!string.IsNullOrEmpty(keyWord))
-                return _menuRepository.GetMulti(x => x.Name.Contains(keyWord) || x.URL.Contains(keyWord));
+                return _menuRepository.GetMulti(x => x.Name.Contains(keyWord), includes);
             else
-                return _menuRepository.GetAll();
+                return _menuRepository.GetAll(includes);
         }
 
         public Menu GetById(int id)

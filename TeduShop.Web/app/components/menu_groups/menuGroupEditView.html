@@ -1,12 +1,12 @@
 ﻿ <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Update product
+        Update MenuGroup
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">product</a></li>
-        <li><a ui-sref="products">Product List</a></li>
+        <li><a href="#">System</a></li>
+        <li><a ui-sref="menu_groups">MenuGroup List</a></li>
         <li class="active">Update</li>
     </ol>
 </section>
@@ -15,18 +15,18 @@
     <!-- Horizontal Form -->
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">{{product.Name}}</h3>
+            <h3 class="box-title">{{menuGroup.Name}}</h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal" novalidate name="frmUpDateProduct" role="form" ng-submit="UpdateProduct()">
+        <form class="form-horizontal" novalidate name="frmUpdateMenuGroup" role="form" ng-submit="UpdateMenuGroup()">
             <div class="box-body">
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
                     <div class="col-sm-10">
-                        <input type="text" style="width: 300px;" ng-maxlength="256" required class="form-control" name="name" ng-change="GetSeoTitle()" ng-model="product.Name">
-                        <span ng-show="frmUpDateProduct.name.$invalid" class="has-error"> must be enter name</span>
-                        <span ng-show="frmUpDateProduct.name.$error.maxlength" class="has-error"> Field should be 256 characters.</span>
+                        <input type="text" style="width: 300px;" ng-maxlength="256" required class="form-control" name="name" ng-model="menuGroup.Name">
+                        <span ng-show="frmUpdateMenuGroup.name.$invalid" class="has-error"> must be enter name</span>
+                        <span ng-show="frmUpdateMenuGroup.name.$error.maxlength" class="has-error"> Field should be 256 characters.</span>
                     </div>
                 </div>
                 
@@ -34,23 +34,23 @@
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Parent</label>
                     <div class="col-sm-10">
-                        <ui-select ng-model="product.ParentId" name="categoryID" theme="bootstrap" style="width: 300px;" title="Choose a Parent">
+                        <ui-select ng-model="menuGroup.ParentId" name="categoryID" theme="bootstrap" style="width: 300px;" title="Choose a Parent">
                             <ui-select-match placeholder="choose a Parent">{{$select.selected.Name}}</ui-select-match>
-                            <ui-select-choices repeat="item.ID as item in productCategories | filter: $select.search">
+                            <ui-select-choices repeat="item.ID as item in menuGroupParents | filter: $select.search">
                                 <span ng-bind-html="item.Name | highlight: $select.search"></span>
                                 <!--<small ng-bind-html="item.Name | highlight: $select.search"></small>-->
                             </ui-select-choices>
                         </ui-select>
 
-                        <span ng-show="frmUpDateProduct.categoryID.$invalid" class="has-error"> must be choose Parent</span>
-                        <input type="hidden" name="ParentId" ng-model="product.ParentId" />
+                        <span ng-show="frmUpdateMenuGroup.categoryID.$invalid" class="has-error"> must be choose Parent</span>
+                        <input type="hidden" name="ParentId" ng-model="menuGroup.ParentId" />
                     </div>
                 </div>  
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
-                <button ui-sref="products" class="btn btn-default">Cancel</button>
-                <button type="submit" ng-disabled="frmUpDateProduct.$invalid" class="btn btn-success pull-right">Save</button>
+                <button ui-sref="menu_groups" class="btn btn-default">Cancel</button>
+                <button type="submit" ng-disabled="frmUpdateMenuGroup.$invalid" class="btn btn-success pull-right">Save</button>
             </div>
             <!-- /.box-footer -->
         </form>

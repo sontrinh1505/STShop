@@ -8,6 +8,8 @@
          'tedushop.application_roles',
          'tedushop.application_users',
          'tedushop.menu_groups',
+         'tedushop.slides',
+         'tedushop.menus',
          'tedushop.statistics',
          'tedushop.common'])
         .config(config)

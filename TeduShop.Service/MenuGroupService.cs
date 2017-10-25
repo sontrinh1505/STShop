@@ -16,9 +16,9 @@ namespace TeduShop.Service
 
         MenuGroup Delete(int id);
 
-        IEnumerable<MenuGroup> GetAll(string[] include = null);
+        //IEnumerable<MenuGroup> GetAll(string[] include = null);
 
-        //IEnumerable<MenuGroup> GetAll(string keyWord);
+        IEnumerable<MenuGroup> GetAll(string keyWord = null);
 
         IEnumerable<MenuGroup> Search(string keyWord);
 
@@ -58,10 +58,16 @@ namespace TeduShop.Service
             return _menuGroupRepository.Delete(id);
         }
 
-        public IEnumerable<MenuGroup> GetAll(string[] includes = null)
+        public IEnumerable<MenuGroup> GetAll(string keyWord = null)
         {
             string[] include = { "MenuGroups", "Menus", "ChildrenGroupMenus" };
             var results = _menuGroupRepository.GetAll(include);
+
+            if (!string.IsNullOrEmpty(keyWord))
+            {
+                results = results.Where(x => x.Name.ToLower().Contains(keyWord.ToLower()));
+            }           
+           
             //return _menuGroupRepository.GetAll(includes);
             return results;
         }

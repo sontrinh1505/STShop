@@ -1,19 +1,20 @@
-﻿(function (app) {
-    app.controller('productListController', productListController);
+﻿/// <reference path="menuGroups.module.js" />
+(function (app) {
+    app.controller('menuListController', menuListController);
 
-    productListController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox', '$filter'];
+    menuListController.$inject = ['$scope', 'apiService', 'notificationService', '$ngBootbox', '$filter'];
 
-    function productListController($scope, apiService, notificationService, $ngBootbox, $filter) {
+    function menuListController($scope, apiService, notificationService, $ngBootbox, $filter) {
 
-        $scope.products = [];
+        $scope.menus = [];
         $scope.page = 0;
         $scope.pagesCount = 0;
-        $scope.getproducts = getproducts;
+        $scope.getmenus = getmenus;
         $scope.keyWord = '';
 
         $scope.search = search;
 
-        $scope.deleteProduct = deleteProduct;
+        $scope.deleteMenu = deleteMenu;
 
         $scope.selectAll = selectAll;
 
@@ -21,7 +22,7 @@
 
         $scope.deleteMultiple = deleteMultiple;
 
-        function deleteMultiple() {http://localhost:51727/../menus
+        function deleteMultiple() {
             var listId = [];
             $.each($scope.selected, function (i, item) {
                 listId.push(item.ID);
@@ -32,7 +33,7 @@
                 }
             }
 
-            apiService.del('api/product/deletemulti', config, function (result) {
+            apiService.del('api/menu/deletemulti', config, function (result) {
                 notificationService.displaySuccess(result.data + ' Delete successful.');
                 search();
             }, function (error) {
@@ -42,19 +43,19 @@
 
         function selectAll() {
             if ($scope.isAll == false) {
-                angular.forEach($scope.products, function (item) {
+                angular.forEach($scope.menus, function (item) {
                     item.checked = true;
                 });
                 $scope.isAll = true;
             } else {
-                angular.forEach($scope.products, function (item) {
+                angular.forEach($scope.menus, function (item) {
                     item.checked = false;
                 });
                 $scope.isAll = false;
             }
         }
 
-        $scope.$watch("products", function (n, o) {
+        $scope.$watch("menus", function (n, o) {
             var checked = $filter('filter')(n, { checked: true });
             if (checked.length) {
                 $scope.selected = checked;
@@ -64,14 +65,14 @@
             }
         }, true);
 
-        function deleteProduct(id) {
+        function deleteMenu(id) {
             $ngBootbox.confirm('Do you want to delete this item.').then(function () {
                 var config = {
                     params: {
                         id: id
                     }
                 }
-                apiService.del('api/product/delete', config, function () {
+                apiService.del('api/menu/delete', config, function () {
                     notificationService.displaySuccess('Delete was successful.');
                     search();
                 }, function () {
@@ -82,10 +83,10 @@
         }
 
         function search() {
-            getproducts();
+            getmenus();
         }
 
-        function getproducts(page) {
+        function getmenus(page) {
             page = page || 0;
             var config = {
                 params: {
@@ -94,20 +95,20 @@
                     pageSize: 20
                 }
             }
-            apiService.get('api/product/getall', config, function (result) {
+            apiService.get('api/menu/getall', config, function (result) {
                 if (result.data.TotalCount == 0) {
                     notificationService.displayWarning('not found.');
                 }
-                $scope.products = result.data.Items;
+                $scope.menus = result.data.Items;
                 $scope.page = result.data.page;
                 $scope.pagesCount = result.data.TotalPages;
                 $scope.totalCount = result.data.TotalCount;
-            }, function () {
-                console.log('Load product failed.');
+            }, function (result) {
+                console.log('Load menu group failed.');
             })
         }
 
-        $scope.getproducts();
+        $scope.getmenus();
     }
 
-})(angular.module('tedushop.products'));
+})(angular.module('tedushop.menus'));

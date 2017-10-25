@@ -230,6 +230,8 @@
     <Compile Include="Api\ApplicationGroupController.cs" />
     <Compile Include="Api\ApplicationRoleController.cs" />
     <Compile Include="Api\ApplicationUserController.cs" />
+    <Compile Include="Api\SlideController.cs" />
+    <Compile Include="Api\MenuController.cs" />
     <Compile Include="Api\MenuGroupController.cs" />
     <Compile Include="Api\PostCategoryController.cs" />
     <Compile Include="Api\ProductCategoryController.cs" />
@@ -270,6 +272,7 @@
     <Compile Include="Models\FooterViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\OrderDetailViewModel.cs" />
     <Compile Include="Models\ApplicationPermissionViewModel.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
@@ -316,6 +319,20 @@
     <Content Include="app\components\home\rootController.js" />
     <Content Include="app\components\login\loginController.js" />
     <Content Include="app\components\login\loginView.html" />
+    <Content Include="app\components\slides\slideAddController.js" />
+    <Content Include="app\components\slides\slideAddView.html" />
+    <Content Include="app\components\slides\slideEditController.js" />
+    <Content Include="app\components\slides\slideEditView.html" />
+    <Content Include="app\components\slides\slideListController.js" />
+    <Content Include="app\components\slides\slideListView.html" />
+    <Content Include="app\components\slides\slides.module.js" />
+    <Content Include="app\components\menus\menuAddController.js" />
+    <Content Include="app\components\menus\menuAddView.html" />
+    <Content Include="app\components\menus\menuEditController.js" />
+    <Content Include="app\components\menus\menuEditView.html" />
+    <Content Include="app\components\menus\menuListController.js" />
+    <Content Include="app\components\menus\menuListView.html" />
+    <Content Include="app\components\menus\menus.module.js" />
     <Content Include="app\components\menu_groups\menuGroupAddController.js" />
     <Content Include="app\components\menu_groups\menuGroupAddView.html" />
     <Content Include="app\components\menu_groups\menuGroupEditController.js" />

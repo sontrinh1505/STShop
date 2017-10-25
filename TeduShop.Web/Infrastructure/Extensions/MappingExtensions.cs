@@ -259,6 +259,51 @@ namespace TeduShop.Web.Infrastructure.Extensions
 
         }
 
+        //Menu <-> MenuViewModel
+        public static Menu ToModel(this MenuViewModel viewmodel)
+        {
+            return Mapper.Map<MenuViewModel, Menu>(viewmodel);
+        }
+
+        public static MenuViewModel ToViewModel(this Menu model)
+        {
+            return Mapper.Map<Menu, MenuViewModel>(model);
+        }
+
+        public static IEnumerable<Menu> ToListModel(this IEnumerable<MenuViewModel> viewmodel)
+        {
+            return Mapper.Map<IEnumerable<MenuViewModel>, IEnumerable<Menu>>(viewmodel);
+        }
+
+        public static IEnumerable<MenuViewModel> ToListViewModel(this IEnumerable<Menu> model)
+        {
+            return Mapper.Map<IEnumerable<Menu>, IEnumerable<MenuViewModel>>(model);
+
+        }
+
+
+        //Slide <-> SlideViewModel
+        public static Slide ToModel(this SlideViewModel viewmodel)
+        {
+            return Mapper.Map<SlideViewModel, Slide>(viewmodel);
+        }
+
+        public static SlideViewModel ToViewModel(this Slide model)
+        {
+            return Mapper.Map<Slide, SlideViewModel>(model);
+        }
+
+        public static IEnumerable<Slide> ToListModel(this IEnumerable<SlideViewModel> viewmodel)
+        {
+            return Mapper.Map<IEnumerable<SlideViewModel>, IEnumerable<Slide>>(viewmodel);
+        }
+
+        public static IEnumerable<SlideViewModel> ToListViewModel(this IEnumerable<Slide> model)
+        {
+            return Mapper.Map<IEnumerable<Slide>, IEnumerable<SlideViewModel>>(model);
+
+        }
+
 
 
 

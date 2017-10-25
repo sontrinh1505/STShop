@@ -14,17 +14,17 @@ using TeduShop.Web.Models;
 
 namespace TeduShop.Web.Api
 {
-    [RoutePrefix("api/menugroup")]
+    [RoutePrefix("api/menu")]
    // [CustomAuthorize]
-    public class MenuGroupController : ApiControllerBase
+    public class MenuController : ApiControllerBase
     {
         #region Initialize
-        IMenuGroupService _menuGroupService;
+        IMenuService _menuService;
 
-        public MenuGroupController(IErrorService errorService, IMenuGroupService menuGroupService)
+        public MenuController(IErrorService errorService, IMenuService menuService)
             : base(errorService)
         {
-            this._menuGroupService = menuGroupService;
+            this._menuService = menuService;
         }
         #endregion
 
@@ -36,11 +36,11 @@ namespace TeduShop.Web.Api
             return CreateHttpResponse(request, () =>
             {
                 int totalRow = 0;
-                var model = _menuGroupService.GetAll(keyWord);
+                var model = _menuService.GetAll(keyWord);
                 totalRow = model.Count();
                 var viewModel = model.OrderByDescending(x => x.Name).Skip(page * pageSize).Take(pageSize).ToListViewModel();
-                //var responseData = Mapper.Map<IEnumerable<Product>, IEnumerable<MenuGroupViewModel>>(query);
-                var paginationSet = new PaginationSet<MenuGroupViewModel>()
+                //var responseData = Mapper.Map<IEnumerable<Product>, IEnumerable<MenuViewModel>>(query);
+                var paginationSet = new PaginationSet<MenuViewModel>()
                 {
                     Items = viewModel,
                     Page = page,
@@ -61,7 +61,7 @@ namespace TeduShop.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
-                var model = _menuGroupService.GetAll().ToListViewModel();
+                var model = _menuService.GetAll().ToListViewModel();
                 var response = request.CreateResponse(HttpStatusCode.OK, model);
                 return response;
             });
@@ -74,8 +74,8 @@ namespace TeduShop.Web.Api
         //{
         //    return CreateHttpResponse(request, () =>
         //    {
-        //        var viewModel = _menuGroupService.GetAll().ToListViewModel();
-        //        //var responseData = Mapper.Map<IEnumerable<Product>, IEnumerable<MenuGroupViewModel>>(model);
+        //        var viewModel = _menuService.GetAll().ToListViewModel();
+        //        //var responseData = Mapper.Map<IEnumerable<Product>, IEnumerable<MenuViewModel>>(model);
         //        var response = request.CreateResponse(HttpStatusCode.OK, viewModel);
         //        return response;
         //    });
@@ -88,8 +88,8 @@ namespace TeduShop.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
-                var viewModel = _menuGroupService.GetById(id).ToViewModel();
-                //var responseData = Mapper.Map<Product, MenuGroupViewModel>(model);
+                var viewModel = _menuService.GetById(id).ToViewModel();
+                //var responseData = Mapper.Map<Product, MenuViewModel>(model);
                 var response = request.CreateResponse(HttpStatusCode.OK, viewModel);
                 return response;
             });
@@ -98,7 +98,7 @@ namespace TeduShop.Web.Api
         [Route("create")]
        // [CustomAuthorize(Roles = "Create")]
         [HttpPost]
-        public HttpResponseMessage Create(HttpRequestMessage request, MenuGroupViewModel menuGrouptVm)
+        public HttpResponseMessage Create(HttpRequestMessage request, MenuViewModel menuGrouptVm)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -112,10 +112,10 @@ namespace TeduShop.Web.Api
                 {
                     var model = menuGrouptVm.ToModel();
                     
-                    _menuGroupService.Add(model);
-                    _menuGroupService.Save();
+                    _menuService.Add(model);
+                    _menuService.Save();
 
-                    //var responeData = Mapper.Map<Product, MenuGroupViewModel>(newProduct);
+                    //var responeData = Mapper.Map<Product, MenuViewModel>(newProduct);
                     respone = request.CreateResponse(HttpStatusCode.Created, model.ToViewModel());
                 }
 
@@ -126,7 +126,7 @@ namespace TeduShop.Web.Api
         [Route("update")]
        // [CustomAuthorize(Roles = "Update")]
         [HttpPut]
-        public HttpResponseMessage Update(HttpRequestMessage request, MenuGroupViewModel menuGrouptVm)
+        public HttpResponseMessage Update(HttpRequestMessage request, MenuViewModel menuGrouptVm)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -139,8 +139,8 @@ namespace TeduShop.Web.Api
                 else
                 {
                     var model = menuGrouptVm.ToModel();
-                    _menuGroupService.Update(model);
-                    _menuGroupService.Save();
+                    _menuService.Update(model);
+                    _menuService.Save();
 
                     respone = request.CreateResponse(HttpStatusCode.OK, model.ToViewModel());
                 }
@@ -164,9 +164,9 @@ namespace TeduShop.Web.Api
                 }
                 else
                 {
-                    var oldProduct = _menuGroupService.Delete(id).ToViewModel();
-                    _menuGroupService.Save();
-                   // var responeData = Mapper.Map<Product, MenuGroupViewModel>(oldProduct);
+                    var oldProduct = _menuService.Delete(id).ToViewModel();
+                    _menuService.Save();
+                   // var responeData = Mapper.Map<Product, MenuViewModel>(oldProduct);
                     respone = request.CreateResponse(HttpStatusCode.OK, oldProduct);
                 }
 
@@ -192,9 +192,9 @@ namespace TeduShop.Web.Api
                     var listProduct = new JavaScriptSerializer().Deserialize<List<int>>(checkedProducts);
                     foreach (var item in listProduct)
                     {
-                        _menuGroupService.Delete(item);
+                        _menuService.Delete(item);
                     }
-                    _menuGroupService.Save();
+                    _menuService.Save();
                     respone = request.CreateResponse(HttpStatusCode.OK, listProduct.Count);
                 }
 

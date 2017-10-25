@@ -5,63 +5,27 @@
 
     function menuGroupAddController(apiService, $scope, notificationService, $state, commonService) {
 
-        $scope.product = {
-            CreateDate: new Date(),
-            Status: true
-        }
 
-        $scope.ckeditorOptions = {
-            language: 'en',
-            height: '200px'
-        }
+        $scope.AddMenuGroup = AddMenuGroup;
 
-        $scope.GetSeoTitle = GetSeoTitle;
-
-        function GetSeoTitle() {
-            $scope.product.Alias = commonService.getSeoTitle($scope.product.Name);
-        }
-
-        $scope.AddProduct = AddProduct;
-
-        function AddProduct() {
-            $scope.product.MoreImages = JSON.stringify($scope.moreImages);
-            apiService.post('api/product/create', $scope.product, function (result) {
+        function AddMenuGroup() {
+            apiService.post('api/menugroup/create', $scope.menuGroup, function (result) {
                 notificationService.displaySuccess(result.data.Name + ' have been added');
-                $state.go('products');
+                $state.go('menu_groups');
             }, function (error) {
                 notificationService.displayError('product can not add');
             });
         }
 
-        function loadProductCategory() {
-            apiService.get('api/productcategory/getallparents', null, function (result) {
-                $scope.productCategories = result.data;
+        function loadMenuGroupParent() {
+            apiService.get('api/menugroup/getallparents', null, function (result) {
+                $scope.menuGroupParents = result.data;
             }, function () {
                 console.log('can not get list parent.');
             });
         }
-        $scope.chooseImage = function () {
-            var finder = new CKFinder();
-            finder.selectActionFunction = function (fileUrl) { 
-                $scope.$apply(function () {
-                    $scope.product.Image = fileUrl;
-                })
-            }
-            finder.popup();
-        }
 
-        $scope.moreImages = [];
-        $scope.chooseMoreImage = function () {
-            var finder = new CKFinder();
-            finder.selectActionFunction = function (fileUrl) {
-                $scope.$apply(function () {
-                    $scope.moreImages.push(fileUrl);
-                })              
-            }
-            finder.popup();
-        }
-
-        loadProductCategory();
+        loadMenuGroupParent();
     }
 
 })(angular.module('tedushop.menu_groups'));

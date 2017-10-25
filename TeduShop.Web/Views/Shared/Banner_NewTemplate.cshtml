@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<TeduShop.Web.Models.SlideViewModel>
 <div id="top-banner-and-menu" class="homepage2">
     <div class="container">
         <div class="col-xs-12">
@@ -6,48 +6,34 @@
 
             <div id="hero">
                 <div id="owl-main" class="owl-carousel height-lg owl-inner-nav owl-ui-lg">
+                    @foreach (var slide in Model)
+                    {
+                        <div class="item" style="background-image: url(@slide.Image);">
+                           @* @Html.Raw(slide.Content)*@
+                            
+                        </div><!-- /.item -->
+                    }
 
-                    <div class="item" style="background-image: url(Assets/New_Template/assets/images/sliders/slider02.jpg);">
-                        <div class="container-fluid">
-                            <div class="caption vertical-center text-left right" style="padding-right:0;">
-                                <div class="big-text fadeInDown-1">
-                                    Save up to a<span class="big"><span class="sign">$</span>400</span>
-                                </div>
 
-                                <div class="excerpt fadeInDown-2">
-                                    on selected laptops<br>
-                                    &amp; desktop pcs or<br>
-                                    smartphones
-                                </div>
-                                <div class="small fadeInDown-2">
-                                    terms and conditions apply
-                                </div>
-                                <div class="button-holder fadeInDown-3">
-                                    <a href="single-product.html" class="big le-button ">shop now</a>
-                                </div>
-                            </div><!-- /.caption -->
-                        </div><!-- /.container-fluid -->
-                    </div><!-- /.item -->
+                    @*<div class="item" style="background-image: url(Assets/New_Template/assets/images/sliders/slider04.jpg);">
+                            <div class="container-fluid">
+                                <div class="caption vertical-center text-left left" style="padding-left:7%;">
+                                    <div class="big-text fadeInDown-1">
+                                        Want a<span class="big"><span class="sign">$</span>200</span>Discount?
+                                    </div>
 
-                    <div class="item" style="background-image: url(Assets/New_Template/assets/images/sliders/slider04.jpg);">
-                        <div class="container-fluid">
-                            <div class="caption vertical-center text-left left" style="padding-left:7%;">
-                                <div class="big-text fadeInDown-1">
-                                    Want a<span class="big"><span class="sign">$</span>200</span>Discount?
-                                </div>
-
-                                <div class="excerpt fadeInDown-2">
-                                    on desktop pcs
-                                </div>
-                                <div class="small fadeInDown-2">
-                                    terms and conditions apply
-                                </div>
-                                <div class="button-holder fadeInDown-3">
-                                    <a href="single-product.html" class="big le-button ">shop now</a>
-                                </div>
-                            </div><!-- /.caption -->
-                        </div><!-- /.container-fluid -->
-                    </div><!-- /.item -->
+                                    <div class="excerpt fadeInDown-2">
+                                        on desktop pcs
+                                    </div>
+                                    <div class="small fadeInDown-2">
+                                        terms and conditions apply
+                                    </div>
+                                    <div class="button-holder fadeInDown-3">
+                                        <a href="single-product.html" class="big le-button ">shop now</a>
+                                    </div>
+                                </div><!-- /.caption -->
+                            </div><!-- /.container-fluid -->
+                        </div><!-- /.item -->*@
 
                 </div><!-- /.owl-carousel -->
             </div>
@@ -59,16 +45,21 @@
 <!-- ========================================= HOME BANNERS ========================================= -->
 <section id="banner-holder" class="wow fadeInUp">
     <div class="container">
-        <div class="col-xs-12 col-lg-6 no-margin banner">
-            <a href="category-grid-2">
-                <div class="banner-text theblue">
-                    <h1>New Life</h1>
-                    <span class="tagline">Introducing New Category</span>
-                </div>
-                <img class="banner-image" alt="" src="Assets/New_Template/assets/images/blank.gif" data-echo="Assets/New_Template/assets/images/banners/banner-narrow-01.jpg" />
-            </a>
-        </div>
-        <div class="col-xs-12 col-lg-6 no-margin text-right banner">
+        @foreach (var slide in Model)
+        {
+          
+            <div class="col-xs-12 col-lg-6 no-margin banner">
+                <a href="category-grid-2">
+                    @*<div class="banner-text theblue">
+                        <h1>New Life</h1>
+                        <span class="tagline">Introducing New Category</span>
+                    </div>*@
+                    <img class="banner-image" alt="" src="Assets/New_Template/assets/images/blank.gif" data-echo="@slide.Image" />
+                </a>
+            </div>
+        }
+        
+        @*<div class="col-xs-12 col-lg-6 no-margin text-right banner">
             <a href="category-grid-2">
                 <div class="banner-text right">
                     <h1>Time &amp; Style</h1>
@@ -76,7 +67,7 @@
                 </div>
                 <img class="banner-image" alt="" src="Assets/New_Template/assets/images/blank.gif" data-echo="Assets/New_Template/assets/images/banners/banner-narrow-02.jpg" />
             </a>
-        </div>
+        </div>*@
     </div><!-- /.container -->
 </section><!-- /#banner-holder -->
 <!-- ========================================= HOME BANNERS : END ========================================= -->

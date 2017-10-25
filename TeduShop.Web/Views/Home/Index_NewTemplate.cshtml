@@ -1,10 +1,11 @@
-﻿
+﻿@model TeduShop.Web.Models.HomeViewModel
 @{
     Layout = "~/Views/Shared/Layouts_NewTemplate.cshtml";
+    var slides = Model.Slides;
 }
 
-@{Html.RenderAction("Banner", "Home");}
-@{Html.RenderAction("ProductTab", "Home");}
+@{Html.RenderAction("Banner", "Home", new { slides = Model.Slides });}
+@{ Html.RenderAction("ProductTab", "Home");}
 @{Html.RenderAction("BestSeller", "Home");}
 
 @{Html.RenderAction("RecentView", "Home");}

@@ -107,7 +107,7 @@ namespace TeduShop.Service
         public IEnumerable<Product> GetAll(string keyWord)
         {
             if (!string.IsNullOrEmpty(keyWord))
-                return _ProductRepository.GetMulti(x => x.Name.Contains(keyWord) || x.Description.Contains(keyWord));
+                return _ProductRepository.GetMulti(x => x.Name.ToLower().Contains(keyWord.ToLower()) || x.Description.ToLower().Contains(keyWord.ToLower()));
             else
                 return _ProductRepository.GetAll();
         }

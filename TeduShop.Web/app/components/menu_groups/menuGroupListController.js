@@ -7,14 +7,14 @@
     function menuGroupListController($scope, apiService, notificationService, $ngBootbox, $filter) {
 
         $scope.menugroups = [];
-        //$scope.page = 0;
-        //$scope.pagesCount = 0;
-        $scope.getproducts = getproducts;
-        //$scope.keyWord = '';
+        $scope.page = 0;
+        $scope.pagesCount = 0;
+        $scope.getmenugroups = getmenugroups;
+        $scope.keyWord = '';
 
         $scope.search = search;
 
-        $scope.deleteProduct = deleteProduct;
+        $scope.deleteMenuGroup = deleteMenuGroup;
 
         $scope.selectAll = selectAll;
 
@@ -43,19 +43,19 @@
 
         function selectAll() {
             if ($scope.isAll == false) {
-                angular.forEach($scope.products, function (item) {
+                angular.forEach($scope.menugroups, function (item) {
                     item.checked = true;
                 });
                 $scope.isAll = true;
             } else {
-                angular.forEach($scope.products, function (item) {
+                angular.forEach($scope.menugroups, function (item) {
                     item.checked = false;
                 });
                 $scope.isAll = false;
             }
         }
 
-        $scope.$watch("products", function (n, o) {
+        $scope.$watch("menugroups", function (n, o) {
             var checked = $filter('filter')(n, { checked: true });
             if (checked.length) {
                 $scope.selected = checked;
@@ -65,7 +65,7 @@
             }
         }, true);
 
-        function deleteProduct(id) {
+        function deleteMenuGroup(id) {
             $ngBootbox.confirm('Do you want to delete this item.').then(function () {
                 var config = {
                     params: {
@@ -83,10 +83,10 @@
         }
 
         function search() {
-            getproducts();
+            getmenugroups();
         }
 
-        function getproducts(page) {
+        function getmenugroups(page) {
             page = page || 0;
             var config = {
                 params: {
@@ -100,15 +100,15 @@
                     notificationService.displayWarning('not found.');
                 }
                 $scope.menugroups = result.data.Items;
-                //$scope.page = result.data.page;
-                //$scope.pagesCount = result.data.TotalPages;
-                //$scope.totalCount = result.data.TotalCount;
+                $scope.page = result.data.page;
+                $scope.pagesCount = result.data.TotalPages;
+                $scope.totalCount = result.data.TotalCount;
             }, function (result) {
                 console.log('Load menu group failed.');
             })
         }
 
-        $scope.getproducts();
+        getmenugroups();
     }
 
 })(angular.module('tedushop.menu_groups'));
