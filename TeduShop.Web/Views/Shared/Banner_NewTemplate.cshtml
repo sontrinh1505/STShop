@@ -8,10 +8,14 @@
                 <div id="owl-main" class="owl-carousel height-lg owl-inner-nav owl-ui-lg">
                     @foreach (var slide in Model)
                     {
-                        <div class="item" style="background-image: url(@slide.Image);">
-                           @* @Html.Raw(slide.Content)*@
-                            
-                        </div><!-- /.item -->
+                        if (slide.IsBanner)
+                        {
+                            <div class="item" style="background-image: url(@slide.Image);">
+                                @* @Html.Raw(slide.Content)*@
+
+                            </div><!-- /.item -->
+                        }
+
                     }
 
 
@@ -47,27 +51,20 @@
     <div class="container">
         @foreach (var slide in Model)
         {
-          
-            <div class="col-xs-12 col-lg-6 no-margin banner">
-                <a href="category-grid-2">
-                    @*<div class="banner-text theblue">
-                        <h1>New Life</h1>
-                        <span class="tagline">Introducing New Category</span>
-                    </div>*@
-                    <img class="banner-image" alt="" src="Assets/New_Template/assets/images/blank.gif" data-echo="@slide.Image" />
-                </a>
-            </div>
-        }
-        
-        @*<div class="col-xs-12 col-lg-6 no-margin text-right banner">
-            <a href="category-grid-2">
-                <div class="banner-text right">
-                    <h1>Time &amp; Style</h1>
-                    <span class="tagline">Checkout new arrivals</span>
+            if (!slide.IsBanner)
+            {
+                <div class="col-xs-12 col-lg-6 no-margin banner">
+                    <a href="category-grid-2">
+                        @*<div class="banner-text theblue">
+                                <h1>New Life</h1>
+                                <span class="tagline">Introducing New Category</span>
+                            </div>*@
+                        <img class="banner-image" alt="" src="Assets/New_Template/assets/images/blank.gif" data-echo="@slide.Image" />
+                    </a>
                 </div>
-                <img class="banner-image" alt="" src="Assets/New_Template/assets/images/blank.gif" data-echo="Assets/New_Template/assets/images/banners/banner-narrow-02.jpg" />
-            </a>
-        </div>*@
+            }
+
+        }
     </div><!-- /.container -->
 </section><!-- /#banner-holder -->
 <!-- ========================================= HOME BANNERS : END ========================================= -->

@@ -24,6 +24,9 @@ namespace TeduShop.Model.Models
         [Required]
         public int CategoryID { set; get; }
 
+        [Required]
+        public int BrandID { set; get; }
+
         [MaxLength(256)]
         public string Image { set; get; }
 
@@ -45,12 +48,17 @@ namespace TeduShop.Model.Models
 
         public string Tags { get; set; }
 
+        public string ProductType{ get; set; }
+
         public int Quantity { get; set; }
 
         public decimal OriginalPrice { set; get; }
 
         [ForeignKey("CategoryID")]
         public virtual ProductCategory ProductCategory { set; get; }
+
+        [ForeignKey("BrandID")]
+        public virtual Brand Brand { set; get; }
 
         public virtual ICollection<ProductTag> ProductTags { set; get; }
     }

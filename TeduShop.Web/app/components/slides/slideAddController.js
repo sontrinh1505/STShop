@@ -7,25 +7,31 @@
 
 
         $scope.AddSlide = AddSlide;
+        $scope.ckeditorOptions = {
+            language: 'en',
+            height: '200px',
+            allowedContent: true
+        }
+
 
         function AddSlide() {
             apiService.post('api/slide/create', $scope.slide, function (result) {
                 notificationService.displaySuccess(result.data.Name + ' have been added');
-                $state.go('menus');
+                $state.go('slides');
             }, function (error) {
                 notificationService.displayError('product can not add');
             });
         }
 
-        //function loadMenuParents() {
-        //    apiService.get('api/menugroup/getallparents', null, function (result) {
-        //        $scope.menuParents = result.data;
-        //    }, function () {
-        //        console.log('can not get list parent.');
-        //    });
-        //}
-
-        //loadMenuParents();
+        $scope.chooseImage = function () {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                $scope.$apply(function () {
+                    $scope.slide.Image = fileUrl;
+                })
+            }
+            finder.popup();
+        }
     }
 
 })(angular.module('tedushop.slides'));

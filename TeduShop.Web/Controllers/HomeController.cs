@@ -21,11 +21,13 @@ namespace TeduShop.Web.Controllers
         IMenuService _menuService;
         IMenuGroupService _menuGroupService;
         ISlideService _slideService;
+        ISystemConfigService _systemConfigService;
 
         public HomeController(IProductCategoryService productCategoryService, 
             ICommonService commonService, IProductService productService,
             IMenuService menuService, IMenuGroupService menuGroupService,
-            ISlideService slideService
+            ISlideService slideService, ISystemConfigService systemConfigService
+
             )
         {
             this._productCategoryService = productCategoryService;
@@ -34,6 +36,7 @@ namespace TeduShop.Web.Controllers
             this._menuService = menuService;
             this._menuGroupService = menuGroupService;
             this._slideService = slideService;
+            this._systemConfigService = systemConfigService;
         }
 
         [OutputCache(Duration = 3600, Location = System.Web.UI.OutputCacheLocation.Client)]
@@ -41,8 +44,9 @@ namespace TeduShop.Web.Controllers
         {
             //var slideModel = _commonService.GetSlides();           
             var lastestProductModel = _productService.GetLastest(10).ToListViewModel();
-            var topSaleProductModel = _productService.GetHotProduct(10).ToListViewModel(); ;
+            var topSaleProductModel = _productService.GetHotProduct(10).ToListViewModel();
             var slides = _slideService.GetAll().ToListViewModel();
+            
 
             //var slideModelViewModel = Mapper.Map<IEnumerable<Slide>, IEnumerable<SlideViewModel>>(slideModel);
             //var lastestProductModelViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(lastestProductModel);
@@ -52,19 +56,11 @@ namespace TeduShop.Web.Controllers
             homeViewModel.Slides = slides;
             homeViewModel.LastestProducts = lastestProductModel;
             homeViewModel.TopSaleProducts = topSaleProductModel;
-            //homeViewModel.Slides = slides.ToListViewModel();
-
-            try
-            {
-                homeViewModel.Title = _commonService.GetSystemConfig(ComomConstants.HomeTitle).ValueString;
-                homeViewModel.MetaKeyword = _commonService.GetSystemConfig(ComomConstants.HomeMetaKeyword).ValueString;
-                homeViewModel.MetaDescription = _commonService.GetSystemConfig(ComomConstants.HomeMataDescription).ValueString;
-            }
-            catch
-            {
-
-            }
-           
+            homeViewModel.Title = _commonService.GetSystemConfig(ComomConstants.HomeTitle).ValueString;
+            homeViewModel.MetaKeyword = _commonService.GetSystemConfig(ComomConstants.HomeMetaKeyword).ValueString;
+            homeViewModel.MetaDescription = _commonService.GetSystemConfig(ComomConstants.HomeMataDescription).ValueString;
+       
+          
             return View("~/Views/Home/Index_NewTemplate.cshtml", homeViewModel);
         }
 
@@ -81,11 +77,12 @@ namespace TeduShop.Web.Controllers
         public ActionResult Header()
         {
             var homeViewModel = new HomeViewModel();
-            string[] include = { "Menus"};
+            var productCatagories = _productCategoryService.GetAll().ToListViewModel();
             var menus = _menuGroupService.GetAll().ToList();
-            
-                homeViewModel.Menus = menus.ToListViewModel();
-
+            homeViewModel.Menus = menus.ToListViewModel();
+            homeViewModel.Email = _commonService.GetSystemConfig(ComomConstants.Email).ValueString;
+            homeViewModel.Phone = _commonService.GetSystemConfig(ComomConstants.Phone).ValueString;
+            homeViewModel.ProductCategories = productCatagories;
             return PartialView("~/Views/Shared/Header_NewTemplate.cshtml", homeViewModel);
         }
 

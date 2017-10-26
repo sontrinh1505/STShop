@@ -64,17 +64,13 @@
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\RepositoryBase.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\201710231819597_aaa.cs" />
-    <Compile Include="Migrations\201710231819597_aaa.Designer.cs">
-      <DependentUpon>201710231819597_aaa.cs</DependentUpon>
+    <Compile Include="Migrations\201710260840394_InitDatabase.cs" />
+    <Compile Include="Migrations\201710260840394_InitDatabase.Designer.cs">
+      <DependentUpon>201710260840394_InitDatabase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201710240317539_UpdateGroupMenu.cs" />
-    <Compile Include="Migrations\201710240317539_UpdateGroupMenu.Designer.cs">
-      <DependentUpon>201710240317539_UpdateGroupMenu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710240321247_UpdateGroupMenuf.cs" />
-    <Compile Include="Migrations\201710240321247_UpdateGroupMenuf.Designer.cs">
-      <DependentUpon>201710240321247_UpdateGroupMenuf.cs</DependentUpon>
+    <Compile Include="Migrations\201710261126073_UpdateProductModel.cs" />
+    <Compile Include="Migrations\201710261126073_UpdateProductModel.Designer.cs">
+      <DependentUpon>201710261126073_UpdateProductModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,11 +81,13 @@
     <Compile Include="Repositories\ApplicationRoleRepository.cs" />
     <Compile Include="Repositories\ApplicationPermissionGroupRepository.cs" />
     <Compile Include="Repositories\ApplicationUserGroupRepository.cs" />
+    <Compile Include="Repositories\ModelBrandRepository.cs" />
     <Compile Include="Repositories\ContactDetailRepository.cs" />
     <Compile Include="Repositories\ErrorRepository.cs" />
     <Compile Include="Repositories\FeedbackRepository.cs" />
     <Compile Include="Repositories\FooterRepository.cs" />
     <Compile Include="Repositories\MenuGroupRepository.cs" />
+    <Compile Include="Repositories\BrandRepository.cs" />
     <Compile Include="Repositories\MenuRepository.cs" />
     <Compile Include="Repositories\OrderDetailRepository.cs" />
     <Compile Include="Repositories\OrderRepository.cs" />
@@ -124,14 +122,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710231819597_aaa.resx">
-      <DependentUpon>201710231819597_aaa.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710260840394_InitDatabase.resx">
+      <DependentUpon>201710260840394_InitDatabase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710240317539_UpdateGroupMenu.resx">
-      <DependentUpon>201710240317539_UpdateGroupMenu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710240321247_UpdateGroupMenuf.resx">
-      <DependentUpon>201710240321247_UpdateGroupMenuf.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710261126073_UpdateProductModel.resx">
+      <DependentUpon>201710261126073_UpdateProductModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

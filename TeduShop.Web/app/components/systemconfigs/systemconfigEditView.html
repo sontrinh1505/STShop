@@ -1,0 +1,59 @@
+﻿ <!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Configurations
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Configurations</a></li>
+        <li><a ui-sref="menus">System</a></li>
+        <li class="active">Update</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Horizontal Form -->
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">{{systemconfig.Code}}</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" novalidate name="frmUpdateSystemConfig" role="form" ng-submit="UpdateSystemConfig()">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" style="width: 300px;" ng-maxlength="256" required class="form-control" name="name" ng-model="systemconfig.Code">
+                        <span ng-show="frmUpdateSystemConfig.name.$invalid" class="has-error"> must be enter name</span>
+                        <span ng-show="frmUpdateSystemConfig.name.$error.maxlength" class="has-error"> Field should be 256 characters.</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">String Value</label>
+                    <div class="col-sm-10">
+                        <input type="text" style="width: 300px;" ng-maxlength="256" required class="form-control" name="stringvalue" ng-model="systemconfig.ValueString">
+                        <span ng-show="frmUpdateSystemConfig.stringvalue.$invalid" class="has-error"> must be enter Value</span>
+                        <span ng-show="frmUpdateSystemConfig.stringvalue.$error.maxlength" class="has-error"> Field should be 256 characters.</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Int Value</label>
+                    <div class="col-sm-10">
+                        <input type="text" style="width: 300px;" ng-maxlength="256" required class="form-control" name="intvalue" ng-model="systemconfig.ValueInt">
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <button ui-sref="systemconfigs" class="btn btn-default">Cancel</button>
+                <button type="submit" ng-disabled="frmUpdateMenu.$invalid" class="btn btn-success pull-right">Save</button>
+            </div>
+            <!-- /.box-footer -->
+        </form>
+    </div>
+    <!-- /.box -->
+</section>
+<!-- /.content -->

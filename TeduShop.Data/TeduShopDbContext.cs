@@ -28,6 +28,8 @@ namespace TeduShop.Data
         public DbSet<PostCategory> PostCategories { get; set; }
         public DbSet<PostTag> PostTags { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<ModelBrand> ModelBrands { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<ProductTag> ProductTags { get; set; }
         public DbSet<Slide> Slides { get; set; }
@@ -46,10 +48,6 @@ namespace TeduShop.Data
 
         public DbSet<ApplicationPermission> ApplicationPermissions { get; set; }
         public DbSet<ApplicationPermissionGroup> ApplicationPermissionGroups { get; set; }
-
-
-        public DbSet<Student> Students { get; set; }
-        public DbSet<Address> Address { get; set; }
 
         public static TeduShopDbContext Create()
         {

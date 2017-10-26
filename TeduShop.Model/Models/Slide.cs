@@ -23,6 +23,8 @@ namespace TeduShop.Model.Models
         [MaxLength(256)]
         public string Url { set; get; }
 
+        public bool IsBanner { set; get; }
+
         public int? DisplayOrder { set; get; }
 
         public bool Status { set; get; }

@@ -56,9 +56,13 @@ namespace TeduShop.Web.Models
 
         public bool Status { set; get; }
 
+        public string ProductType { get; set; }
+
         public decimal OriginalPrice { set; get; }
 
         public virtual ProductCategoryViewModel ProductCategory { set; get; }
+
+        public virtual BrandViewModel Brand { set; get; }
 
         public virtual ICollection<ProductTagViewModel> ProductTags { set; get; }
     }

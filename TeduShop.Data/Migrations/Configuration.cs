@@ -29,6 +29,7 @@
             CreateGroup(context);
             CreatePermission(context);
             CreateMenu(context);
+            CreateModelBrand(context);
         }
 
         private void CreateConfigTitle(TeduShop.Data.TeduShopDbContext context)
@@ -38,7 +39,7 @@
                 context.SystemConfigs.Add(new SystemConfig()
                 {
                     Code = "HomeTitle",
-                    ValueString = "TeduShop Home Page"
+                    ValueString = "ST Shop"
                 });
             }
 
@@ -47,7 +48,7 @@
                 context.SystemConfigs.Add(new SystemConfig()
                 {
                     Code = "HomeMetaKeyword",
-                    ValueString = "TeduShop Home Page"
+                    ValueString = "ST Shop"
                 });
             }
 
@@ -56,7 +57,25 @@
                 context.SystemConfigs.Add(new SystemConfig()
                 {
                     Code = "HomeMataDescription",
-                    ValueString = "TeduShop Home Page"
+                    ValueString = "ST Shop"
+                });
+            }
+
+            if (!context.SystemConfigs.Any(x => x.Code == "Email"))
+            {
+                context.SystemConfigs.Add(new SystemConfig()
+                {
+                    Code = "Email",
+                    ValueString = "STShopSupport@gmail.com"
+                });
+            }
+
+            if (!context.SystemConfigs.Any(x => x.Code == "Phone"))
+            {
+                context.SystemConfigs.Add(new SystemConfig()
+                {
+                    Code = "Phone",
+                    ValueString = "01648484969"
                 });
             }
         }
@@ -472,6 +491,228 @@
                 };
 
                 context.Menus.AddRange(MenuList);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreateModelBrand(TeduShop.Data.TeduShopDbContext context)
+        {
+            if (context.Brands.Count() == 0)
+            {
+                var groupList = new List<Brand>()
+                {
+                    new Brand
+                    {
+                        Name = "Apple",
+                        Country = "USA",
+                        Status = true
+                    },
+                    new Brand
+                    {
+                        Name = "Sansung",
+                        Country = "Korea",
+                        Status = true
+
+                    },
+                    new Brand
+                    {
+                        Name = "One Plus",
+                        Country = "China",
+                        Status = true
+                    },
+                    new Brand
+                    {
+                        Name = "XiaoMi",
+                        Country = "China",
+                        Status = true
+                    }
+
+                };
+
+                context.Brands.AddRange(groupList);
+                context.SaveChanges();
+
+                var appleBrand = context.Brands.Where(x => x.Name == "Apple").SingleOrDefault();
+                var samsungBrand = context.Brands.Where(x => x.Name == "Sansung").SingleOrDefault();
+                var oneplusBrand = context.Brands.Where(x => x.Name == "One Plus").SingleOrDefault();
+                var xiaomiBrand = context.Brands.Where(x => x.Name == "XiaoMi").SingleOrDefault();
+
+                var modelList = new List<ModelBrand>()
+                {
+                    new ModelBrand
+                    {
+                        Name="Iphone 6",
+                        Mode = "iphone6",
+                        BrandID = appleBrand.ID,
+                        Status = true
+                    },
+                   new ModelBrand
+                    {
+                        Name="Iphone 6 Plus",
+                        Mode = "iphone6plus",
+                        BrandID = appleBrand.ID,
+                        Status = true
+                    },
+                   new ModelBrand
+                    {
+                        Name="Iphone 6s",
+                        Mode = "iphone6s",
+                        BrandID = appleBrand.ID,
+                        Status = true
+                    },
+                   new ModelBrand
+                    {
+                        Name="Iphone 6s Plus",
+                        Mode = "iphone6splus",
+                        BrandID = appleBrand.ID,
+                        Status = true
+                    },
+                   new ModelBrand
+                    {
+                        Name="Iphone 7",
+                        Mode = "iphone7",
+                        BrandID = appleBrand.ID,
+                        Status = true
+                    },
+                   new ModelBrand
+                    {
+                        Name="Iphone 7 Plus",
+                        Mode = "iphone7plus",
+                        BrandID = appleBrand.ID,
+                        Status = true
+                    },
+                    new ModelBrand
+                    {
+                        Name="Iphone 8",
+                        Mode = "iphone8",
+                        BrandID = appleBrand.ID,
+                        Status = true
+                    },
+
+                     new ModelBrand
+                    {
+                        Name="Iphone 8",
+                        Mode = "iphone8plus",
+                        BrandID = appleBrand.ID,
+                        Status = true
+                    },
+                   new ModelBrand
+                    {
+                        Name="Iphone X",
+                        Mode = "iphonex",
+                        BrandID = appleBrand.ID,
+                        Status = true
+                    },
+                     new ModelBrand
+                    {
+                        Name="Galaxy S7",
+                        Mode = "galaxys7",
+                        BrandID = samsungBrand.ID,
+                        Status = true
+                    },
+                    new ModelBrand
+                    {
+                        Name="Galaxy S7 Edge",
+                        Mode = "galaxys7edge",
+                        BrandID = samsungBrand.ID,
+                        Status = true
+                    },
+                     new ModelBrand
+                    {
+                        Name="Galaxy S8",
+                        Mode = "galaxys78",
+                        BrandID = samsungBrand.ID,
+                        Status = true
+                    },
+                    new ModelBrand
+                    {
+                        Name="Galaxy S8 Edge",
+                        Mode = "galaxys8edge",
+                        BrandID = samsungBrand.ID,
+                        Status = true
+                    },
+                     new ModelBrand
+                    {
+                        Name="Galaxy Note7",
+                        Mode = "galaxynote7",
+                        BrandID = samsungBrand.ID,
+                        Status = true
+                    },
+                    new ModelBrand
+                    {
+                        Name="Galaxy Note 8",
+                        Mode = "galaxynote8",
+                        BrandID = samsungBrand.ID,
+                        Status = true
+                    },
+
+                    new ModelBrand
+                    {
+                        Name="One Plus 2",
+                        Mode = "oneplus2",
+                        BrandID = oneplusBrand.ID,
+                        Status = true
+                    },
+                    new ModelBrand
+                    {
+                        Name="One Plus 3",
+                        Mode = "oneplus3",
+                        BrandID = oneplusBrand.ID,
+                        Status = true
+                    },
+                    new ModelBrand
+                    {
+                        Name="One Plus 3T",
+                        Mode = "oneplus3",
+                        BrandID = oneplusBrand.ID,
+                        Status = true
+                    },
+                    new ModelBrand
+                    {
+                        Name="One Plus 5",
+                        Mode = "oneplus5",
+                        BrandID = oneplusBrand.ID,
+                        Status = true
+                    },
+                    new ModelBrand
+                    {
+                        Name="Redmi 4 ",
+                        Mode = "Redmi4",
+                        BrandID = xiaomiBrand.ID,
+                        Status = true
+                    },
+                    new ModelBrand
+                    {
+                        Name="Redmi Note 4 ",
+                        Mode = "Redminote4",
+                        BrandID = xiaomiBrand.ID,
+                        Status = true
+                    },
+                     new ModelBrand
+                    {
+                        Name="Redmi Note 4X ",
+                        Mode = "Redminote4x",
+                        BrandID = xiaomiBrand.ID,
+                        Status = true
+                    },
+                     new ModelBrand
+                    {
+                        Name="Mi 5",
+                        Mode = "mi5",
+                        BrandID = xiaomiBrand.ID,
+                        Status = true
+                    },
+                     new ModelBrand
+                    {
+                        Name="Mi 6",
+                        Mode = "mi6",
+                        BrandID = xiaomiBrand.ID,
+                        Status = true
+                    },
+
+                };
+
+                context.ModelBrands.AddRange(modelList);
                 context.SaveChanges();
             }
         }

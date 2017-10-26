@@ -7,13 +7,13 @@ namespace TeduShop.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class UpdateGroupMenu : IMigrationMetadata
+    public sealed partial class UpdateProductModel : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateGroupMenu));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateProductModel));
         
         string IMigrationMetadata.Id
         {
-            get { return "201710240317539_UpdateGroupMenu"; }
+            get { return "201710261126073_UpdateProductModel"; }
         }
         
         string IMigrationMetadata.Source

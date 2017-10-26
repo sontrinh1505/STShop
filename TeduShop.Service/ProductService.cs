@@ -67,7 +67,9 @@ namespace TeduShop.Service
 
         public Product Add(Product Product)
         {
-            var product = _ProductRepository.Add(Product);
+            Product.Brand = null;
+            Product.ProductCategory = null;
+            var product = _ProductRepository.Add(Product);          
             _unitOfWork.Commit();
             if (!string.IsNullOrEmpty(Product.Tags))
             {

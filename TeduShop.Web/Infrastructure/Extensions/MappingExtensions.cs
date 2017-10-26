@@ -304,6 +304,74 @@ namespace TeduShop.Web.Infrastructure.Extensions
 
         }
 
+        //SystemConfig <-> SystemConfigViewModel
+        public static SystemConfig ToModel(this SystemConfigViewModel viewmodel)
+        {
+            return Mapper.Map<SystemConfigViewModel, SystemConfig>(viewmodel);
+        }
+
+        public static SystemConfigViewModel ToViewModel(this SystemConfig model)
+        {
+            return Mapper.Map<SystemConfig, SystemConfigViewModel>(model);
+        }
+
+        public static IEnumerable<SystemConfig> ToListModel(this IEnumerable<SystemConfigViewModel> viewmodel)
+        {
+            return Mapper.Map<IEnumerable<SystemConfigViewModel>, IEnumerable<SystemConfig>>(viewmodel);
+        }
+
+        public static IEnumerable<SystemConfigViewModel> ToListViewModel(this IEnumerable<SystemConfig> model)
+        {
+            return Mapper.Map<IEnumerable<SystemConfig>, IEnumerable<SystemConfigViewModel>>(model);
+
+        }
+
+
+        //Brand <-> BrandViewModel
+        public static Brand ToModel(this BrandViewModel viewmodel)
+        {
+            return Mapper.Map<BrandViewModel, Brand>(viewmodel);
+        }
+
+        public static BrandViewModel ToViewModel(this Brand model)
+        {
+            return Mapper.Map<Brand, BrandViewModel>(model);
+        }
+
+        public static IEnumerable<Brand> ToListModel(this IEnumerable<BrandViewModel> viewmodel)
+        {
+            return Mapper.Map<IEnumerable<BrandViewModel>, IEnumerable<Brand>>(viewmodel);
+        }
+
+        public static IEnumerable<BrandViewModel> ToListViewModel(this IEnumerable<Brand> model)
+        {
+            return Mapper.Map<IEnumerable<Brand>, IEnumerable<BrandViewModel>>(model);
+
+        }
+
+
+        //ModelBrand <-> BrandViewModel
+        public static ModelBrand ToModel(this ModelBrandViewModel viewmodel)
+        {
+            return Mapper.Map<ModelBrandViewModel, ModelBrand>(viewmodel);
+        }
+
+        public static ModelBrandViewModel ToViewModel(this ModelBrand model)
+        {
+            return Mapper.Map<ModelBrand, ModelBrandViewModel>(model);
+        }
+
+        public static IEnumerable<ModelBrand> ToListModel(this IEnumerable<ModelBrandViewModel> viewmodel)
+        {
+            return Mapper.Map<IEnumerable<ModelBrandViewModel>, IEnumerable<ModelBrand>>(viewmodel);
+        }
+
+        public static IEnumerable<ModelBrandViewModel> ToListViewModel(this IEnumerable<ModelBrand> model)
+        {
+            return Mapper.Map<IEnumerable<ModelBrand>, IEnumerable<ModelBrandViewModel>>(model);
+
+        }
+
 
 
 

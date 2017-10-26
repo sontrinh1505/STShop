@@ -13,7 +13,8 @@ namespace TeduShop.Common
         public const string defaultFooterId = "default";
 
         public const string SessionCart = "SessionCart";
-
+        public const string Phone = "Phone";
+        public const string Email = "Email";
         public const string HomeTitle = "HomeTitle";
         public const string HomeMetaKeyword = "HomeMetaKeyword";
         public const string HomeMataDescription = "HomeMataDescription";

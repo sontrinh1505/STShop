@@ -37,12 +37,17 @@
         </div><!-- /.logo-holder -->
 
         <div class="col-xs-12 col-md-6 top-search-holder no-margin">
+        
             <div class="contact-row">
                 <div class="phone inline">
-                    <i class="fa fa-phone"></i> (+800) 123 456 7890
+                    <i class="fa fa-phone"></i> @Model.Phone
                 </div>
+            @{ 
+                string[] stringSeparators = new string[] { "@" };
+                var dataMail = @Model.Email.Split(stringSeparators, StringSplitOptions.None);
+            }
                 <div class="contact inline">
-                    <i class="fa fa-envelope"></i> contact&#64;<span class="le-color">oursupport.com</span>
+                    <i class="fa fa-envelope"></i> @dataMail[0]&#64;<span class="le-color">@dataMail[1]</span>
                 </div>
             </div><!-- /.contact-row -->
             <!-- ============================================================= SEARCH AREA ============================================================= -->
@@ -57,11 +62,10 @@
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="category-grid.html">all categories</a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="category-grid.html">laptops</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="category-grid.html">tv & audio</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="category-grid.html">gadgets</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="category-grid.html">cameras</a></li>
-
+                                    @foreach (var category in Model.ProductCategories)
+                                    {
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">@category.Name</a></li>
+                                    }                                     
                                 </ul>
                             </li>
                         </ul>

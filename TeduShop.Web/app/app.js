@@ -10,6 +10,7 @@
          'tedushop.menu_groups',
          'tedushop.slides',
          'tedushop.menus',
+         'tedushop.systemconfigs',
          'tedushop.statistics',
          'tedushop.common'])
         .config(config)

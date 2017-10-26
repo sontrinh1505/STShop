@@ -230,6 +230,8 @@
     <Compile Include="Api\ApplicationGroupController.cs" />
     <Compile Include="Api\ApplicationRoleController.cs" />
     <Compile Include="Api\ApplicationUserController.cs" />
+    <Compile Include="Api\BrandController.cs" />
+    <Compile Include="Api\SystemConfigController.cs" />
     <Compile Include="Api\SlideController.cs" />
     <Compile Include="Api\MenuController.cs" />
     <Compile Include="Api\MenuGroupController.cs" />
@@ -272,6 +274,7 @@
     <Compile Include="Models\FooterViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\BrandViewModel.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\OrderDetailViewModel.cs" />
     <Compile Include="Models\ApplicationPermissionViewModel.cs" />
@@ -286,8 +289,10 @@
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\ShoppingCartViewModel.cs" />
+    <Compile Include="Models\ModelBrandViewModel.cs" />
     <Compile Include="Models\SlideViewModel.cs" />
     <Compile Include="Models\ApplicationRolePermissionViewModel.cs" />
+    <Compile Include="Models\SystemConfigViewModel.cs" />
     <Compile Include="Models\TagViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -319,6 +324,13 @@
     <Content Include="app\components\home\rootController.js" />
     <Content Include="app\components\login\loginController.js" />
     <Content Include="app\components\login\loginView.html" />
+    <Content Include="app\components\systemconfigs\systemconfigAddController.js" />
+    <Content Include="app\components\systemconfigs\systemconfigAddView.html" />
+    <Content Include="app\components\systemconfigs\systemconfigEditController.js" />
+    <Content Include="app\components\systemconfigs\systemconfigEditView.html" />
+    <Content Include="app\components\systemconfigs\systemconfigListController.js" />
+    <Content Include="app\components\systemconfigs\systemconfigListView.html" />
+    <Content Include="app\components\systemconfigs\systemconfigs.module.js" />
     <Content Include="app\components\slides\slideAddController.js" />
     <Content Include="app\components\slides\slideAddView.html" />
     <Content Include="app\components\slides\slideEditController.js" />

@@ -9,7 +9,6 @@
             CreateDate: new Date(),
             Status: true
         }
-
         $scope.ckeditorOptions = {
             language: 'en',
             height: '200px'
@@ -33,13 +32,43 @@
             });
         }
 
-        function loadProductCategory() {
+        
+
+        function loadProductCategories() {
             apiService.get('api/productcategory/getallparents', null, function (result) {
                 $scope.productCategories = result.data;
-            }, function () {
+            }, function (error) {
                 console.log('can not get list parent.');
             });
         }
+
+
+        function loadBrands() {
+           
+            apiService.get('api/brand/getall', null,  function (result) {
+                $scope.brands = result.data;
+            }, function (error) {
+                console.log('can not get list parent.');
+            });
+        }
+        
+        $scope.loadModelBrands = function() {
+            var config = {
+                params: {
+                    brandId: $scope.product.Brand.ID
+                }
+            }
+            apiService.get('api/brand/getmodelbybrandid', config, function (result) {
+                $scope.modelbrands = result.data;
+            }, function (error) {
+                console.log('can not get list parent.');
+            });
+        }
+
+
+
+
+
         $scope.chooseImage = function () {
             var finder = new CKFinder();
             finder.selectActionFunction = function (fileUrl) { 
@@ -61,7 +90,9 @@
             finder.popup();
         }
 
-        loadProductCategory();
+        //loadModelBrands();
+        loadBrands();
+        loadProductCategories();
     }
 
 })(angular.module('tedushop.products'));
