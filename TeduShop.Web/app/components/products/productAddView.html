@@ -49,7 +49,7 @@
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Brand</label>
                     <div class="col-sm-10">
-                        <ui-select ng-model="product.Brand.ID" name="categoryID" theme="bootstrap" style="width: 300px;" title="Choose a Brand" ng-change="loadModelBrands()">
+                        <ui-select ng-model="product.BrandID" name="categoryID" theme="bootstrap" style="width: 300px;" title="Choose a Brand" ng-change="loadModelBrands()">
                             <ui-select-match placeholder="choose a Brand">{{$select.selected.Name}}</ui-select-match>
                             <ui-select-choices repeat="item.ID as item in brands | filter: $select.search" >
                                 <span ng-bind-html="item.Name | highlight: $select.search"></span>

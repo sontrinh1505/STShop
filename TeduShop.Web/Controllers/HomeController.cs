@@ -77,12 +77,12 @@ namespace TeduShop.Web.Controllers
         public ActionResult Header()
         {
             var homeViewModel = new HomeViewModel();
-            var productCatagories = _productCategoryService.GetAll().ToListViewModel();
+            var productCatagories = _productCategoryService.GetAll().ToList();
             var menus = _menuGroupService.GetAll().ToList();
             homeViewModel.Menus = menus.ToListViewModel();
             homeViewModel.Email = _commonService.GetSystemConfig(ComomConstants.Email).ValueString;
             homeViewModel.Phone = _commonService.GetSystemConfig(ComomConstants.Phone).ValueString;
-            homeViewModel.ProductCategories = productCatagories;
+            homeViewModel.ProductCategories = productCatagories.ToListViewModel();
             return PartialView("~/Views/Shared/Header_NewTemplate.cshtml", homeViewModel);
         }
 

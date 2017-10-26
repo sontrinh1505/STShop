@@ -126,6 +126,9 @@ namespace TeduShop.Service
 
         public void Update(Product Product)
         {
+            Product.Brand = null;
+            Product.ProductCategory = null;
+
             _ProductRepository.Update(Product);
             if (!string.IsNullOrEmpty(Product.Tags))
             {

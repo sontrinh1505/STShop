@@ -55,7 +55,7 @@
         $scope.loadModelBrands = function() {
             var config = {
                 params: {
-                    brandId: $scope.product.Brand.ID
+                    brandId: $scope.product.BrandID
                 }
             }
             apiService.get('api/brand/getmodelbybrandid', config, function (result) {

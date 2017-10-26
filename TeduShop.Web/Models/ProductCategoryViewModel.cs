@@ -11,6 +11,7 @@ namespace TeduShop.Web.Models
         public int ID { set; get; }
 
         [Required(ErrorMessage ="should be enter name")]
+        [MaxLength(256)]
         public string Name { set; get; }
 
         [Required(ErrorMessage = "should be enter Alias name")]
@@ -25,8 +26,6 @@ namespace TeduShop.Web.Models
         public string Image { set; get; }
 
         public bool? HomeFlag { set; get; }
-
-        public virtual IEnumerable<PostViewModel> Posts { set; get; }
 
         public DateTime? CreatedDate { set; get; }
 
@@ -43,6 +42,6 @@ namespace TeduShop.Web.Models
         [Required(ErrorMessage = "should be enter status")]
         public bool Status { set; get; }
 
-        public virtual IEnumerable<ProductCategoryViewModel> Products { set; get; }
+        //public virtual IEnumerable<ProductViewModel> Products { set; get; }
     }
 }

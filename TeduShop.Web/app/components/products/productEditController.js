@@ -66,6 +66,28 @@
             finder.popup();
         }
 
+        function loadBrands() {
+
+            apiService.get('api/brand/getall', null, function (result) {
+                $scope.brands = result.data;
+            }, function (error) {
+                console.log('can not get list parent.');
+            });
+        }
+
+        $scope.loadModelBrands = function () {
+            var config = {
+                params: {
+                    brandId: $scope.product.BrandID
+                }
+            }
+            apiService.get('api/brand/getmodelbybrandid', config, function (result) {
+                $scope.modelbrands = result.data;
+            }, function (error) {
+                console.log('can not get list parent.');
+            });
+        }
+        loadBrands();
         loadProductCategory();
         loadProductDetail();
     }

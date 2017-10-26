@@ -60,6 +60,8 @@ namespace TeduShop.Web.Models
 
         public decimal OriginalPrice { set; get; }
 
+        public int BrandID { set; get; }
+
         public virtual ProductCategoryViewModel ProductCategory { set; get; }
 
         public virtual BrandViewModel Brand { set; get; }
