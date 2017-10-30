@@ -24,6 +24,7 @@
             apiService.get('api/product/getbyid/' + $stateParams.id, null, function (result) {
                 $scope.product = result.data;
                 $scope.moreImages = JSON.parse($scope.product.MoreImages);
+                loadModelBrands();
             }, function (error) {
                 notificationService.displayError(error.data);
             });
@@ -75,7 +76,9 @@
             });
         }
 
-        $scope.loadModelBrands = function () {
+        
+
+        function loadModelBrands() {
             var config = {
                 params: {
                     brandId: $scope.product.BrandID
@@ -90,6 +93,7 @@
         loadBrands();
         loadProductCategory();
         loadProductDetail();
+        $scope.loadModelBrands = loadModelBrands;
     }
 
 })(angular.module('tedushop.products'));

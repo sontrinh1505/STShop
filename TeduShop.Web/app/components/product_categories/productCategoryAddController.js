@@ -25,8 +25,18 @@
                 notificationService.displaySuccess(result.data.Name + ' đã được thêm mới.');
                 $state.go('product_categories');
             },function (error) {
-                notificationService.displayError('Thêm mới không thành công.');
+                notificationService.displayError('Unsuccessfully Add');
             });
+        }
+
+        $scope.chooseImage = function () {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                $scope.$apply(function () {
+                    $scope.productCategory.Image = fileUrl;
+                })
+            }
+            finder.popup();
         }
   
         function loadParentCategory() {

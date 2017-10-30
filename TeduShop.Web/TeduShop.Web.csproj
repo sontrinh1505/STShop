@@ -5454,6 +5454,7 @@
     <Content Include="Assets\New_Template\assets\css\owl.transitions.css" />
     <Content Include="Assets\New_Template\assets\css\prettyPhoto.css" />
     <Content Include="Assets\New_Template\assets\css\red.css" />
+    <Content Include="Assets\New_Template\assets\Custom\Custom.css" />
     <Content Include="Assets\New_Template\assets\images\ajax.gif" />
     <Content Include="Assets\New_Template\assets\images\AjaxLoader.gif" />
     <Content Include="Assets\New_Template\assets\images\background-images\testimonials.jpg" />

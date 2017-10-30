@@ -41,21 +41,11 @@ namespace TeduShop.Web.Controllers
 
         [OutputCache(Duration = 3600, Location = System.Web.UI.OutputCacheLocation.Client)]
         public ActionResult Index()
-        {
-            //var slideModel = _commonService.GetSlides();           
-            var lastestProductModel = _productService.GetLastest(10).ToListViewModel();
-            var topSaleProductModel = _productService.GetHotProduct(10).ToListViewModel();
+        {               
             var slides = _slideService.GetAll().ToListViewModel();
-            
-
-            //var slideModelViewModel = Mapper.Map<IEnumerable<Slide>, IEnumerable<SlideViewModel>>(slideModel);
-            //var lastestProductModelViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(lastestProductModel);
-            //var topSaleProductModelViewModel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(topSaleProductModel);
 
             var homeViewModel = new HomeViewModel();
             homeViewModel.Slides = slides;
-            homeViewModel.LastestProducts = lastestProductModel;
-            homeViewModel.TopSaleProducts = topSaleProductModel;
             homeViewModel.Title = _commonService.GetSystemConfig(ComomConstants.HomeTitle).ValueString;
             homeViewModel.MetaKeyword = _commonService.GetSystemConfig(ComomConstants.HomeMetaKeyword).ValueString;
             homeViewModel.MetaDescription = _commonService.GetSystemConfig(ComomConstants.HomeMataDescription).ValueString;
@@ -101,7 +91,16 @@ namespace TeduShop.Web.Controllers
         [ChildActionOnly]
         public ActionResult ProductTab()
         {
-            return PartialView("~/Views/Shared/ProductTab_NewTemplate.cshtml");
+            var lastestProductModel = _productService.GetLastest(10).ToListViewModel();
+            var topSaleProductModel = _productService.GetHotProduct(10).ToListViewModel();
+
+            var homeViewModel = new HomeViewModel();
+            homeViewModel.LastestProducts = lastestProductModel;
+            homeViewModel.TopSaleProducts = topSaleProductModel;
+
+            homeViewModel.Hotroducts = topSaleProductModel;
+
+            return PartialView("~/Views/Shared/ProductTab_NewTemplate.cshtml", homeViewModel);
         }
 
         [ChildActionOnly]

@@ -156,12 +156,14 @@ namespace TeduShop.Service
 
         public IEnumerable<Product> GetLastest(int top)
         {
-            return _ProductRepository.GetMulti(x => x.Status == true).OrderByDescending(x => x.CreatedDate).Take(top);
+            string[] includes = { "Brand" };
+            return _ProductRepository.GetMulti(x => x.Status == true && x.HomeFlag == true, includes).OrderByDescending(x => x.CreatedDate).Take(top);
         }
 
         public IEnumerable<Product> GetHotProduct(int top)
         {
-            return _ProductRepository.GetMulti(x => x.Status == true && x.HotFlag == true).OrderByDescending(x => x.CreatedDate).Take(top);
+            string[] includes = { "Brand" };
+            return _ProductRepository.GetMulti(x => x.Status == true && x.HotFlag == true, includes).OrderByDescending(x => x.CreatedDate).Take(top);
         }
 
         public IEnumerable<Product> GetListProductByCategoryIdPaging(int categoryId, int page, int pageSize, string sort, out int totalRow)

@@ -11,6 +11,7 @@ namespace TeduShop.Web.Models
         public IEnumerable<SlideViewModel> Slides { set; get; }
         public IEnumerable<ProductViewModel> LastestProducts { set; get; }
         public IEnumerable<ProductViewModel> TopSaleProducts { set; get; }
+        public IEnumerable<ProductViewModel>Hotroducts { set; get; }
         public IEnumerable<MenuGroupViewModel> Menus { set; get; }
         public IEnumerable<ProductCategoryViewModel> ProductCategories { set; get; }
         
