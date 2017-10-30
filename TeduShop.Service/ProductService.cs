@@ -22,7 +22,9 @@ namespace TeduShop.Service
 
         IEnumerable<Product> GetLastest(int top);
 
-        IEnumerable<Product> GetHotProduct(int top);
+        IEnumerable<Product> GetTopSale(int top);
+
+        IEnumerable<Product> GetBestSeller(int top);
 
         IEnumerable<Product> GetListProductByCategoryIdPaging(int categoryId, int page, int pageSize, string sort, out int totalRow);
 
@@ -160,7 +162,13 @@ namespace TeduShop.Service
             return _ProductRepository.GetMulti(x => x.Status == true && x.HomeFlag == true, includes).OrderByDescending(x => x.CreatedDate).Take(top);
         }
 
-        public IEnumerable<Product> GetHotProduct(int top)
+        public IEnumerable<Product> GetTopSale(int top)
+        {
+            string[] includes = { "Brand" };
+            return _ProductRepository.GetMulti(x => x.Status == true && x.PromotionPrice != null && x.PromotionPrice < x.Price, includes).OrderByDescending(x => x.CreatedDate).Take(top);
+        }
+
+        public IEnumerable<Product> GetBestSeller(int top)
         {
             string[] includes = { "Brand" };
             return _ProductRepository.GetMulti(x => x.Status == true && x.HotFlag == true, includes).OrderByDescending(x => x.CreatedDate).Take(top);

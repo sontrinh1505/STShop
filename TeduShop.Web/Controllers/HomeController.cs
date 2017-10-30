@@ -92,12 +92,11 @@ namespace TeduShop.Web.Controllers
         public ActionResult ProductTab()
         {
             var lastestProductModel = _productService.GetLastest(10).ToListViewModel();
-            var topSaleProductModel = _productService.GetHotProduct(10).ToListViewModel();
+            var topSaleProductModel = _productService.GetTopSale(10).ToListViewModel();
 
             var homeViewModel = new HomeViewModel();
             homeViewModel.LastestProducts = lastestProductModel;
             homeViewModel.TopSaleProducts = topSaleProductModel;
-
             homeViewModel.Hotroducts = topSaleProductModel;
 
             return PartialView("~/Views/Shared/ProductTab_NewTemplate.cshtml", homeViewModel);
@@ -106,6 +105,11 @@ namespace TeduShop.Web.Controllers
         [ChildActionOnly]
         public ActionResult BestSeller()
         {
+            var homeViewModel = new HomeViewModel();
+            var bestSellerProductModel = _productService.GetBestSeller(10).ToListViewModel();
+
+
+            homeViewModel.BestSelleProduct = bestSellerProductModel;
             return PartialView("~/Views/Shared/BestSeller_NewTemplate.cshtml");
         }
 
