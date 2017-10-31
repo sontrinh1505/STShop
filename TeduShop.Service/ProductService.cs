@@ -165,7 +165,7 @@ namespace TeduShop.Service
         public IEnumerable<Product> GetTopSale(int top)
         {
             string[] includes = { "Brand" };
-            return _ProductRepository.GetMulti(x => x.Status == true && x.PromotionPrice != null && x.PromotionPrice < x.Price, includes).OrderByDescending(x => x.CreatedDate).Take(top);
+            return _ProductRepository.GetMulti(x => x.Status == true && x.PromotionPrice != null && x.PromotionPrice <= x.Price, includes).OrderByDescending(x => x.CreatedDate).Take(top);
         }
 
         public IEnumerable<Product> GetBestSeller(int top)

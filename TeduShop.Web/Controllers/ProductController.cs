@@ -119,7 +119,7 @@ namespace TeduShop.Web.Controllers
 
         public ActionResult HotProduct()
         {
-            var products = _productService.GetHotProduct(20).ToListViewModel();
+            var products = _productService.GetTopSale(20).ToListViewModel();
 
             return View(products);
         }

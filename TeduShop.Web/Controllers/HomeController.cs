@@ -109,8 +109,8 @@ namespace TeduShop.Web.Controllers
             var bestSellerProductModel = _productService.GetBestSeller(10).ToListViewModel();
 
 
-            homeViewModel.BestSelleProduct = bestSellerProductModel;
-            return PartialView("~/Views/Shared/BestSeller_NewTemplate.cshtml");
+            homeViewModel.BestSellerProduct = bestSellerProductModel;
+            return PartialView("~/Views/Shared/BestSeller_NewTemplate.cshtml", homeViewModel);
         }
 
         [ChildActionOnly]

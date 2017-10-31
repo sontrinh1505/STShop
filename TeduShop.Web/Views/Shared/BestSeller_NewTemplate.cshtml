@@ -1,180 +1,53 @@
-﻿  <!-- ========================================= BEST SELLERS ========================================= -->
+﻿@model  TeduShop.Web.Models.HomeViewModel
+
+<!-- ========================================= BEST SELLERS ========================================= -->
 <section id="bestsellers" class="color-bg wow fadeInUp">
     <div class="container">
         <h1 class="section-title">Best Sellers</h1>
 
         <div class="product-grid-holder medium">
-            <div class="col-xs-12 col-md-7 no-margin">
 
-                <div class="row no-margin">
-                    <div class="col-xs-12 col-sm-4 no-margin product-item-holder size-medium hover">
-                        <div class="product-item">
-                            <div class="image">
-                                <img alt="" src="Assets/New_Template/assets/images/blank.gif" data-echo="Assets/New_Template/assets/images/products/product-05.jpg" />
-                            </div>
-                            <div class="body">
-                                <div class="label-discount clear"></div>
-                                <div class="title">
-                                    <a href="single-product.html">beats studio headphones official one</a>
-                                </div>
-                                <div class="brand">beats</div>
-                            </div>
-                            <div class="prices">
+            @foreach (var product in Model.BestSellerProduct)
+            {
+                <div class="col-xs-12 col-md-7 no-margin">
 
-                                <div class="price-current text-right">$1199.00</div>
-                            </div>
-                            <div class="hover-area">
-                                <div class="add-cart-button">
-                                    <a href="single-product.html" class="le-button">Add to cart</a>
+                    <div class="row no-margin">
+                        <div class="col-xs-12 col-sm-4 no-margin product-item-holder size-medium hover">
+                            <div class="product-item">
+                                <div class="image">
+                                    <img alt="" src="@product.Image" data-echo="@product.Image" />
                                 </div>
-                                <div class="wish-compare">
-                                    <a class="btn-add-to-wishlist" href="#">Add to Wishlist</a>
-                                    <a class="btn-add-to-compare" href="#">Compare</a>
+                                <div class="body">
+                                    <div class="label-discount clear"></div>
+                                    <div class="title">
+                                        <a href="#">@product.Name</a>
+                                    </div>
+                                    <div class="brand">
+                                        @if (product.Brand != null)
+                                        {
+                                            @product.Brand.Name
+                                        }
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div><!-- /.product-item-holder -->
+                                <div class="prices">
 
-                    <div class="col-xs-12 col-sm-4 no-margin product-item-holder size-medium hover">
-                        <div class="product-item">
-                            <div class="image">
-                                <img alt="" src="Assets/New_Template/assets/images/blank.gif" data-echo="Assets/New_Template/assets/images/products/product-06.jpg" />
-                            </div>
-                            <div class="body">
-                                <div class="label-discount clear"></div>
-                                <div class="title">
-                                    <a href="single-product.html">playstasion 4 with four games and pad</a>
+                                    <div class="price-current text-right">@product.Price</div>
                                 </div>
-                                <div class="brand">acer</div>
-                            </div>
-                            <div class="prices">
-                                <div class="price-current text-right">$1199.00</div>
-                            </div>
-                            <div class="hover-area">
-                                <div class="add-cart-button">
-                                    <a href="single-product.html" class="le-button">Add to cart</a>
-                                </div>
-                                <div class="wish-compare">
-                                    <a class="btn-add-to-wishlist" href="#">Add to Wishlist</a>
-                                    <a class="btn-add-to-compare" href="#">Compare</a>
+                                <div class="hover-area">
+                                    <div class="add-cart-button">
+                                        <a href="single-product.html" class="le-button">Add to cart</a>
+                                    </div>
+                                    <div class="wish-compare">
+                                        <a class="btn-add-to-wishlist" href="#">Add to Wishlist</a>
+                                        <a class="btn-add-to-compare" href="#">Compare</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div><!-- /.product-item-holder -->
+                        </div><!-- /.product-item-holder -->
+                    </div><!-- /.row -->
+                </div><!-- /.col -->
+            }
 
-                    <div class="col-xs-12 col-sm-4 no-margin product-item-holder size-medium hover">
-                        <div class="product-item">
-                            <div class="image">
-                                <img alt="" src="Assets/New_Template/assets/images/blank.gif" data-echo="Assets/New_Template/assets/images/products/product-07.jpg" />
-                            </div>
-                            <div class="body">
-                                <div class="label-discount clear"></div>
-                                <div class="title">
-                                    <a href="single-product.html">EOS rebel t5i DSLR Camera with 18-55mm IS STM lens</a>
-                                </div>
-                                <div class="brand">canon</div>
-                            </div>
-                            <div class="prices">
-                                <div class="price-current text-right">$1199.00</div>
-                            </div>
-                            <div class="hover-area">
-                                <div class="add-cart-button">
-                                    <a href="single-product.html" class="le-button">Add to cart</a>
-                                </div>
-                                <div class="wish-compare">
-                                    <a class="btn-add-to-wishlist" href="#">Add to Wishlist</a>
-                                    <a class="btn-add-to-compare" href="#">Compare</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- /.product-item-holder -->
-                </div><!-- /.row -->
-
-                <div class="row no-margin">
-
-                    <div class="col-xs-12 col-sm-4 no-margin product-item-holder size-medium hover">
-                        <div class="product-item">
-                            <div class="image">
-                                <img alt="" src="Assets/New_Template/assets/images/blank.gif" data-echo="Assets/New_Template/assets/images/products/product-08.jpg" />
-                            </div>
-                            <div class="body">
-                                <div class="label-discount clear"></div>
-                                <div class="title">
-                                    <a href="single-product.html">fitbit zip wireless activity tracker - lime</a>
-                                </div>
-                                <div class="brand">fitbit zip</div>
-                            </div>
-                            <div class="prices">
-                                <div class="price-current text-right">$1199.00</div>
-                            </div>
-                            <div class="hover-area">
-                                <div class="add-cart-button">
-                                    <a href="single-product.html" class="le-button">Add to cart</a>
-                                </div>
-                                <div class="wish-compare">
-                                    <a class="btn-add-to-wishlist" href="#">Add to Wishlist</a>
-                                    <a class="btn-add-to-compare" href="#">Compare</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- /.product-item-holder -->
-
-                    <div class="col-xs-12 col-sm-4 no-margin product-item-holder size-medium hover">
-                        <div class="product-item">
-                            <div class="image">
-                                <img alt="" src="Assets/New_Template/assets/images/blank.gif" data-echo="Assets/New_Template/assets/images/products/product-09.jpg" />
-                            </div>
-                            <div class="body">
-                                <div class="label-discount clear"></div>
-                                <div class="title">
-                                    <a href="single-product.html">PowerShot elph 115 16MP digital camera</a>
-                                </div>
-                                <div class="brand">canon</div>
-                            </div>
-                            <div class="prices">
-                                <div class="price-current text-right">$1199.00</div>
-                            </div>
-                            <div class="hover-area">
-                                <div class="add-cart-button">
-                                    <a href="single-product.html" class="le-button">Add to cart</a>
-                                </div>
-                                <div class="wish-compare">
-                                    <a class="btn-add-to-wishlist" href="#">Add to Wishlist</a>
-                                    <a class="btn-add-to-compare" href="#">Compare</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- /.product-item-holder -->
-
-                    <div class="col-xs-12 col-sm-4 no-margin product-item-holder size-medium hover">
-                        <div class="product-item">
-                            <div class="image">
-                                <img alt="" src="Assets/New_Template/assets/images/blank.gif" data-echo="Assets/New_Template/assets/images/products/product-10.jpg" />
-                            </div>
-                            <div class="body">
-                                <div class="label-discount clear"></div>
-                                <div class="title">
-                                    <a href="single-product.html">netbook acer travelMate b113-E-10072</a>
-                                </div>
-                                <div class="brand">acer</div>
-                            </div>
-                            <div class="prices">
-                                <div class="price-current text-right">$1199.00</div>
-                            </div>
-                            <div class="hover-area">
-                                <div class="add-cart-button">
-                                    <a href="single-product.html" class="le-button">Add to cart</a>
-                                </div>
-                                <div class="wish-compare">
-                                    <a class="btn-add-to-wishlist" href="#">Add to Wishlist</a>
-                                    <a class="btn-add-to-compare" href="#">Compare</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- /.product-item-holder -->
-
-                </div><!-- /.row -->
-            </div><!-- /.col -->
             <div class="col-xs-12 col-md-5 no-margin">
                 <div class="product-item-holder size-big single-product-gallery small-gallery">
 
