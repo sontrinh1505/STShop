@@ -1,5 +1,22 @@
-﻿@model  TeduShop.Web.Models.HomeViewModel
+﻿@using System.Web.Script.Serialization;
 
+@model  TeduShop.Web.Models.HomeViewModel
+@{
+
+    var Products = Model.BestSellerProduct.OrderBy(x => x.Name).Take(7).ToList();
+    var sixProduct = Products.Take(6).ToList();
+    var bigProdcut = Products.LastOrDefault();
+
+
+    var moreImages = new List<string>();
+    if (bigProdcut.MoreImages != null)
+    {
+
+        moreImages = new JavaScriptSerializer().Deserialize<List<string>>(bigProdcut.MoreImages);
+    }
+
+    var count = 1;
+}
 <!-- ========================================= BEST SELLERS ========================================= -->
 <section id="bestsellers" class="color-bg wow fadeInUp">
     <div class="container">
@@ -7,89 +24,112 @@
 
         <div class="product-grid-holder medium">
 
-            @foreach (var product in Model.BestSellerProduct)
-            {
-                <div class="col-xs-12 col-md-7 no-margin">
 
-                    <div class="row no-margin">
-                        <div class="col-xs-12 col-sm-4 no-margin product-item-holder size-medium hover">
-                            <div class="product-item">
-                                <div class="image">
-                                    <img alt="" src="@product.Image" data-echo="@product.Image" />
-                                </div>
-                                <div class="body">
-                                    <div class="label-discount clear"></div>
-                                    <div class="title">
-                                        <a href="#">@product.Name</a>
+
+            <div class="col-xs-12 col-md-7 no-margin">
+                <div class="row no-margin">
+                    @foreach (var product in sixProduct)
+                     {
+                       
+                            <div class="col-xs-12 col-sm-4 no-margin product-item-holder size-medium hover">
+                                <div class="product-item">
+                                    <div class="image">
+                                        <img alt="" src="@product.Image" data-echo="@product.Image" />
                                     </div>
-                                    <div class="brand">
-                                        @if (product.Brand != null)
-                                        {
+                                    <div class="body">
+                                        <div class="label-discount clear"></div>
+                                        <div class="title">
+                                            <a href="#">@product.Name</a>
+                                        </div>
+                                        <div class="brand">
+                                            @if (product.Brand != null)
+                                            {
                                             @product.Brand.Name
-                                        }
+                                            }
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="prices">
+                                    <div class="prices">
 
-                                    <div class="price-current text-right">@product.Price</div>
-                                </div>
-                                <div class="hover-area">
-                                    <div class="add-cart-button">
-                                        <a href="single-product.html" class="le-button">Add to cart</a>
+                                        <div class="price-current text-right">@product.Price</div>
                                     </div>
-                                    <div class="wish-compare">
-                                        <a class="btn-add-to-wishlist" href="#">Add to Wishlist</a>
-                                        <a class="btn-add-to-compare" href="#">Compare</a>
+                                    <div class="hover-area">
+                                        <div class="add-cart-button">
+                                            <a href="single-product.html" class="le-button">Add to cart</a>
+                                        </div>
+                                        <div class="wish-compare">
+                                            <a class="btn-add-to-wishlist" href="#">Add to Wishlist</a>
+                                            <a class="btn-add-to-compare" href="#">Compare</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div><!-- /.product-item-holder -->
-                    </div><!-- /.row -->
-                </div><!-- /.col -->
-            }
+                            </div><!-- /.product-item-holder -->
+                        
+
+                       }
+
+                </div><!-- /.row -->
+            </div><!-- /.col -->
+
+
+
 
             <div class="col-xs-12 col-md-5 no-margin">
                 <div class="product-item-holder size-big single-product-gallery small-gallery">
 
                     <div id="best-seller-single-product-slider" class="single-product-slider owl-carousel">
-                        <div class="single-product-gallery-item" id="slide1">
-                            <a data-rel="prettyphoto" href="images/products/product-gallery-01.jpg">
-                                <img alt="" src="Assets/New_Template/assets/images/blank.gif" data-echo="Assets/New_Template/assets/images/products/product-gallery-01.jpg" />
-                            </a>
-                        </div><!-- /.single-product-gallery-item -->
 
-                        <div class="single-product-gallery-item" id="slide2">
-                            <a data-rel="prettyphoto" href="images/products/product-gallery-01.jpg">
-                                <img alt="" src="Assets/New_Template/assets/images/blank.gif" data-echo="Assets/New_Template/assets/images/products/product-gallery-01.jpg" />
-                            </a>
-                        </div><!-- /.single-product-gallery-item -->
+                        @{
+                           
+                                if (moreImages.Count() > 0)
+                                {
+                                    foreach (var image in moreImages)
+                                    {
+                                        <div class="single-product-gallery-item" id="@count">
+                                            <a data-rel="prettyphoto" href="@image">
+                                                <img alt="" src="@image" data-echo="@image" />
+                                            </a>
+                                        </div><!-- /.single-product-gallery-item -->
+                                    count++;
+                                }
+                            }
 
-                        <div class="single-product-gallery-item" id="slide3">
-                            <a data-rel="prettyphoto" href="images/products/product-gallery-01.jpg">
-                                <img alt="" src="Assets/New_Template/assets/images/blank.gif" data-echo="Assets/New_Template/assets/images/products/product-gallery-01.jpg" />
-                            </a>
-                        </div><!-- /.single-product-gallery-item -->
+
+
+                        }
+
+                        
                     </div><!-- /.single-product-slider -->
-
                     <div class="gallery-thumbs clearfix">
                         <ul>
-                            <li><a class="horizontal-thumb active" data-target="#best-seller-single-product-slider" data-slide="0" href="#slide1"><img alt="" src="Assets/New_Template/assets/images/blank.gif" data-echo="Assets/New_Template/assets/images/products/gallery-thumb-01.jpg" /></a></li>
+                             @if (moreImages.Count() > 0)
+                                         {
+                                             count = 1;
+                                             var active = "active";
+                                                         foreach (var image in moreImages)
+                                             {
+                                            <li><a class="horizontal-thumb @if (count == 1) { @active }" data-target="#best-seller-single-product-slider" data-slide="0" href="#@count"><img alt="" src="@image" data-echo="@image" /></a></li>
+                                     count++;
+
+                                            }
+                             }
+                            
+                            @*<li><a class="horizontal-thumb active" data-target="#best-seller-single-product-slider" data-slide="0" href="#slide1"><img alt="" src="Assets/New_Template/assets/images/blank.gif" data-echo="Assets/New_Template/assets/images/products/gallery-thumb-01.jpg" /></a></li>
                             <li><a class="horizontal-thumb" data-target="#best-seller-single-product-slider" data-slide="1" href="#slide2"><img alt="" src="Assets/New_Template/assets/images/blank.gif" data-echo="Assets/New_Template/assets/images/products/gallery-thumb-01.jpg" /></a></li>
-                            <li><a class="horizontal-thumb" data-target="#best-seller-single-product-slider" data-slide="2" href="#slide3"><img alt="" src="Assets/New_Template/assets/images/blank.gif" data-echo="Assets/New_Template/assets/images/products/gallery-thumb-01.jpg" /></a></li>
+                            <li><a class="horizontal-thumb" data-target="#best-seller-single-product-slider" data-slide="2" href="#slide3"><img alt="" src="Assets/New_Template/assets/images/blank.gif" data-echo="Assets/New_Template/assets/images/products/gallery-thumb-01.jpg" /></a></li>*@
                         </ul>
                     </div><!-- /.gallery-thumbs -->
-
                     <div class="body">
                         <div class="label-discount clear"></div>
                         <div class="title">
-                            <a href="single-product.html">CPU intel core i5-4670k 3.4GHz BOX B82-12-122-41</a>
+                            <a href="#">@bigProdcut.Name</a>
                         </div>
-                        <div class="brand">sony</div>
+                        <div class="brand">@bigProdcut.Brand.Name</div>
                     </div>
                     <div class="prices text-right">
-                        <div class="price-current inline">$1199.00</div>
+                        <div class="price-current inline">@bigProdcut.Price</div>
                         <a href="cart.html" class="le-button big inline">add to cart</a>
                     </div>
+
                 </div><!-- /.product-item-holder -->
             </div><!-- /.col -->
 
